@@ -102,25 +102,26 @@ zope==4.0b4
 [Counter()](#counter)<br />
 [@Property: Counter.value](#property-countervalue)<br />
 [Counter.__init__(self, max_value)](#counterinitself-max_value)<br />
-[HostObject()](#hostobject)<br />
-[@Property: HostObject.isconnected](#property-hostobjectisconnected)<br />
-[HostObject.__init__(self, label, host, port=False)](#hostobjectinitself-label-host-portfalse)<br />
-[HostObject.__refresh(self)](#hostobject__refreshself)<br />
-[HostObject.stop(self)](#hostobjectstopself)<br />
-[MembersObj()](#membersobj)<br />
-[MembersObj.__getitem__(self, index)](#membersobjgetitemself-index)<br />
-[MembersObj.__init__(self)](#membersobjinitself)<br />
-[MembersObj.__iter__(self)](#membersobjiterself)<br />
-[MembersObj.__len__(self)](#membersobjlenself)<br />
-[MembersObj.__next__(self)](#membersobjnextself)<br />
-[MembersObj.__repr__(self)](#membersobjreprself)<br />
-[MembersObj.__str__(self)](#membersobjstrself)<br />
-[MembersObj.append(self, value)](#membersobjappendself-value)<br />
-[MembersObj.items(self)](#membersobjitemsself)<br />
-[PingNetworkObj()](#pingnetworkobj)<br />
-[@Property: PingNetworkObj.host](#property-pingnetworkobjhost)<br />
-[@Property: PingNetworkObj.isconnected](#property-pingnetworkobjisconnected)<br />
-[PingNetworkObj.__init__(self, host)](#pingnetworkobjinitself-host)<br />
+[Counter.reset(self)](#counterresetself)<br />
+[NetworkNode()](#networknode)<br />
+[@Property: NetworkNode.isconnected](#property-networknodeisconnected)<br />
+[NetworkNode.__init__(self, label, host, port=False)](#networknodeinitself-label-host-portfalse)<br />
+[NetworkNode.__refresh(self)](#networknode__refreshself)<br />
+[NetworkNode.stop(self)](#networknodestopself)<br />
+[NetworkNodeList()](#networknodelist)<br />
+[NetworkNodeList.__getitem__(self, index)](#networknodelistgetitemself-index)<br />
+[NetworkNodeList.__init__(self)](#networknodelistinitself)<br />
+[NetworkNodeList.__iter__(self)](#networknodelistiterself)<br />
+[NetworkNodeList.__len__(self)](#networknodelistlenself)<br />
+[NetworkNodeList.__next__(self)](#networknodelistnextself)<br />
+[NetworkNodeList.__repr__(self)](#networknodelistreprself)<br />
+[NetworkNodeList.__str__(self)](#networknodeliststrself)<br />
+[NetworkNodeList.append(self, value)](#networknodelistappendself-value)<br />
+[NetworkNodeList.items(self)](#networknodelistitemsself)<br />
+[PingNetworkNode()](#pingnetworknode)<br />
+[@Property: PingNetworkNode.host](#property-pingnetworknodehost)<br />
+[@Property: PingNetworkNode.isconnected](#property-pingnetworknodeisconnected)<br />
+[PingNetworkNode.__init__(self, host)](#pingnetworknodeinitself-host)<br />
 [PythonPing()](#pythonping)<br />
 [PythonPing.__init__(self, inputfile)](#pythonpinginitself-inputfile)<br />
 [PythonPing.run(self)](#pythonpingrunself)<br />
@@ -130,7 +131,6 @@ zope==4.0b4
 [ScreenCurses.build(self)](#screencursesbuildself)<br />
 [ScreenCurses.menubar(self)](#screencursesmenubarself)<br />
 [ScreenCurses.run(self)](#screencursesrunself)<br />
-[Template()](#template)<br />
 
 
 #### CalcLimit()
@@ -138,7 +138,8 @@ zope==4.0b4
 class CalcLimit(object):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> Calc element location according to element stripe size and<br />
+> stripe size.<br />
 > <br />
 ##### @Property: CalcLimit.column
 ```python
@@ -205,14 +206,14 @@ def CalcLimit.stripe_size(self, value):
 def CalcLimit.__init__(self, stripe_size, element_size):
 ```
 > <br />
-> Initialize self.  See help(type(self)) for accurate signature.<br />
+> Init default value and test<br />
 > <br />
 #### ConfigYAML()
 ```python
 class ConfigYAML(object):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> This class manage YAML config file<br />
 > <br />
 ##### @Property: ConfigYAML.config
 ```python
@@ -246,7 +247,8 @@ def ConfigYAML.__init__(self, filename):
 class Counter(object):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> This class count from 0 to max_value.<br />
+> In the end (max_value+1), the value becomes 0<br />
 > <br />
 ##### @Property: Counter.value
 ```python
@@ -262,148 +264,155 @@ def Counter.value(self):
 def Counter.__init__(self, max_value):
 ```
 > <br />
-> Initialize self.  See help(type(self)) for accurate signature.<br />
+> Init current value and stores max_value<br />
 > <br />
-#### HostObject()
+##### Counter.reset(self)
 ```python
-class HostObject(object):
+def Counter.reset(self):
+```
+> <br />
+> reset current value<br />
+> <br />
+#### NetworkNode()
+```python
+class NetworkNode(object):
 ```
 > <br />
 > <b>- docstring empty -</b><br />
 > <br />
-##### @Property: HostObject.isconnected
+##### @Property: NetworkNode.isconnected
 ```python
 @property
-def HostObject.isconnected(self):
+def NetworkNode.isconnected(self):
 @isconnected.setter
-def HostObject.isconnected(self, value):
+def NetworkNode.isconnected(self, value):
 
 ```
 > <br />
 > @Property<br />
 > <br />
-##### HostObject.__init__(self, label, host, port=False)
+##### NetworkNode.__init__(self, label, host, port=False)
 ```python
-def HostObject.__init__(self, label, host, port=False):
+def NetworkNode.__init__(self, label, host, port=False):
 ```
 > <br />
 > Initialize self.  See help(type(self)) for accurate signature.<br />
 > <br />
-##### HostObject.__refresh(self)
+##### NetworkNode.__refresh(self)
 ```python
-def HostObject.__refresh(self):
+def NetworkNode.__refresh(self):
 ```
 > <br />
 > <b>- docstring empty -</b><br />
 > <br />
-##### HostObject.stop(self)
+##### NetworkNode.stop(self)
 ```python
-def HostObject.stop(self):
+def NetworkNode.stop(self):
 ```
 > <br />
 > <b>- docstring empty -</b><br />
 > <br />
-#### MembersObj()
+#### NetworkNodeList()
 ```python
-class MembersObj(object):
+class NetworkNodeList(object):
 ```
 > <br />
-> Dict() to store a python object's members.<br />
+> [] to store a python object's members (NetworkNode).<br />
 > This object will become an attribute.<br />
 > <br />
-##### MembersObj.__getitem__(self, index)
+##### NetworkNodeList.__getitem__(self, index)
 ```python
-def MembersObj.__getitem__(self, index):
+def NetworkNodeList.__getitem__(self, index):
 ```
 > <br />
 > <b>- docstring empty -</b><br />
 > <br />
-##### MembersObj.__init__(self)
+##### NetworkNodeList.__init__(self)
 ```python
-def MembersObj.__init__(self):
+def NetworkNodeList.__init__(self):
 ```
 > <br />
 > Initialize self.  See help(type(self)) for accurate signature.<br />
 > <br />
-##### MembersObj.__iter__(self)
+##### NetworkNodeList.__iter__(self)
 ```python
-def MembersObj.__iter__(self):
+def NetworkNodeList.__iter__(self):
 ```
 > <br />
 > <b>- docstring empty -</b><br />
 > <br />
-##### MembersObj.__len__(self)
+##### NetworkNodeList.__len__(self)
 ```python
-def MembersObj.__len__(self):
+def NetworkNodeList.__len__(self):
 ```
 > <br />
 > <b>- docstring empty -</b><br />
 > <br />
-##### MembersObj.__next__(self)
+##### NetworkNodeList.__next__(self)
 ```python
-def MembersObj.__next__(self):
+def NetworkNodeList.__next__(self):
 ```
 > <br />
 > <b>- docstring empty -</b><br />
 > <br />
-##### MembersObj.__repr__(self)
+##### NetworkNodeList.__repr__(self)
 ```python
-def MembersObj.__repr__(self):
+def NetworkNodeList.__repr__(self):
 ```
 > <br />
 > Return repr(self).<br />
 > <br />
-##### MembersObj.__str__(self)
+##### NetworkNodeList.__str__(self)
 ```python
-def MembersObj.__str__(self):
+def NetworkNodeList.__str__(self):
 ```
 > <br />
 > Return str(self).<br />
 > <br />
-##### MembersObj.append(self, value)
+##### NetworkNodeList.append(self, value)
 ```python
-def MembersObj.append(self, value):
+def NetworkNodeList.append(self, value):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> add a member<br />
 > <br />
-##### MembersObj.items(self)
+##### NetworkNodeList.items(self)
 ```python
-def MembersObj.items(self):
+def NetworkNodeList.items(self):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> get members<br />
 > <br />
-#### PingNetworkObj()
+#### PingNetworkNode()
 ```python
-class PingNetworkObj(object):
+class PingNetworkNode(object):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> This class ping a network equipement<br />
 > <br />
-##### @Property: PingNetworkObj.host
+##### @Property: PingNetworkNode.host
 ```python
 @property
-def PingNetworkObj.host(self):
+def PingNetworkNode.host(self):
 @host.setter
-def PingNetworkObj.host(self, host):
+def PingNetworkNode.host(self, host):
 
 ```
 > <br />
 > @Property<br />
 > <br />
-##### @Property: PingNetworkObj.isconnected
+##### @Property: PingNetworkNode.isconnected
 ```python
 @property
-def PingNetworkObj.isconnected(self):
+def PingNetworkNode.isconnected(self):
 
 ```
 > <br />
 > @Property<br />
 > <br />
-##### PingNetworkObj.__init__(self, host)
+##### PingNetworkNode.__init__(self, host)
 ```python
-def PingNetworkObj.__init__(self, host):
+def PingNetworkNode.__init__(self, host):
 ```
 > <br />
 > Initialize self.  See help(type(self)) for accurate signature.<br />
@@ -467,13 +476,6 @@ def ScreenCurses.menubar(self):
 ##### ScreenCurses.run(self)
 ```python
 def ScreenCurses.run(self):
-```
-> <br />
-> <b>- docstring empty -</b><br />
-> <br />
-#### Template()
-```python
-class Template:
 ```
 > <br />
 > <b>- docstring empty -</b><br />

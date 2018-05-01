@@ -13,19 +13,19 @@
 
 from threading import Timer
 from pytping.screen import ScreenCurses
-from pytping.ping import PingNetworkObj
+from pytping.ping import PingNetworkNode
 from pytping.configyaml import ConfigYAML
-from pytping.members import MembersObj
+from pytping.members import NetworkNodeList
 
 
-class HostObject(object):
+class NetworkNode(object):
     def __init__(self, label, host, port=False):
         self.__isconnected = None
         self.__started = True
         self.isconnected = False
         self.label = label
         self.host = host
-        self.__ping = PingNetworkObj(host)
+        self.__ping = PingNetworkNode(host)
         self.__port = port
         self.__refresh()
 
@@ -52,10 +52,10 @@ class PythonPing(object):
     def __init__(self, inputfile):
         self.__yaml = ConfigYAML(inputfile)
         self.__config = self.__yaml.config
-        self.__host_list = MembersObj()
+        self.__host_list = NetworkNodeList()
         for label in self.__config:
-            self.__host_list.append(HostObject(label,
-                                               self.__config[label]['host']))
+            self.__host_list.append(NetworkNode(label,
+                                                self.__config[label]['host']))
         self.__screen = ScreenCurses(self.__host_list)
 
     def run(self):

@@ -6,10 +6,11 @@ sudo iptables -P OUTPUT ACCEPT
 myhost = PingNetworkObj('http://www.google.fr')
 print(myhost.isconnected)
 """
+
 import subprocess
 
 
-class PingNetworkObj(object):
+class PingNetworkNode(object):
     """
     This class ping a network equipement
     """

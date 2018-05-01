@@ -20,10 +20,10 @@ for member in a  :
 """
 
 
-class MembersObj(object):
+class NetworkNodeList(object):
 
     """
-    [] to store a python object's members.
+    [] to store a python object's members (NetworkNode).
     This object will become an attribute.
     """
 
