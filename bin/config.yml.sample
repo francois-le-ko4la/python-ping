@@ -1,0 +1,12 @@
+Internet access:
+  host: www.google.fr
+  port: 80
+vCenter:
+  host: 192.168.1.12
+  port: 80
+ESX1:
+  host: 192.168.1.230
+  port: 80
+ESX2:
+  host: 192.168.1.240
+  port: 80
