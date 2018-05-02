@@ -61,10 +61,11 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 """
 
 from pytping import __about__
-from pytping.limit import CalcLimit
+from pytping.position import ElementPosition
 from pytping.counter import Counter
 from pytping.screen import ScreenCurses
 from pytping.ping import PingNetworkNode
 from pytping.configyaml import ConfigYAML
+from pytping.netnode import NetworkNode
 from pytping.members import NetworkNodeList
-from pytping.pyping import NetworkNode, PythonPing
+from pytping.pyping import PythonPing

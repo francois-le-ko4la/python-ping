@@ -19,6 +19,8 @@ for member in a  :
     print(member)
 """
 
+from pytping.netnode import NetworkNode
+
 
 class NetworkNodeList(object):
 
@@ -28,6 +30,7 @@ class NetworkNodeList(object):
     """
 
     def __init__(self):
+        self.__objectType = NetworkNode("", "")
         self.__members = []
         self.__currentindex = 0
 
@@ -60,7 +63,10 @@ class NetworkNodeList(object):
         """
         add a member
         """
-        self.__members.append(value)
+        if isinstance(value, type(self.__objectType)):
+            self.__members.append(value)
+        else:
+            raise TypeError("This object is not a NetworkNode")
 
     def items(self):
         """

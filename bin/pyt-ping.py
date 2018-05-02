@@ -4,6 +4,7 @@
 import pathlib
 import sys
 import argparse
+import os
 from pytping import __about__
 from pytping import *
 
@@ -47,6 +48,7 @@ class ArgsManagement(object):
 def main(argv):
     args = ArgsManagement(argv)
     current_args = args.get()
+    os.environ["NCURSES_NO_UTF8_ACS"] = "1"
     pyt_ping = PythonPing(current_args.input)
     pyt_ping.run()
 

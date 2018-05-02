@@ -18,10 +18,33 @@ def calc_limit(stripe_size, element_size, current_id):
 import numbers
 
 
-class CalcLimit(object):
+class ElementPosition(object):
     """
-    Calc element location according to element stripe size and
+    Calc element position according to element stripe size and
     stripe size.
+
+      +------------+
+      | Element 0  |
+      +------------+
+      <------------>
+       Element size
+                         Stripe Size
+      <-------------------------------------------->
+      .                                            .
+      .                  Stripe 0                  .
+      +--------------------------------------------+
+      | +-----------+ +-----------+                |
+      | | Element 0 | | Element 1 | ...            |
+      | +-----------+ +-----------+                |
+      +--------------------------------------------+
+
+                         Stripe 1
+      +--------------------------------------------+
+      | +-----------+ +-----------+                |
+      | | Element 0 | | Element 1 | ...            |
+      | +-----------+ +-----------+                |
+      +--------------------------------------------+
+
     """
     def __init__(self, stripe_size, element_size):
         """

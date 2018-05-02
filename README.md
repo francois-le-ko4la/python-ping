@@ -87,14 +87,6 @@ zope==4.0b4
 ![alt text](pictures/classes_pytping.png)
 
 ### Objects
-[CalcLimit()](#calclimit)<br />
-[@Property: CalcLimit.column](#property-calclimitcolumn)<br />
-[@Property: CalcLimit.current_id](#property-calclimitcurrent_id)<br />
-[@Property: CalcLimit.element_size](#property-calclimitelement_size)<br />
-[@Property: CalcLimit.ratio](#property-calclimitratio)<br />
-[@Property: CalcLimit.row](#property-calclimitrow)<br />
-[@Property: CalcLimit.stripe_size](#property-calclimitstripe_size)<br />
-[CalcLimit.__init__(self, stripe_size, element_size)](#calclimitinitself-stripe_size-element_size)<br />
 [ConfigYAML()](#configyaml)<br />
 [@Property: ConfigYAML.config](#property-configyamlconfig)<br />
 [@Property: ConfigYAML.filename](#property-configyamlfilename)<br />
@@ -103,10 +95,19 @@ zope==4.0b4
 [@Property: Counter.value](#property-countervalue)<br />
 [Counter.__init__(self, max_value)](#counterinitself-max_value)<br />
 [Counter.reset(self)](#counterresetself)<br />
+[ElementPosition()](#elementposition)<br />
+[@Property: ElementPosition.column](#property-elementpositioncolumn)<br />
+[@Property: ElementPosition.current_id](#property-elementpositioncurrent_id)<br />
+[@Property: ElementPosition.element_size](#property-elementpositionelement_size)<br />
+[@Property: ElementPosition.ratio](#property-elementpositionratio)<br />
+[@Property: ElementPosition.row](#property-elementpositionrow)<br />
+[@Property: ElementPosition.stripe_size](#property-elementpositionstripe_size)<br />
+[ElementPosition.__init__(self, stripe_size, element_size)](#elementpositioninitself-stripe_size-element_size)<br />
 [NetworkNode()](#networknode)<br />
 [@Property: NetworkNode.isconnected](#property-networknodeisconnected)<br />
 [NetworkNode.__init__(self, label, host, port=False)](#networknodeinitself-label-host-portfalse)<br />
 [NetworkNode.__refresh(self)](#networknode__refreshself)<br />
+[NetworkNode.start(self)](#networknodestartself)<br />
 [NetworkNode.stop(self)](#networknodestopself)<br />
 [NetworkNodeList()](#networknodelist)<br />
 [NetworkNodeList.__getitem__(self, index)](#networknodelistgetitemself-index)<br />
@@ -133,81 +134,6 @@ zope==4.0b4
 [ScreenCurses.run(self)](#screencursesrunself)<br />
 
 
-#### CalcLimit()
-```python
-class CalcLimit(object):
-```
-> <br />
-> Calc element location according to element stripe size and<br />
-> stripe size.<br />
-> <br />
-##### @Property: CalcLimit.column
-```python
-@property
-def CalcLimit.column(self):
-
-```
-> <br />
-> @Property<br />
-> <br />
-##### @Property: CalcLimit.current_id
-```python
-@property
-def CalcLimit.current_id(self):
-@current_id.setter
-def CalcLimit.current_id(self, value):
-
-```
-> <br />
-> @Property<br />
-> <br />
-##### @Property: CalcLimit.element_size
-```python
-@property
-def CalcLimit.element_size(self):
-@element_size.setter
-def CalcLimit.element_size(self, value):
-
-```
-> <br />
-> @Property<br />
-> <br />
-##### @Property: CalcLimit.ratio
-```python
-@property
-def CalcLimit.ratio(self):
-
-```
-> <br />
-> @Property<br />
-> <br />
-##### @Property: CalcLimit.row
-```python
-@property
-def CalcLimit.row(self):
-
-```
-> <br />
-> @Property<br />
-> <br />
-##### @Property: CalcLimit.stripe_size
-```python
-@property
-def CalcLimit.stripe_size(self):
-@stripe_size.setter
-def CalcLimit.stripe_size(self, value):
-
-```
-> <br />
-> @Property<br />
-> <br />
-##### CalcLimit.__init__(self, stripe_size, element_size)
-```python
-def CalcLimit.__init__(self, stripe_size, element_size):
-```
-> <br />
-> Init default value and test<br />
-> <br />
 #### ConfigYAML()
 ```python
 class ConfigYAML(object):
@@ -273,6 +199,103 @@ def Counter.reset(self):
 > <br />
 > reset current value<br />
 > <br />
+#### ElementPosition()
+```python
+class ElementPosition(object):
+```
+> <br />
+> Calc element position according to element stripe size and<br />
+> stripe size.<br />
+> <br />
+>   +------------+<br />
+>   | Element 0  |<br />
+>   +------------+<br />
+>   <------------><br />
+>    Element size<br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Stripe Size<br />
+>   <--------------------------------------------><br />
+>   .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  .<br />
+>   .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Stripe 0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    .<br />
+>   +--------------------------------------------+<br />
+>   | +-----------+ +-----------+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  |<br />
+>   | | Element 0 | | Element 1 | ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  |<br />
+>   | +-----------+ +-----------+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  |<br />
+>   +--------------------------------------------+<br />
+> <br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Stripe 1<br />
+>   +--------------------------------------------+<br />
+>   | +-----------+ +-----------+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  |<br />
+>   | | Element 0 | | Element 1 | ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  |<br />
+>   | +-----------+ +-----------+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  |<br />
+>   +--------------------------------------------+<br />
+> <br />
+##### @Property: ElementPosition.column
+```python
+@property
+def ElementPosition.column(self):
+
+```
+> <br />
+> @Property<br />
+> <br />
+##### @Property: ElementPosition.current_id
+```python
+@property
+def ElementPosition.current_id(self):
+@current_id.setter
+def ElementPosition.current_id(self, value):
+
+```
+> <br />
+> @Property<br />
+> <br />
+##### @Property: ElementPosition.element_size
+```python
+@property
+def ElementPosition.element_size(self):
+@element_size.setter
+def ElementPosition.element_size(self, value):
+
+```
+> <br />
+> @Property<br />
+> <br />
+##### @Property: ElementPosition.ratio
+```python
+@property
+def ElementPosition.ratio(self):
+
+```
+> <br />
+> @Property<br />
+> <br />
+##### @Property: ElementPosition.row
+```python
+@property
+def ElementPosition.row(self):
+
+```
+> <br />
+> @Property<br />
+> <br />
+##### @Property: ElementPosition.stripe_size
+```python
+@property
+def ElementPosition.stripe_size(self):
+@stripe_size.setter
+def ElementPosition.stripe_size(self, value):
+
+```
+> <br />
+> @Property<br />
+> <br />
+##### ElementPosition.__init__(self, stripe_size, element_size)
+```python
+def ElementPosition.__init__(self, stripe_size, element_size):
+```
+> <br />
+> Init default value and test<br />
+> <br />
 #### NetworkNode()
 ```python
 class NetworkNode(object):
@@ -301,6 +324,13 @@ def NetworkNode.__init__(self, label, host, port=False):
 ##### NetworkNode.__refresh(self)
 ```python
 def NetworkNode.__refresh(self):
+```
+> <br />
+> <b>- docstring empty -</b><br />
+> <br />
+##### NetworkNode.start(self)
+```python
+def NetworkNode.start(self):
 ```
 > <br />
 > <b>- docstring empty -</b><br />

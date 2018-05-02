@@ -13,11 +13,10 @@ export NCURSES_NO_UTF8_ACS=1
 """
 
 import curses
-from pytping.limit import *
-from pytping.counter import *
-from math import *
 from threading import Timer
 import time
+from pytping.position import ElementPosition
+from pytping.counter import Counter
 
 
 class Template:
@@ -50,6 +49,7 @@ class ScreenCurses(object):
         curses.init_pair(4, curses.COLOR_BLACK, curses.COLOR_GREEN)
         curses.init_pair(5, curses.COLOR_BLACK, curses.COLOR_RED)
         curses.curs_set(0)
+        #self.screen.nodelay(True)
 
     def menubar(self):
         box = self.screen.subwin(3, self.width, self.height - 3, 0)
@@ -69,7 +69,7 @@ class ScreenCurses(object):
             return
 
         self.height, self.width = self.screen.getmaxyx()
-        location = CalcLimit(
+        location = ElementPosition(
             self.width - 2, Template.box_width + Template.box_margin_x)
         self.screen.border(0)
         self.menubar()
@@ -86,7 +86,6 @@ class ScreenCurses(object):
                                          location.column * (Template.box_width + Template.box_margin_x)+Template.box_margin_x)
             except Exception:
                 return
-            # box.immedok(True)
             box.box()
             box.addstr("Ping")
             box.addstr(1, 2, host.label)
@@ -101,13 +100,12 @@ class ScreenCurses(object):
         self.__refresh()
 
     def run(self):
-        x = 0
-        while x != 27:
+        keypressevent = 0
+        while keypressevent != 27:
             self.screen.erase()
             self.build()
-            x = self.screen.getch()
+            keypressevent = self.screen.getch()
 
         self.__started = False
         time.sleep(1)
-        # self.__timer.cancel()
         curses.endwin()
