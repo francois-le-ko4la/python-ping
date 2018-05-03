@@ -20,8 +20,8 @@ The package contents itself are in the `config_from_json` directory:
 * `__about__.py` Global parameters
 * `configyaml.py` Config file management
 * `counter.py` Simple counter to make a progress animation
-* `members.py` NetworkNode management
 * `netnode.py` NetworkNode def
+* `nodelist.py` NetworkNode management
 * `ping.py` check host/port
 * `position.py` Element position management
 * `pyping.py` main function
@@ -86,13 +86,13 @@ ESX2:
 ## Todo:
 
 - [X] Create the project
-- [ ] Write code and tests
-- [ ] Test installation and requirements (setup.py and/or Makefile)
-- [ ] Test code
-- [ ] Validate features
-- [ ] Write Doc/stringdoc
-- [ ] Run PEP8 validation
-- [ ] Clean & last check
+- [X] Write code and tests
+- [X] Test installation and requirements (setup.py and/or Makefile)
+- [X] Test code
+- [X] Validate features
+- [X] Write Doc/stringdoc
+- [X] Run PEP8 validation
+- [X] Clean & last check
 - [ ] Release
 
 ## Note:
