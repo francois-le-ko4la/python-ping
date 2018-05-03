@@ -2,7 +2,7 @@
 ## Description:
 
 This package loads the configuration values defined in external YAML file and
-ping equipemments.
+ping network nodes.
 
 The following files comprise the `pytping` package:
 * `LICENSE`: The license file. `config-from-json` is released under the terms
@@ -197,8 +197,12 @@ Property:
     - config (dict)
 
 Use:
-    a = ConfigYAML("./onfig.yml")
-    print(a.config)
+    >>> import pathlib
+    >>> path_pyth = (pathlib.Path(__file__).resolve().parent)
+    >>> conf = pathlib.PurePath(path_pyth, '../bin/config.yml.sample')
+    >>> a = ConfigYAML(conf)
+    >>> print(a.config['Internet access'])
+    {'host': 'www.google.fr', 'port': 80}
 ```
 
 ##### @Property: ConfigYAML.config
@@ -234,31 +238,33 @@ class Counter(object):
 ```
 
 ```
-This class count from 0 to max_value.
+This class count from 0 to (max_value - 1).
 In the end, we restart the count.
 
-+---+    +---+    +---+           +---+
-| 0 | -> | 0 | -> | 0 | -> ... -> |max|
-+---+    +---+    +---+           +---+
-  ^                                 |
-  |                                 |
-  +---------------------------------+
++-----+    +-----+    +-----+           +-------+
+|  0  | -> |  1  | -> |  2  | -> ... -> |  max  |
++-----+    +-----+    +-----+           +-------+
+  ^                                         |
+  |                                         |
+  +-----------------------------------------+
 
 Attributes:
     value (int): current value
 
-Use:
-    a = Counter(max_value)
-    print(a.value)
-    print(a.value)
-    print(a.value)
-    print(a.value)
+Test:
+    python3 -m doctest -v <module>
 
-Results:
+Use:
+    >>> max_value = 2
+    >>> a = Counter(max_value)
+    >>> print(a.value)
     0
+    >>> print(a.value)
     1
+    >>> print(a.value)
     2
-    ...
+    >>> print(a.value)
+    0
 ```
 
 ##### @Property: Counter.value
@@ -320,6 +326,26 @@ stripe size.
   | | Element 0 | | Element 1 | ...            |
   | +-----------+ +-----------+                |
   +--------------------------------------------+
+
+Use:
+   >>> a = ElementPosition()
+   >>> a.element_size = 3
+   >>> a.stripe_size = 11
+   >>> a.current_id = 0
+   >>> print(a.row)
+   0
+   >>> print(a.column)
+   0
+   >>> a.current_id = 2
+   >>> print(a.row)
+   0
+   >>> print(a.column)
+   2
+   >>> a.current_id = 3
+   >>> print(a.row)
+   1
+   >>> print(a.column)
+   0
 ```
 
 ##### @Property: ElementPosition.column
@@ -395,7 +421,10 @@ class NetworkNode(object):
 ```
 
 ```
-Docstring empty
+Define a network node :
+- label
+- host
+- port
 ```
 
 ##### @Property: NetworkNode.isconnected
@@ -428,14 +457,26 @@ def NetworkNode.__refresh(self):
 def NetworkNode.start(self):
 ```
 > <br />
-> Docstring empty<br />
+> Start multithreading to ping the node.<br />
+> <br />
+> <b>Args:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
+> <br />
+> <b>Returns:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
 > <br />
 ##### NetworkNode.stop(self)
 ```python
 def NetworkNode.stop(self):
 ```
 > <br />
-> Docstring empty<br />
+> Stop multithreading<br />
+> <br />
+> <b>Args:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
+> <br />
+> <b>Returns:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
 > <br />
 #### NetworkNodeList()
 ```python
@@ -446,13 +487,19 @@ class NetworkNodeList(object):
 [] to store a python object's members (NetworkNode).
 This object will become an attribute.
 
-    a = MembersObj()
-    b = NetworkNode()
-    a.append(b)
-
-    print(a.items())
-    for member in a:
-        print(member)
+    >>> a = NetworkNodeList()
+    >>> b = NetworkNode("", "", "")
+    >>> c = NetworkNode("", "", "")
+    >>> a.append(b)
+    >>> print(type(a.items()))
+    <class 'list'>
+    >>> for member in a: print(type(member))
+    <class 'pytping.netnode.NetworkNode'>
+    >>> print(len(a))
+    1
+    >>> a.append(c)
+    >>> print(len(a))
+    2
 ```
 
 ##### NetworkNodeList.__getitem__(self, index)
@@ -529,6 +576,16 @@ We store host/port
 Host can be defined with a hostname or IP address.
 If port = ICMP then we use ping command.
 Else, we use socket API.
+
+    >>> a = PingNetworkNode("www.google.fr", 80)
+    >>> print(a.isconnected)
+    True
+    >>> a = PingNetworkNode("localhost", "ICMP")
+    >>> print(a.isconnected)
+    True
+    >>> a = PingNetworkNode("10.10.9.1", "ICMP")
+    >>> print(a.isconnected)
+    False
 ```
 
 ##### @Property: PingNetworkNode.host
@@ -589,7 +646,10 @@ class PythonPing(object):
 ```
 
 ```
-Docstring empty
+Main class
+Use YAML config file
+Create NetworkNodeList
+Launch the screen manager
 ```
 
 ##### PythonPing.__init__(self, inputfile)
@@ -604,7 +664,7 @@ def PythonPing.__init__(self, inputfile):
 def PythonPing.run(self):
 ```
 > <br />
-> start screen <br />
+> start screen<br />
 > <br />
 #### ScreenCurses()
 ```python
@@ -612,7 +672,33 @@ class ScreenCurses(object):
 ```
 
 ```
-Docstring empty
+This class manage the screen.
+
++-----------------------------------------------------------------+
+|                                                                 |
+|     +-------------+  +-------------+  +-------------+           |
+|     | NetworkNode |  | NetworkNode |  | NetworkNode |           |
+|     +-------------+  +-------------+  +-------------+           |
+|                                                                 |
+|                                                                 |
+|                                                                 |
+|                                                                 |
+|                                                                 |
+|                                                                 |
+|                                                                 |
+|                                                                 |
+|                                                                 |
+|                                                                 |
+|                                                                 |
++-----------------------------------------------------------------+
+|  Press ESC to EXIT (*)                                          |
++-----------------------------------------------------------------+
+
++-------------+
+| NetworkNode |    Network Node : label, IP, status
++-------------+
+
+(*)                Progress
 ```
 
 ##### ScreenCurses.__init__(self, host_list)
@@ -634,19 +720,37 @@ def ScreenCurses.__refresh(self):
 def ScreenCurses.build(self):
 ```
 > <br />
-> Docstring empty<br />
+> Build the screen<br />
+> <br />
+> <b>Args:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
+> <br />
+> <b>Returns:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
 > <br />
 ##### ScreenCurses.menubar(self)
 ```python
 def ScreenCurses.menubar(self):
 ```
 > <br />
-> Docstring empty<br />
+> draw the bar<br />
+> <br />
+> <b>Args:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
+> <br />
+> <b>Returns:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
 > <br />
 ##### ScreenCurses.run(self)
 ```python
 def ScreenCurses.run(self):
 ```
 > <br />
-> Docstring empty<br />
+> Curses getch loop<br />
+> <br />
+> <b>Args:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
+> <br />
+> <b>Returns:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
 > <br />

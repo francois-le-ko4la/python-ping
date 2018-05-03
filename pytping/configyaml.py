@@ -25,8 +25,12 @@ class ConfigYAML(object):
         - config (dict)
 
     Use:
-        a = ConfigYAML("./onfig.yml")
-        print(a.config)
+        >>> import pathlib
+        >>> path_pyth = (pathlib.Path(__file__).resolve().parent)
+        >>> conf = pathlib.PurePath(path_pyth, '../bin/config.yml.sample')
+        >>> a = ConfigYAML(conf)
+        >>> print(a.config['Internet access'])
+        {'host': 'www.google.fr', 'port': 80}
     """
     def __init__(self, filename):
         self.__filename = None
@@ -34,6 +38,10 @@ class ConfigYAML(object):
 
     @property
     def filename(self):
+        """
+        @Property:
+            filename (str): /path/to/the/config/file
+        """
         return self.__filename
 
     @filename.setter
@@ -45,8 +53,17 @@ class ConfigYAML(object):
 
     @property
     def config(self):
+        """
+        @Property:
+            config (dict)
+        """
         with open(self.__filename, 'r') as yaml_file:
             try:
                 return yaml.load(yaml_file)
             except yaml.YAMLError:
                 raise
+
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()

@@ -5,7 +5,7 @@
 ## Description:
 
 This package loads the configuration values defined in external YAML file and
-ping equipemments.
+ping network nodes.
 
 The following files comprise the `pytping` package:
 * `LICENSE`: The license file. `config-from-json` is released under the terms
@@ -114,5 +114,5 @@ from pytping.screen import ScreenCurses
 from pytping.ping import PingNetworkNode
 from pytping.configyaml import ConfigYAML
 from pytping.netnode import NetworkNode
-from pytping.members import NetworkNodeList
+from pytping.nodelist import NetworkNodeList
 from pytping.pyping import PythonPing

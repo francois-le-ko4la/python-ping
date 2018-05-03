@@ -11,7 +11,10 @@ import subprocess
 import socket
 
 
-class default:
+class Default:
+    """
+    PingNetworkNode parameters
+    """
     timeout = 0.5
     ICMP = "ICMP"
     msg_typeerror = "PingNetworkNode: invalid input type"
@@ -26,6 +29,16 @@ class PingNetworkNode(object):
     Host can be defined with a hostname or IP address.
     If port = ICMP then we use ping command.
     Else, we use socket API.
+
+        >>> a = PingNetworkNode("www.google.fr", 80)
+        >>> print(a.isconnected)
+        True
+        >>> a = PingNetworkNode("localhost", "ICMP")
+        >>> print(a.isconnected)
+        True
+        >>> a = PingNetworkNode("10.10.9.1", "ICMP")
+        >>> print(a.isconnected)
+        False
     """
 
     def __init__(self, host, port):
@@ -36,36 +49,48 @@ class PingNetworkNode(object):
 
     @property
     def host(self):
+        """
+        @Property:
+            str: hostname or IP address
+        """
         return self.__host
 
     @host.setter
     def host(self, host):
-        if type(host) is type(str()):
+        if isinstance(host, str):
             self.__host = host
         else:
-            raise TypeError(default.msg_typeerror)
+            raise TypeError(Default.msg_typeerror)
 
     @property
     def port(self):
+        """
+        @Property:
+            str/int: "ICMP" or port number
+        """
         return self.__port
 
     @port.setter
     def port(self, port):
-        if type(port) is type(str()) or type(port) is type(int()):
+        if isinstance(port, str) or isinstance(port, int):
             self.__port = port
         else:
-            raise TypeError(default.msg_typeerror)
+            raise TypeError(Default.msg_typeerror)
 
     @property
     def isconnected(self):
-        if type(self.__port) is type(str() and default.ICMP in self.__port):
+        """
+        @Property:
+            bool: True if the node is connected. False otherwise.
+        """
+        if isinstance(self.__port, str) and Default.ICMP in self.__port:
             return self.__ping()
         else:
             return self.__socket()
 
     def __socket(self):
         try:
-            socket.setdefaulttimeout(default.timeout);
+            socket.setdefaulttimeout(Default.timeout)
             socket.socket().connect((self.__host, self.__port))
         except Exception:
             return False
@@ -73,7 +98,7 @@ class PingNetworkNode(object):
 
     def __ping(self):
         try:
-            subprocess.run(default.ping_cmd + self.__host,
+            subprocess.run(Default.ping_cmd + self.__host,
                            shell=True,
                            check=True,
                            stdout=subprocess.PIPE,

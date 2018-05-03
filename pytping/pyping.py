@@ -14,10 +14,16 @@
 from pytping.screen import ScreenCurses
 from pytping.configyaml import ConfigYAML
 from pytping.netnode import NetworkNode
-from pytping.members import NetworkNodeList
+from pytping.nodelist import NetworkNodeList
 
 
 class PythonPing(object):
+    """
+    Main class
+    Use YAML config file
+    Create NetworkNodeList
+    Launch the screen manager
+    """
     def __init__(self, inputfile):
         self.__yaml = ConfigYAML(inputfile)
         self.__config = self.__yaml.config
@@ -31,7 +37,9 @@ class PythonPing(object):
         self.__screen = ScreenCurses(self.__host_list)
 
     def run(self):
-        """ start screen """
+        """
+        start screen
+        """
         self.__screen.run()
         """ EXIT """
         for host in self.__host_list:

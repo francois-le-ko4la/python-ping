@@ -31,6 +31,36 @@ class Template:
 
 
 class ScreenCurses(object):
+    """
+    This class manage the screen.
+
+    +-----------------------------------------------------------------+
+    |                                                                 |
+    |     +-------------+  +-------------+  +-------------+           |
+    |     | NetworkNode |  | NetworkNode |  | NetworkNode |           |
+    |     +-------------+  +-------------+  +-------------+           |
+    |                                                                 |
+    |                                                                 |
+    |                                                                 |
+    |                                                                 |
+    |                                                                 |
+    |                                                                 |
+    |                                                                 |
+    |                                                                 |
+    |                                                                 |
+    |                                                                 |
+    |                                                                 |
+    +-----------------------------------------------------------------+
+    |  Press ESC to EXIT (*)                                          |
+    +-----------------------------------------------------------------+
+
+    +-------------+
+    | NetworkNode |    Network Node : label, IP, status
+    +-------------+
+
+    (*)                Progress
+
+    """
     def __init__(self, host_list):
         self.__timer = ""
         self.__started = True
@@ -50,9 +80,17 @@ class ScreenCurses(object):
         curses.init_pair(4, curses.COLOR_BLACK, curses.COLOR_GREEN)
         curses.init_pair(5, curses.COLOR_BLACK, curses.COLOR_RED)
         curses.curs_set(0)
-        #self.screen.nodelay(True)
 
     def menubar(self):
+        """
+        draw the bar
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         box = self.screen.subwin(3, self.width, self.height - 3, 0)
         box.border()
         box.box()
@@ -65,26 +103,44 @@ class ScreenCurses(object):
             self.__timer.start()
 
     def build(self):
+        """
+        Build the screen
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         if self.__started is not True:
             return
 
         self.height, self.width = self.screen.getmaxyx()
 
         self.__elemnt_position.stripe_size = self.width - 2
-        self.__elemnt_position.element_size = Template.box_width + Template.box_margin_x
+        self.__elemnt_position.element_size = Template.box_width + \
+            Template.box_margin_x
         self.screen.border(0)
         self.menubar()
 
         i = 0
         for host in self.__host_list:
             self.__elemnt_position.current_id = i
+
+            pos_x = self.__elemnt_position.column * \
+                (Template.box_width + Template.box_margin_x) + \
+                Template.box_margin_x
+            pos_y = self.__elemnt_position.row * \
+                (Template.box_height + Template.box_margin_y) + \
+                Template.box_margin_y + 1
+
             try:
                 box = self.screen.subwin(Template.box_height,
                                          Template.box_width,
-                                         self.__elemnt_position.row *
-                                         (Template.box_height + Template.box_margin_y) +
-                                         Template.box_margin_y+1,
-                                         self.__elemnt_position.column * (Template.box_width + Template.box_margin_x)+Template.box_margin_x)
+                                         pos_y,
+                                         pos_x
+                                         )
+
             except Exception:
                 return
             box.box()
@@ -101,6 +157,15 @@ class ScreenCurses(object):
         self.__refresh()
 
     def run(self):
+        """
+        Curses getch loop
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         keypressevent = 0
         while keypressevent != 27:
             self.screen.erase()

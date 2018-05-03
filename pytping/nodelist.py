@@ -28,13 +28,19 @@ class NetworkNodeList(object):
     [] to store a python object's members (NetworkNode).
     This object will become an attribute.
 
-        a = MembersObj()
-        b = NetworkNode()
-        a.append(b)
-
-        print(a.items())
-        for member in a:
-            print(member)
+        >>> a = NetworkNodeList()
+        >>> b = NetworkNode("", "", "")
+        >>> c = NetworkNode("", "", "")
+        >>> a.append(b)
+        >>> print(type(a.items()))
+        <class 'list'>
+        >>> for member in a: print(type(member))
+        <class 'pytping.netnode.NetworkNode'>
+        >>> print(len(a))
+        1
+        >>> a.append(c)
+        >>> print(len(a))
+        2
     """
 
     def __init__(self):

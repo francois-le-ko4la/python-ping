@@ -15,31 +15,34 @@
 
 class Counter(object):
     """
-    This class count from 0 to max_value.
+    This class count from 0 to (max_value - 1).
     In the end, we restart the count.
 
-    +---+    +---+    +---+           +---+
-    | 0 | -> | 0 | -> | 0 | -> ... -> |max|
-    +---+    +---+    +---+           +---+
-      ^                                 |
-      |                                 |
-      +---------------------------------+
+    +-----+    +-----+    +-----+           +-------+
+    |  0  | -> |  1  | -> |  2  | -> ... -> |  max  |
+    +-----+    +-----+    +-----+           +-------+
+      ^                                         |
+      |                                         |
+      +-----------------------------------------+
 
     Attributes:
         value (int): current value
 
-    Use:
-        a = Counter(max_value)
-        print(a.value)
-        print(a.value)
-        print(a.value)
-        print(a.value)
+    Test:
+        python3 -m doctest -v <module>
 
-    Results:
+    Use:
+        >>> max_value = 2
+        >>> a = Counter(max_value)
+        >>> print(a.value)
         0
+        >>> print(a.value)
         1
+        >>> print(a.value)
         2
-        ...
+        >>> print(a.value)
+        0
+
     """
     def __init__(self, max_value):
         self.__value = None
@@ -48,6 +51,10 @@ class Counter(object):
 
     @property
     def value(self):
+        """
+        @Property:
+            current value (int)
+        """
         if self.__value is (self.__max_value + 1):
             self.reset()
 

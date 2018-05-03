@@ -35,7 +35,7 @@ for current_file in list(path.glob('**/*.py')):
         def ch(current_file):
             return lambda self: self.run_pycodesyle(current_file)
         setattr(RunPyCodeStyle,
-                "test_{}".format(current_file),
+                "test_mod_{}".format(pathlib.PurePosixPath(current_file).stem),
                 ch(current_file)
                 )
 

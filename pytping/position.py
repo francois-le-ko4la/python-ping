@@ -46,6 +46,26 @@ class ElementPosition(object):
       | +-----------+ +-----------+                |
       +--------------------------------------------+
 
+    Use:
+       >>> a = ElementPosition()
+       >>> a.element_size = 3
+       >>> a.stripe_size = 11
+       >>> a.current_id = 0
+       >>> print(a.row)
+       0
+       >>> print(a.column)
+       0
+       >>> a.current_id = 2
+       >>> print(a.row)
+       0
+       >>> print(a.column)
+       2
+       >>> a.current_id = 3
+       >>> print(a.row)
+       1
+       >>> print(a.column)
+       0
+
     """
     def __init__(self):
         self.__stripe_size = None
@@ -55,6 +75,10 @@ class ElementPosition(object):
 
     @property
     def stripe_size(self):
+        """
+        @Property:
+            int: stripe size
+        """
         return self.__stripe_size
 
     @stripe_size.setter
@@ -66,6 +90,10 @@ class ElementPosition(object):
 
     @property
     def element_size(self):
+        """
+        @Property:
+            int: element size
+        """
         return self.__element_size
 
     @element_size.setter
@@ -77,6 +105,10 @@ class ElementPosition(object):
 
     @property
     def ratio(self):
+        """
+        @Property:
+            int: number of element per stripe
+        """
         current_ratio = int(self.__stripe_size/self.__element_size)
         if current_ratio is 0:
             current_ratio = 1
@@ -84,6 +116,10 @@ class ElementPosition(object):
 
     @property
     def current_id(self):
+        """
+        @Property:
+            int: current element id
+        """
         return self.__current_id
 
     @current_id.setter
@@ -95,8 +131,16 @@ class ElementPosition(object):
 
     @property
     def row(self):
+        """
+        @Property:
+            int: row
+        """
         return int(self.__current_id/self.ratio)
 
     @property
     def column(self):
+        """
+        @Property:
+            int: column
+        """
         return self.__current_id - (self.row * self.ratio)

@@ -57,5 +57,6 @@ publish:
 
 test:
 	@sudo ./setup.py test
+	@sudo ./setup.py test > last_check.log
 
 .PHONY: default init dev install uninstall clean test doc publish release

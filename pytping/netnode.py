@@ -16,6 +16,12 @@ from pytping.ping import PingNetworkNode
 
 
 class NetworkNode(object):
+    """
+    Define a network node :
+    - label
+    - host
+    - port
+    """
     def __init__(self, label, host, port):
         self.__timer = None
         self.__isconnected = None
@@ -28,6 +34,10 @@ class NetworkNode(object):
 
     @property
     def isconnected(self):
+        """
+        @Property:
+            bool: True if the node is connected. False otherwise.
+        """
         return self.__isconnected
 
     @isconnected.setter
@@ -42,8 +52,26 @@ class NetworkNode(object):
         self.__timer.start()
 
     def stop(self):
+        """
+        Stop multithreading
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         self.__started = False
 
     def start(self):
+        """
+        Start multithreading to ping the node.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         self.__started = True
         self.__refresh()
