@@ -27,6 +27,14 @@ class NetworkNodeList(object):
     """
     [] to store a python object's members (NetworkNode).
     This object will become an attribute.
+
+        a = MembersObj()
+        b = NetworkNode()
+        a.append(b)
+
+        print(a.items())
+        for member in a:
+            print(member)
     """
 
     def __init__(self):

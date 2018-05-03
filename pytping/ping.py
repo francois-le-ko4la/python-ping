@@ -12,14 +12,22 @@ import socket
 
 
 class default:
-    timeout=0.5
-    ICMP="ICMP"
+    timeout = 0.5
+    ICMP = "ICMP"
+    msg_typeerror = "PingNetworkNode: invalid input type"
+    ping_cmd = "ping -c 1 -w 1 "
 
 
 class PingNetworkNode(object):
+
     """
-    This class ping a network equipement
+    This class ping a network node.
+    We store host/port
+    Host can be defined with a hostname or IP address.
+    If port = ICMP then we use ping command.
+    Else, we use socket API.
     """
+
     def __init__(self, host, port):
         self.__host = None
         self.__port = None
@@ -28,38 +36,28 @@ class PingNetworkNode(object):
 
     @property
     def host(self):
-        """
-        Property
-        """
         return self.__host
 
     @host.setter
     def host(self, host):
-        self.__host = host
+        if type(host) is type(str()):
+            self.__host = host
+        else:
+            raise TypeError(default.msg_typeerror)
 
     @property
     def port(self):
-        """
-        Property
-        """
         return self.__port
 
     @port.setter
     def port(self, port):
-        self.__port = port
+        if type(port) is type(str()) or type(port) is type(int()):
+            self.__port = port
+        else:
+            raise TypeError(default.msg_typeerror)
 
     @property
     def isconnected(self):
-        """Test network connection
-
-        Args:
-            None
-
-        Returns:
-            bool
-
-        """
-
         if type(self.__port) is type(str() and default.ICMP in self.__port):
             return self.__ping()
         else:
@@ -75,7 +73,7 @@ class PingNetworkNode(object):
 
     def __ping(self):
         try:
-            subprocess.run("ping -c 1 -w 1 " + self.__host,
+            subprocess.run(default.ping_cmd + self.__host,
                            shell=True,
                            check=True,
                            stdout=subprocess.PIPE,

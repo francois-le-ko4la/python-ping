@@ -191,6 +191,14 @@ class ConfigYAML(object):
 
 ```
 This class manage YAML config file
+
+Property:
+    - filename (str): /path/to/the/config/file
+    - config (dict)
+
+Use:
+    a = ConfigYAML("./onfig.yml")
+    print(a.config)
 ```
 
 ##### @Property: ConfigYAML.config
@@ -227,7 +235,30 @@ class Counter(object):
 
 ```
 This class count from 0 to max_value.
-In the end (max_value+1), the value becomes 0
+In the end, we restart the count.
+
++---+    +---+    +---+           +---+
+| 0 | -> | 0 | -> | 0 | -> ... -> |max|
++---+    +---+    +---+           +---+
+  ^                                 |
+  |                                 |
+  +---------------------------------+
+
+Attributes:
+    value (int): current value
+
+Use:
+    a = Counter(max_value)
+    print(a.value)
+    print(a.value)
+    print(a.value)
+    print(a.value)
+
+Results:
+    0
+    1
+    2
+    ...
 ```
 
 ##### @Property: Counter.value
@@ -244,7 +275,7 @@ def Counter.value(self):
 def Counter.__init__(self, max_value):
 ```
 > <br />
-> Init current value and stores max_value<br />
+> Initialize self.  See help(type(self)) for accurate signature.<br />
 > <br />
 ##### Counter.reset(self)
 ```python
@@ -252,6 +283,12 @@ def Counter.reset(self):
 ```
 > <br />
 > reset current value<br />
+> <br />
+> <b>Args:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
+> <br />
+> <b>Returns:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
 > <br />
 #### ElementPosition()
 ```python
@@ -350,7 +387,7 @@ def ElementPosition.stripe_size(self, value):
 def ElementPosition.__init__(self):
 ```
 > <br />
-> Init default value and test<br />
+> Initialize self.  See help(type(self)) for accurate signature.<br />
 > <br />
 #### NetworkNode()
 ```python
@@ -408,6 +445,14 @@ class NetworkNodeList(object):
 ```
 [] to store a python object's members (NetworkNode).
 This object will become an attribute.
+
+    a = MembersObj()
+    b = NetworkNode()
+    a.append(b)
+
+    print(a.items())
+    for member in a:
+        print(member)
 ```
 
 ##### NetworkNodeList.__getitem__(self, index)
@@ -479,7 +524,11 @@ class PingNetworkNode(object):
 ```
 
 ```
-This class ping a network equipement
+This class ping a network node.
+We store host/port
+Host can be defined with a hostname or IP address.
+If port = ICMP then we use ping command.
+Else, we use socket API.
 ```
 
 ##### @Property: PingNetworkNode.host

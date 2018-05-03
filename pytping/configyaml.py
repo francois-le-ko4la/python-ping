@@ -10,8 +10,6 @@
    #    #     # #     # #
    #    #     # #     # #######
 
-mlk = ConfigYAML("./onfig.yml")
-print(mlk.config)
 """
 
 import pathlib
@@ -21,6 +19,14 @@ import yaml
 class ConfigYAML(object):
     """
     This class manage YAML config file
+
+    Property:
+        - filename (str): /path/to/the/config/file
+        - config (dict)
+
+    Use:
+        a = ConfigYAML("./onfig.yml")
+        print(a.config)
     """
     def __init__(self, filename):
         self.__filename = None
@@ -28,16 +34,10 @@ class ConfigYAML(object):
 
     @property
     def filename(self):
-        """
-        @property filename
-        """
         return self.__filename
 
     @filename.setter
     def filename(self, filename):
-        """
-        This function check the path and store it in self.__filename
-        """
         if pathlib.Path(filename).exists():
             self.__filename = filename
         else:
@@ -45,10 +45,6 @@ class ConfigYAML(object):
 
     @property
     def config(self):
-        """
-        Open/read the YAML config file.
-        Returns the config.
-        """
         with open(self.__filename, 'r') as yaml_file:
             try:
                 return yaml.load(yaml_file)
