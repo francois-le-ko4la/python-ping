@@ -358,7 +358,7 @@ class NetworkNode(object):
 ```
 
 ```
-<b>- docstring empty -</b>
+Docstring empty
 ```
 
 ##### @Property: NetworkNode.isconnected
@@ -384,21 +384,21 @@ def NetworkNode.__init__(self, label, host, port):
 def NetworkNode.__refresh(self):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> Docstring empty<br />
 > <br />
 ##### NetworkNode.start(self)
 ```python
 def NetworkNode.start(self):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> Docstring empty<br />
 > <br />
 ##### NetworkNode.stop(self)
 ```python
 def NetworkNode.stop(self):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> Docstring empty<br />
 > <br />
 #### NetworkNodeList()
 ```python
@@ -415,7 +415,7 @@ This object will become an attribute.
 def NetworkNodeList.__getitem__(self, index):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> Docstring empty<br />
 > <br />
 ##### NetworkNodeList.__init__(self)
 ```python
@@ -429,21 +429,21 @@ def NetworkNodeList.__init__(self):
 def NetworkNodeList.__iter__(self):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> Docstring empty<br />
 > <br />
 ##### NetworkNodeList.__len__(self)
 ```python
 def NetworkNodeList.__len__(self):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> Docstring empty<br />
 > <br />
 ##### NetworkNodeList.__next__(self)
 ```python
 def NetworkNodeList.__next__(self):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> Docstring empty<br />
 > <br />
 ##### NetworkNodeList.__repr__(self)
 ```python
@@ -525,14 +525,14 @@ def PingNetworkNode.__init__(self, host, port):
 def PingNetworkNode.__ping(self):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> Docstring empty<br />
 > <br />
 ##### PingNetworkNode.__socket(self)
 ```python
 def PingNetworkNode.__socket(self):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> Docstring empty<br />
 > <br />
 #### PythonPing()
 ```python
@@ -540,7 +540,7 @@ class PythonPing(object):
 ```
 
 ```
-<b>- docstring empty -</b>
+Docstring empty
 ```
 
 ##### PythonPing.__init__(self, inputfile)
@@ -563,7 +563,7 @@ class ScreenCurses(object):
 ```
 
 ```
-<b>- docstring empty -</b>
+Docstring empty
 ```
 
 ##### ScreenCurses.__init__(self, host_list)
@@ -578,26 +578,26 @@ def ScreenCurses.__init__(self, host_list):
 def ScreenCurses.__refresh(self):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> Docstring empty<br />
 > <br />
 ##### ScreenCurses.build(self)
 ```python
 def ScreenCurses.build(self):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> Docstring empty<br />
 > <br />
 ##### ScreenCurses.menubar(self)
 ```python
 def ScreenCurses.menubar(self):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> Docstring empty<br />
 > <br />
 ##### ScreenCurses.run(self)
 ```python
 def ScreenCurses.run(self):
 ```
 > <br />
-> <b>- docstring empty -</b><br />
+> Docstring empty<br />
 > <br />
