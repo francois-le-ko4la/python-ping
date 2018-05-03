@@ -36,6 +36,7 @@ class ScreenCurses(object):
         self.__started = True
         self.__host_list = host_list
         self.__count = Counter(3)
+        self.__elemnt_position = ElementPosition()
         self.screen = curses.initscr()
         self.screen.immedok(True)
         self.height, self.width = self.screen.getmaxyx()
@@ -53,7 +54,6 @@ class ScreenCurses(object):
 
     def menubar(self):
         box = self.screen.subwin(3, self.width, self.height - 3, 0)
-        # box.immedok(True)
         box.border()
         box.box()
         box.addstr(1, 2, Template.msg + " " +
@@ -69,21 +69,22 @@ class ScreenCurses(object):
             return
 
         self.height, self.width = self.screen.getmaxyx()
-        location = ElementPosition(
-            self.width - 2, Template.box_width + Template.box_margin_x)
+
+        self.__elemnt_position.stripe_size = self.width - 2
+        self.__elemnt_position.element_size = Template.box_width + Template.box_margin_x
         self.screen.border(0)
         self.menubar()
 
         i = 0
         for host in self.__host_list:
-            location.current_id = i
+            self.__elemnt_position.current_id = i
             try:
                 box = self.screen.subwin(Template.box_height,
                                          Template.box_width,
-                                         location.row *
+                                         self.__elemnt_position.row *
                                          (Template.box_height + Template.box_margin_y) +
                                          Template.box_margin_y+1,
-                                         location.column * (Template.box_width + Template.box_margin_x)+Template.box_margin_x)
+                                         self.__elemnt_position.column * (Template.box_width + Template.box_margin_x)+Template.box_margin_x)
             except Exception:
                 return
             box.box()

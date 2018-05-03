@@ -17,7 +17,15 @@ of the GNU General Public License (GPL), version 3.
 
 The package contents itself are in the `config_from_json` directory:
 * `__init__.py` Initialization file for the Python package.
-* `XXX`: The code of interest.
+* `__about__.py` Global parameters
+* `configyaml.py` Config file management
+* `counter.py` Simple counter to make a progress animation
+* `members.py` NetworkNode management
+* `netnode.py` NetworkNode def
+* `ping.py` check host/port
+* `position.py` Element position management
+* `pyping.py` main function
+* `screen.py` Screen management
 
 ## Setup:
 
@@ -34,7 +42,46 @@ This module has been tested and validated on Ubuntu.
 make test
 ```
 
+## Screenshot:
+
+![alt text](./pictures/screen.png)
+
+
 ## Use:
+
+Use the script provided in this package :
+```shell
+$ pyt-ping.py -h
+usage: pyt-ping.py [-h] [-v] -i INPUT
+
+Ping tool...
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --version         show program's version number and exit
+
+required arguments:
+  -i INPUT, --input INPUT
+                        Input file name
+
+Enjoy...
+```
+
+Configuration file should be write according to this example:
+```yaml
+Internet access:
+  host: www.google.fr
+  port: 80
+vCenter:
+  host: 192.168.1.12
+  port: ICMP
+ESX1:
+  host: 192.168.1.230
+  port: 23
+ESX2:
+  host: 192.168.1.240
+  port: ICMP
+```
 
 ## Todo:
 

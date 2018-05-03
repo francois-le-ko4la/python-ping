@@ -46,7 +46,7 @@ class ElementPosition(object):
       +--------------------------------------------+
 
     """
-    def __init__(self, stripe_size, element_size):
+    def __init__(self): #, stripe_size, element_size):
         """
         Init default value and test
         """
@@ -54,8 +54,8 @@ class ElementPosition(object):
         self.__element_size = None
         self.__current_id = None
         self.current_id = 0
-        self.stripe_size = stripe_size
-        self.element_size = element_size
+        #self.stripe_size = stripe_size
+        #self.element_size = element_size
 
     @property
     def stripe_size(self):

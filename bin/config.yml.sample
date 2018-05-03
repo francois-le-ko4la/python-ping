@@ -3,10 +3,10 @@ Internet access:
   port: 80
 vCenter:
   host: 192.168.1.12
-  port: 80
+  port: ICMP
 ESX1:
   host: 192.168.1.230
-  port: 80
+  port: 22
 ESX2:
   host: 192.168.1.240
-  port: 80
+  port: ICMP

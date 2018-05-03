@@ -23,7 +23,9 @@ class PythonPing(object):
         self.__config = self.__yaml.config
         self.__host_list = NetworkNodeList()
         for label in self.__config:
-            current_node = NetworkNode(label, self.__config[label]['host'])
+            current_node = NetworkNode(label,
+                                       self.__config[label]['host'],
+                                       self.__config[label]['port'])
             current_node.start()
             self.__host_list.append(current_node)
         self.__screen = ScreenCurses(self.__host_list)

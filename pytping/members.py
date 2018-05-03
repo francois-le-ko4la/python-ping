@@ -30,7 +30,7 @@ class NetworkNodeList(object):
     """
 
     def __init__(self):
-        self.__objectType = NetworkNode("", "")
+        self.__objectType = NetworkNode("", "", "")
         self.__members = []
         self.__currentindex = 0
 

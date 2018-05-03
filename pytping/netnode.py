@@ -16,14 +16,14 @@ from pytping.ping import PingNetworkNode
 
 
 class NetworkNode(object):
-    def __init__(self, label, host, port=False):
+    def __init__(self, label, host, port):
         self.__timer = None
         self.__isconnected = None
         self.__started = False
         self.isconnected = False
         self.label = label
         self.host = host
-        self.__ping = PingNetworkNode(host)
+        self.__ping = PingNetworkNode(host, port)
         self.__port = port
 
     @property

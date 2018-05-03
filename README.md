@@ -14,7 +14,15 @@ of the GNU General Public License (GPL), version 3.
 
 The package contents itself are in the `config_from_json` directory:
 * `__init__.py` Initialization file for the Python package.
-* `XXX`: The code of interest.
+* `__about__.py` Global parameters
+* `configyaml.py` Config file management
+* `counter.py` Simple counter to make a progress animation
+* `members.py` NetworkNode management
+* `netnode.py` NetworkNode def
+* `ping.py` check host/port
+* `position.py` Element position management
+* `pyping.py` main function
+* `screen.py` Screen management
 
 ## Setup:
 
@@ -31,7 +39,46 @@ This module has been tested and validated on Ubuntu.
 make test
 ```
 
+## Screenshot:
+
+![alt text](./pictures/screen.png)
+
+
 ## Use:
+
+Use the script provided in this package :
+```shell
+$ pyt-ping.py -h
+usage: pyt-ping.py [-h] [-v] -i INPUT
+
+Ping tool...
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --version         show program's version number and exit
+
+required arguments:
+  -i INPUT, --input INPUT
+                        Input file name
+
+Enjoy...
+```
+
+Configuration file should be write according to this example:
+```yaml
+Internet access:
+  host: www.google.fr
+  port: 80
+vCenter:
+  host: 192.168.1.12
+  port: ICMP
+ESX1:
+  host: 192.168.1.230
+  port: 23
+ESX2:
+  host: 192.168.1.240
+  port: ICMP
+```
 
 ## Todo:
 
@@ -102,10 +149,10 @@ zope==4.0b4
 [@Property: ElementPosition.ratio](#property-elementpositionratio)<br />
 [@Property: ElementPosition.row](#property-elementpositionrow)<br />
 [@Property: ElementPosition.stripe_size](#property-elementpositionstripe_size)<br />
-[ElementPosition.__init__(self, stripe_size, element_size)](#elementpositioninitself-stripe_size-element_size)<br />
+[ElementPosition.__init__(self)](#elementpositioninitself)<br />
 [NetworkNode()](#networknode)<br />
 [@Property: NetworkNode.isconnected](#property-networknodeisconnected)<br />
-[NetworkNode.__init__(self, label, host, port=False)](#networknodeinitself-label-host-portfalse)<br />
+[NetworkNode.__init__(self, label, host, port)](#networknodeinitself-label-host-port)<br />
 [NetworkNode.__refresh(self)](#networknode__refreshself)<br />
 [NetworkNode.start(self)](#networknodestartself)<br />
 [NetworkNode.stop(self)](#networknodestopself)<br />
@@ -122,7 +169,10 @@ zope==4.0b4
 [PingNetworkNode()](#pingnetworknode)<br />
 [@Property: PingNetworkNode.host](#property-pingnetworknodehost)<br />
 [@Property: PingNetworkNode.isconnected](#property-pingnetworknodeisconnected)<br />
-[PingNetworkNode.__init__(self, host)](#pingnetworknodeinitself-host)<br />
+[@Property: PingNetworkNode.port](#property-pingnetworknodeport)<br />
+[PingNetworkNode.__init__(self, host, port)](#pingnetworknodeinitself-host-port)<br />
+[PingNetworkNode.__ping(self)](#pingnetworknode__pingself)<br />
+[PingNetworkNode.__socket(self)](#pingnetworknode__socketself)<br />
 [PythonPing()](#pythonping)<br />
 [PythonPing.__init__(self, inputfile)](#pythonpinginitself-inputfile)<br />
 [PythonPing.run(self)](#pythonpingrunself)<br />
@@ -289,9 +339,9 @@ def ElementPosition.stripe_size(self, value):
 > <br />
 > @Property<br />
 > <br />
-##### ElementPosition.__init__(self, stripe_size, element_size)
+##### ElementPosition.__init__(self)
 ```python
-def ElementPosition.__init__(self, stripe_size, element_size):
+def ElementPosition.__init__(self):
 ```
 > <br />
 > Init default value and test<br />
@@ -314,9 +364,9 @@ def NetworkNode.isconnected(self, value):
 > <br />
 > @Property<br />
 > <br />
-##### NetworkNode.__init__(self, label, host, port=False)
+##### NetworkNode.__init__(self, label, host, port)
 ```python
-def NetworkNode.__init__(self, label, host, port=False):
+def NetworkNode.__init__(self, label, host, port):
 ```
 > <br />
 > Initialize self.  See help(type(self)) for accurate signature.<br />
@@ -440,12 +490,37 @@ def PingNetworkNode.isconnected(self):
 > <br />
 > @Property<br />
 > <br />
-##### PingNetworkNode.__init__(self, host)
+##### @Property: PingNetworkNode.port
 ```python
-def PingNetworkNode.__init__(self, host):
+@property
+def PingNetworkNode.port(self):
+@port.setter
+def PingNetworkNode.port(self, port):
+
+```
+> <br />
+> @Property<br />
+> <br />
+##### PingNetworkNode.__init__(self, host, port)
+```python
+def PingNetworkNode.__init__(self, host, port):
 ```
 > <br />
 > Initialize self.  See help(type(self)) for accurate signature.<br />
+> <br />
+##### PingNetworkNode.__ping(self)
+```python
+def PingNetworkNode.__ping(self):
+```
+> <br />
+> <b>- docstring empty -</b><br />
+> <br />
+##### PingNetworkNode.__socket(self)
+```python
+def PingNetworkNode.__socket(self):
+```
+> <br />
+> <b>- docstring empty -</b><br />
 > <br />
 #### PythonPing()
 ```python

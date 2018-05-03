@@ -8,15 +8,23 @@ print(myhost.isconnected)
 """
 
 import subprocess
+import socket
+
+
+class default:
+    timeout=0.5
+    ICMP="ICMP"
 
 
 class PingNetworkNode(object):
     """
     This class ping a network equipement
     """
-    def __init__(self, host):
+    def __init__(self, host, port):
         self.__host = None
+        self.__port = None
         self.host = host
+        self.port = port
 
     @property
     def host(self):
@@ -30,6 +38,17 @@ class PingNetworkNode(object):
         self.__host = host
 
     @property
+    def port(self):
+        """
+        Property
+        """
+        return self.__port
+
+    @port.setter
+    def port(self, port):
+        self.__port = port
+
+    @property
     def isconnected(self):
         """Test network connection
 
@@ -40,6 +59,21 @@ class PingNetworkNode(object):
             bool
 
         """
+
+        if type(self.__port) is type(str() and default.ICMP in self.__port):
+            return self.__ping()
+        else:
+            return self.__socket()
+
+    def __socket(self):
+        try:
+            socket.setdefaulttimeout(default.timeout);
+            socket.socket().connect((self.__host, self.__port))
+        except Exception:
+            return False
+        return True
+
+    def __ping(self):
         try:
             subprocess.run("ping -c 1 -w 1 " + self.__host,
                            shell=True,
