@@ -238,7 +238,7 @@ class Counter(object):
 ```
 
 ```
-This class count from 0 to (max_value - 1).
+This class count from 0 to max_value.
 In the end, we restart the count.
 
 +-----+    +-----+    +-----+           +-------+
