@@ -464,8 +464,6 @@ Define a network node :
 ```python
 @property
 def NetworkNode.isconnected(self):
-@isconnected.setter
-def NetworkNode.isconnected(self, value):
 
 ```
 > <br />
