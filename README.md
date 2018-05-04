@@ -188,13 +188,10 @@ zope==4.0b4
 [NetworkNode.start(self)](#networknodestartself)<br />
 [NetworkNode.stop(self)](#networknodestopself)<br />
 [NetworkNodeList()](#networknodelist)<br />
-[NetworkNodeList.__getitem__(self, index)](#networknodelistgetitemself-index)<br />
 [NetworkNodeList.__init__(self)](#networknodelistinitself)<br />
 [NetworkNodeList.__iter__(self)](#networknodelistiterself)<br />
 [NetworkNodeList.__len__(self)](#networknodelistlenself)<br />
 [NetworkNodeList.__next__(self)](#networknodelistnextself)<br />
-[NetworkNodeList.__repr__(self)](#networknodelistreprself)<br />
-[NetworkNodeList.__str__(self)](#networknodeliststrself)<br />
 [NetworkNodeList.append(self, value)](#networknodelistappendself-value)<br />
 [NetworkNodeList.items(self)](#networknodelistitemsself)<br />
 [PingNetworkNode()](#pingnetworknode)<br />
@@ -574,35 +571,60 @@ def NetworkNode.stop(self):
 > <br />
 #### NetworkNodeList()
 ```python
-class NetworkNodeList(object):
+class NetworkNodeList(dict):
 ```
 
 ```
-[] to store a python object's members (NetworkNode).
-This object will become an attribute.
+{} to store a python object's members (NetworkNode).
+We want to test object type before store.
+We use a dict() in order to make a complex object :
+
+   +-------------------------------------+ --*  
+   |  label                              |   |
+   | +------+    +------------+          |   |- __str__
+   | | type | => |  obj type  |     str  |   |  __iter__
+   | +------+    +------------+          |   |  ...
+   |                                     |   |       
+   | +------+    +------------+  *       |   |     --*
+   | | data | => |  Object 0  |  |       |   |       |
+   | +------+    +------------+  |       |   |       |  
+   |             +------------+  |       |   |       |
+   |             |  Object 1  |  |- list |   |       |- append
+   |             +------------+  |       |   |       |  items
+   |                  ...        |       |   |       |  __len__
+   |             +------------+  |       |   |       |  __next__
+   |             |  Object n  |  |       |   |       |
+   |             +------------+  *       |   |     --*
+   +-------------------------------------+ --*
+
+Obj type is protected by design and is NetworkNode type.
+A new element type is compare with Obj type.
+Another type will create a raise exception.
+
+str(NetworkNodeList()) => str(ALL)
+len(NetworkNodeList()) => len(list())
+NetworkNodeList.append => list().append
 
     >>> a = NetworkNodeList()
     >>> b = NetworkNode("", "", "")
     >>> c = NetworkNode("", "", "")
     >>> a.append(b)
-    >>> print(type(a.items()))
-    <class 'list'>
-    >>> for member in a: print(type(member))
-    <class 'pytping.netnode.NetworkNode'>
     >>> print(len(a))
     1
+    >>> for member in a: print(type(member))
+    <class 'pytping.netnode.NetworkNode'>
     >>> a.append(c)
     >>> print(len(a))
     2
+    >>> for member in a: print(type(member))
+    <class 'pytping.netnode.NetworkNode'>
+    <class 'pytping.netnode.NetworkNode'>
+    >>> a.append(3)
+    Traceback (most recent call last):
+    ...
+    TypeError: This object is not a NetworkNode
 ```
 
-##### NetworkNodeList.__getitem__(self, index)
-```python
-def NetworkNodeList.__getitem__(self, index):
-```
-> <br />
-> Docstring empty<br />
-> <br />
 ##### NetworkNodeList.__init__(self)
 ```python
 def NetworkNodeList.__init__(self):
@@ -615,14 +637,14 @@ def NetworkNodeList.__init__(self):
 def NetworkNodeList.__iter__(self):
 ```
 > <br />
-> Docstring empty<br />
+> Implement iter(self).<br />
 > <br />
 ##### NetworkNodeList.__len__(self)
 ```python
 def NetworkNodeList.__len__(self):
 ```
 > <br />
-> Docstring empty<br />
+> Return len(self).<br />
 > <br />
 ##### NetworkNodeList.__next__(self)
 ```python
@@ -630,20 +652,6 @@ def NetworkNodeList.__next__(self):
 ```
 > <br />
 > Docstring empty<br />
-> <br />
-##### NetworkNodeList.__repr__(self)
-```python
-def NetworkNodeList.__repr__(self):
-```
-> <br />
-> Return repr(self).<br />
-> <br />
-##### NetworkNodeList.__str__(self)
-```python
-def NetworkNodeList.__str__(self):
-```
-> <br />
-> Return str(self).<br />
 > <br />
 ##### NetworkNodeList.append(self, value)
 ```python
