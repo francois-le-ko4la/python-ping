@@ -579,15 +579,15 @@ class NetworkNodeList(dict):
 We want to test object type before store.
 We use a dict() in order to make a complex object :
 
-   +-------------------------------------+ --*  
+   +-------------------------------------+ --*
    |  label                              |   |
    | +------+    +------------+          |   |- __str__
-   | | type | => |  obj type  |     str  |   |  __iter__
+   | | type | => |  obj type  |     obj  |   |  __iter__
    | +------+    +------------+          |   |  ...
-   |                                     |   |       
+   |                                     |   |
    | +------+    +------------+  *       |   |     --*
    | | data | => |  Object 0  |  |       |   |       |
-   | +------+    +------------+  |       |   |       |  
+   | +------+    +------------+  |       |   |       |
    |             +------------+  |       |   |       |
    |             |  Object 1  |  |- list |   |       |- append
    |             +------------+  |       |   |       |  items

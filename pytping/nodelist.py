@@ -32,7 +32,7 @@ class NetworkNodeList(dict):
        +-------------------------------------+ --*
        |  label                              |   |
        | +------+    +------------+          |   |- __str__
-       | | type | => |  obj type  |     str  |   |  __iter__
+       | | type | => |  obj type  |     obj  |   |  __iter__
        | +------+    +------------+          |   |  ...
        |                                     |   |
        | +------+    +------------+  *       |   |     --*
@@ -77,7 +77,7 @@ class NetworkNodeList(dict):
     """
 
     def __init__(self):
-        self['type'] = type(NetworkNode("", "", ""))
+        self['type'] = NetworkNode("", "", "")
         self.__dict__['data'] = []
         self.__currentindex = 0
         self.__index = 0
@@ -102,7 +102,7 @@ class NetworkNodeList(dict):
         """
         add a member
         """
-        if isinstance(value, self['type']):
+        if isinstance(value, type(self['type'])):
             self.__dict__['data'].append(value)
             self['data'] = self.__dict__['data']
         else:
