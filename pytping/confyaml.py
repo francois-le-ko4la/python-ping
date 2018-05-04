@@ -28,9 +28,8 @@ class ConfigYAML(dict):
     """
     This class manage YAML config file
 
-    Property:
+    Args:
         - filename (str): /path/to/the/config/file
-        - config (dict)
 
     Use:
         >>> import pathlib

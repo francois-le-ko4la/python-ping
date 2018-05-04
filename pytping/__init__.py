@@ -44,7 +44,7 @@ of the GNU General Public License (GPL), version 3.
 The package contents itself are in the `pytping` directory:
 * `__init__.py` Initialization file for the Python package.
 * `__about__.py` Global parameters
-* `configyaml.py` Config file management
+* `confyaml.py` Config file management
 * `counter.py` Simple counter to make a progress animation
 * `netnode.py` NetworkNode def
 * `nodelist.py` NetworkNode management
