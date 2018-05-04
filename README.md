@@ -1,4 +1,25 @@
 # pytping
+## Why:
+
+When you have to check a network node, you use ping command and all is fine.
+Sometimes, you have to manage multiple nodes. As a consequence, you have to
+open multiple terminal windows to ping the nodes. In the real life, this kind
+of tasks are not really interresting and you have to switch between the
+windows. Of course, at the same time, you have to remember IP address.
+
+Basically, you have many ping tools on Windows.
+My objective is to provide a __simple/light tool__ that can be used quickly
+on linux environments.
+
+The GUI has been build with `curses` library provided by system V/posix
+environments. A windows library exist and allow you to adapt the screen module.
+
+__This project is not :__
+- a ping command replacement
+- a tool (MultiPing/PingInfoView) replacement
+- a network analyzer
+- a CMDB tool
+
 ## Description:
 
 This package loads the configuration values defined in external YAML file and
