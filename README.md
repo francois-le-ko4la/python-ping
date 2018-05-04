@@ -12,7 +12,7 @@ My objective is to provide a __simple/light tool__ that can be used quickly
 on linux environments.
 
 The GUI has been build with `curses` library provided by system V/posix
-environments. A windows library exist and allow you to adapt the screen module.
+environments. A windows library exists and allow you to adapt the screen module.
 
 __This project is not :__
 - a ping command replacement
