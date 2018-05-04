@@ -77,7 +77,8 @@ class NetworkNodeList(dict):
     """
 
     def __init__(self):
-        self['type'] = NetworkNode("", "", "")
+        self.__obj_type = NetworkNode("", "", "")
+        self['type'] = self.__obj_type
         self.__dict__['data'] = []
         self.__currentindex = 0
         self.__index = 0
