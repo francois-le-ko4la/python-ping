@@ -41,7 +41,7 @@ of the GNU General Public License (GPL), version 3.
 The package contents itself are in the `pytping` directory:
 * `__init__.py` Initialization file for the Python package.
 * `__about__.py` Global parameters
-* `configyaml.py` Config file management
+* `confyaml.py` Config file management
 * `counter.py` Simple counter to make a progress animation
 * `netnode.py` NetworkNode def
 * `nodelist.py` NetworkNode management
@@ -223,13 +223,22 @@ class ConfigYAML(dict):
 ```
 This class manage YAML config file
 
-Property:
+Args:
     - filename (str): /path/to/the/config/file
-    - config (dict)
 
 Use:
     >>> import pathlib
     >>> path_pyth = (pathlib.Path(__file__).resolve().parent)
+    >>> conf = pathlib.PurePath(path_pyth, '../bin/config.yml.samp')
+    >>> config = ConfigYAML(conf)
+    Traceback (most recent call last):
+    ...
+    OSError: File not found !
+    >>> conf = pathlib.PurePath(path_pyth, '../LICENSE')
+    >>> config = ConfigYAML(conf)
+    Traceback (most recent call last):
+    ...
+    ValueError: Can't load the YAML...
     >>> conf = pathlib.PurePath(path_pyth, '../bin/config.yml.sample')
     >>> config = ConfigYAML(conf)
     >>> print(config['Internet access'])
