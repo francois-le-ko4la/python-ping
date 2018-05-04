@@ -236,7 +236,8 @@ def ConfigYAML.config(self):
 
 ```
 > <br />
-> @Property<br />
+> <b>@Property:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  config (dict)<br />
 > <br />
 ##### @Property: ConfigYAML.filename
 ```python
@@ -247,7 +248,8 @@ def ConfigYAML.filename(self, filename):
 
 ```
 > <br />
-> @Property<br />
+> <b>@Property:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  filename (str): /path/to/the/config/file<br />
 > <br />
 ##### ConfigYAML.__init__(self, filename)
 ```python
@@ -298,7 +300,8 @@ def Counter.value(self):
 
 ```
 > <br />
-> @Property<br />
+> <b>@Property:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  current value (int)<br />
 > <br />
 ##### Counter.__init__(self, max_value)
 ```python
@@ -379,7 +382,8 @@ def ElementPosition.column(self):
 
 ```
 > <br />
-> @Property<br />
+> <b>@Property:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: column<br />
 > <br />
 ##### @Property: ElementPosition.current_id
 ```python
@@ -390,7 +394,8 @@ def ElementPosition.current_id(self, value):
 
 ```
 > <br />
-> @Property<br />
+> <b>@Property:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: current element id<br />
 > <br />
 ##### @Property: ElementPosition.element_size
 ```python
@@ -401,7 +406,8 @@ def ElementPosition.element_size(self, value):
 
 ```
 > <br />
-> @Property<br />
+> <b>@Property:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: element size<br />
 > <br />
 ##### @Property: ElementPosition.ratio
 ```python
@@ -410,7 +416,8 @@ def ElementPosition.ratio(self):
 
 ```
 > <br />
-> @Property<br />
+> <b>@Property:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: number of element per stripe<br />
 > <br />
 ##### @Property: ElementPosition.row
 ```python
@@ -419,7 +426,8 @@ def ElementPosition.row(self):
 
 ```
 > <br />
-> @Property<br />
+> <b>@Property:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: row<br />
 > <br />
 ##### @Property: ElementPosition.stripe_size
 ```python
@@ -430,7 +438,8 @@ def ElementPosition.stripe_size(self, value):
 
 ```
 > <br />
-> @Property<br />
+> <b>@Property:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: stripe size<br />
 > <br />
 ##### ElementPosition.__init__(self)
 ```python
@@ -460,7 +469,8 @@ def NetworkNode.isconnected(self, value):
 
 ```
 > <br />
-> @Property<br />
+> <b>@Property:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  bool: True if the node is connected. False otherwise.<br />
 > <br />
 ##### NetworkNode.__init__(self, label, host, port)
 ```python
@@ -621,7 +631,8 @@ def PingNetworkNode.host(self, host):
 
 ```
 > <br />
-> @Property<br />
+> <b>@Property:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  str: hostname or IP address<br />
 > <br />
 ##### @Property: PingNetworkNode.isconnected
 ```python
@@ -630,7 +641,8 @@ def PingNetworkNode.isconnected(self):
 
 ```
 > <br />
-> @Property<br />
+> <b>@Property:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  bool: True if the node is connected. False otherwise.<br />
 > <br />
 ##### @Property: PingNetworkNode.port
 ```python
@@ -641,7 +653,8 @@ def PingNetworkNode.port(self, port):
 
 ```
 > <br />
-> @Property<br />
+> <b>@Property:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  str/int: "ICMP" or port number<br />
 > <br />
 ##### PingNetworkNode.__init__(self, host, port)
 ```python
