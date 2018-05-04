@@ -33,11 +33,11 @@ def readme():
 
 
 setup(
-    name='pytping',
+    name=__about__.__name__,
     version=__about__.__version__,
     description=__about__.__description__,
     long_description=readme(),
-    python_requires='>=3.6',
+    python_requires=__about__.__python_version__,
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Console',
@@ -46,11 +46,11 @@ setup(
     url=__about__.__url__,
     author=__about__.__author__,
     author_email=__about__.__email__,
-    license='GPL3',
-    packages=['pytping'],
+    license=__about__.__license__,
+    packages=[__about__.__name__],
     setup_requires=['pytest-runner'],
     tests_require=['pytest'],
-    test_suite="tests.pytping",
-    scripts=['bin/pyt-ping.py'],
+    test_suite="tests." + __about__.__name__,
+    scripts=[__about__.__script__],
     zip_safe=False
     )

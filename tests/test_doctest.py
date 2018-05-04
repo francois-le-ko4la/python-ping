@@ -16,6 +16,7 @@ import pathlib
 import doctest
 import unittest
 import subprocess
+from pytping import __about__
 
 modulelist = ['configyaml.py',
               'counter.py',
@@ -49,7 +50,7 @@ for current_file in modulelist:
         return lambda self: self.run_doctest(current_file)
     setattr(RunDocTest,
             "test_mod_{}".format(current_file),
-            ch("pytping/" + current_file)
+            ch(__about__.__name__ + "/" + current_file)
             )
 
 

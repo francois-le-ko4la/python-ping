@@ -1,7 +1,7 @@
 # Makefile
 
-PACKAGE_NAME = `sed -n "/^    name='\(.*\)',$$/s//\1/p" setup.py`
-PACKAGE_DIR = `sed -n "/^    packages=\['\(.*\)'\],$$/s//\1/p" setup.py`
+PACKAGE_NAME = `sudo ./setup.py --name`
+PACKAGE_DIR = $(PACKAGE_NAME)
 MAKE := $(MAKE) --no-print-directory
 SHELL = bash
 
@@ -25,6 +25,7 @@ dev:
 	@sudo python3 setup.py develop
 
 uninstall:
+	@pip3 show $(PACKAGE_NAME)
 	@sudo -H pip3 uninstall -y $(PACKAGE_NAME)
 
 install:
@@ -36,6 +37,7 @@ clean:
 	@sudo find -type f -name '*.pyc' -delete
 
 doc:
+	@pip3 show $(PACKAGE_NAME)
 	@pyreverse $(PACKAGE_DIR) -f ALL -o png -p $(PACKAGE_NAME)
 	@mv *.png pictures/
 	@export_docstring2md.py -i $(PACKAGE_DIR) -o README.md -r requirements.txt -t runtime.txt -u pictures/classes_$(PACKAGE_NAME).png
@@ -46,6 +48,7 @@ release:
 	@$(MAKE) doc
 
 requirements:
+	@pip3 show $(PACKAGE_NAME)
 	@pipreqs .
 
 publish:
@@ -56,6 +59,7 @@ publish:
 	@git push
 
 test:
+	@pip3 show $(PACKAGE_NAME)
 	@sudo ./setup.py test
 	@sudo ./setup.py test > last_check.log
 

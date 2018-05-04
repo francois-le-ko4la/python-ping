@@ -11,9 +11,13 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 """
 
+__name__ = 'pytping'
 __version__ = '0.1.0.dev1'
 __author__ = 'Ko4lA'
 __email__ = 'francois@le.ko4la.fr'
 __description__ = 'The funniest ping tool'
+__python_version__ = '>=3.6'
+__script__ = 'bin/pyt-ping.py'
 __script_description__ = "Ping tool..."
 __url__ = 'https://github.com/francois-le-ko4la/pyt-ping.git'
+__license__ = 'GPL3'
