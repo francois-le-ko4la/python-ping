@@ -1,0 +1,41 @@
+running pytest
+Searching for pytest
+Best match: pytest 3.5.1
+Processing pytest-3.5.1-py3.6.egg
+
+Using /home/ko4la/GIT/new/pyt-ping/.eggs/pytest-3.5.1-py3.6.egg
+running egg_info
+writing pytping.egg-info/PKG-INFO
+writing dependency_links to pytping.egg-info/dependency_links.txt
+writing top-level names to pytping.egg-info/top_level.txt
+reading manifest file 'pytping.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+writing manifest file 'pytping.egg-info/SOURCES.txt'
+running build_ext
+============================= test session starts ==============================
+platform linux -- Python 3.6.5, pytest-3.5.1, py-1.5.3, pluggy-0.6.0 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/ko4la/GIT/new/pyt-ping, inifile: setup.cfg
+collecting ... collected 19 items
+
+tests/test_doctest.py::RunDocTest::test_mod_configyaml.py PASSED         [  5%]
+tests/test_doctest.py::RunDocTest::test_mod_counter.py PASSED            [ 10%]
+tests/test_doctest.py::RunDocTest::test_mod_nodelist.py PASSED           [ 15%]
+tests/test_doctest.py::RunDocTest::test_mod_ping.py PASSED               [ 21%]
+tests/test_doctest.py::RunDocTest::test_mod_position.py PASSED           [ 26%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod___about__ PASSED     [ 31%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod___init__ PASSED      [ 36%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_configyaml PASSED    [ 42%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_counter PASSED       [ 47%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_netnode PASSED       [ 52%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_nodelist PASSED      [ 57%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_ping PASSED          [ 63%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_position PASSED      [ 68%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_pyping PASSED        [ 73%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_pyt-ping PASSED      [ 78%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_screen PASSED        [ 84%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_setup PASSED         [ 89%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_test_doctest PASSED  [ 94%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_test_pycodestyle PASSED [100%]
+
+========================== 19 passed in 1.70 seconds ===========================
