@@ -23,7 +23,11 @@ __This project is not :__
 - a network analyzer
 - a CMDB tool
 
-## Description:
+## Screenshot:
+
+![alt text](./pictures/screen.png)
+
+## Package description:
 
 This package loads the configuration values defined in external YAML file and
 ping network nodes.
@@ -48,6 +52,9 @@ The package contents itself are in the `pytping` directory:
 * `pyping.py` main function
 * `screen.py` Screen management
 
+The script is in the bin directory:
+* `pyt-ping.py`: The script to run
+
 ## Setup:
 
 ```shell
@@ -62,11 +69,6 @@ This module has been [tested and validated](./last_check.log) on Ubuntu.
 ```shell
 $ make test
 ```
-
-## Screenshot:
-
-![alt text](./pictures/screen.png)
-
 
 ## Use:
 
