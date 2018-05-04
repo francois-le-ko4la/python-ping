@@ -8,14 +8,14 @@ This package loads the configuration values defined in external YAML file and
 ping network nodes.
 
 The following files comprise the `pytping` package:
-* `LICENSE`: The license file. `config-from-json` is released under the terms
+* `LICENSE`: The license file. `pytping` is released under the terms
 of the GNU General Public License (GPL), version 3.
 * `README.md`: This readme file.
 * `Makefile`: Generic management tasks.
 * `setup.py`: Package and distribution management.
 * `setup.cfg`: The setuptools setup file.
 
-The package contents itself are in the `config_from_json` directory:
+The package contents itself are in the `pytping` directory:
 * `__init__.py` Initialization file for the Python package.
 * `__about__.py` Global parameters
 * `configyaml.py` Config file management
@@ -30,16 +30,16 @@ The package contents itself are in the `config_from_json` directory:
 ## Setup:
 
 ```shell
-git clone https://github.com/francois-le-ko4la/pyt-ping.git
-cd pyt-ping
-make install
+$ git clone https://github.com/francois-le-ko4la/pyt-ping.git
+$ cd pyt-ping
+$ make install
 ```
 
 ## Test:
 
 This module has been [tested and validated](./last_check.log) on Ubuntu.
 ```shell
-make test
+$ make test
 ```
 
 ## Screenshot:
