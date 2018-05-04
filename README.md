@@ -159,9 +159,16 @@ zope==4.0b4
 
 ### Objects
 [ConfigYAML()](#configyaml)<br />
-[@Property: ConfigYAML.config](#property-configyamlconfig)<br />
-[@Property: ConfigYAML.filename](#property-configyamlfilename)<br />
+[ConfigYAML.__getconfig(self)](#configyaml__getconfigself)<br />
+[ConfigYAML.__getitem__(self, key)](#configyamlgetitemself-key)<br />
 [ConfigYAML.__init__(self, filename)](#configyamlinitself-filename)<br />
+[ConfigYAML.__iter__(self)](#configyamliterself)<br />
+[ConfigYAML.__len__(self)](#configyamllenself)<br />
+[ConfigYAML.__repr__(self)](#configyamlreprself)<br />
+[ConfigYAML.__set_filename(self, filename)](#configyaml__set_filenameself-filename)<br />
+[ConfigYAML.__str__(self)](#configyamlstrself)<br />
+[ConfigYAML.items(self)](#configyamlitemsself)<br />
+[ConfigYAML.keys(self)](#configyamlkeysself)<br />
 [Counter()](#counter)<br />
 [@Property: Counter.value](#property-countervalue)<br />
 [Counter.__init__(self, max_value)](#counterinitself-max_value)<br />
@@ -210,7 +217,7 @@ zope==4.0b4
 
 #### ConfigYAML()
 ```python
-class ConfigYAML(object):
+class ConfigYAML(dict):
 ```
 
 ```
@@ -224,32 +231,29 @@ Use:
     >>> import pathlib
     >>> path_pyth = (pathlib.Path(__file__).resolve().parent)
     >>> conf = pathlib.PurePath(path_pyth, '../bin/config.yml.sample')
-    >>> a = ConfigYAML(conf)
-    >>> print(a.config['Internet access'])
+    >>> config = ConfigYAML(conf)
+    >>> print(config['Internet access'])
     {'host': 'www.google.fr', 'port': 80}
+    >>> print(config.keys())
+    dict_keys(['Internet access', 'vCenter', 'ESX1', 'ESX2'])
+    >>> print(len(config))
+    4
 ```
 
-##### @Property: ConfigYAML.config
+##### ConfigYAML.__getconfig(self)
 ```python
-@property
-def ConfigYAML.config(self):
-
+def ConfigYAML.__getconfig(self):
 ```
 > <br />
 > <b>@Property:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  config (dict)<br />
 > <br />
-##### @Property: ConfigYAML.filename
+##### ConfigYAML.__getitem__(self, key)
 ```python
-@property
-def ConfigYAML.filename(self):
-@filename.setter
-def ConfigYAML.filename(self, filename):
-
+def ConfigYAML.__getitem__(self, key):
 ```
 > <br />
-> <b>@Property:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  filename (str): /path/to/the/config/file<br />
+> x.__getitem__(y) <==> x[y]<br />
 > <br />
 ##### ConfigYAML.__init__(self, filename)
 ```python
@@ -257,6 +261,55 @@ def ConfigYAML.__init__(self, filename):
 ```
 > <br />
 > Initialize self.  See help(type(self)) for accurate signature.<br />
+> <br />
+##### ConfigYAML.__iter__(self)
+```python
+def ConfigYAML.__iter__(self):
+```
+> <br />
+> Implement iter(self).<br />
+> <br />
+##### ConfigYAML.__len__(self)
+```python
+def ConfigYAML.__len__(self):
+```
+> <br />
+> Return len(self).<br />
+> <br />
+##### ConfigYAML.__repr__(self)
+```python
+def ConfigYAML.__repr__(self):
+```
+> <br />
+> Return repr(self).<br />
+> <br />
+##### ConfigYAML.__set_filename(self, filename)
+```python
+def ConfigYAML.__set_filename(self, filename):
+```
+> <br />
+> Docstring empty<br />
+> <br />
+##### ConfigYAML.__str__(self)
+```python
+def ConfigYAML.__str__(self):
+```
+> <br />
+> Return str(self).<br />
+> <br />
+##### ConfigYAML.items(self)
+```python
+def ConfigYAML.items(self):
+```
+> <br />
+> D.items() -> a set-like object providing a view on D's items<br />
+> <br />
+##### ConfigYAML.keys(self)
+```python
+def ConfigYAML.keys(self):
+```
+> <br />
+> D.keys() -> a set-like object providing a view on D's keys<br />
 > <br />
 #### Counter()
 ```python

@@ -136,7 +136,7 @@ from pytping.position import ElementPosition
 from pytping.counter import Counter
 from pytping.screen import ScreenCurses
 from pytping.ping import PingNetworkNode
-from pytping.configyaml import ConfigYAML
+from pytping.confyaml import ConfigYAML
 from pytping.netnode import NetworkNode
 from pytping.nodelist import NetworkNodeList
 from pytping.pyping import PythonPing

@@ -18,14 +18,14 @@ cachedir: .pytest_cache
 rootdir: /home/ko4la/GIT/new/pyt-ping, inifile: setup.cfg
 collecting ... collected 19 items
 
-tests/test_doctest.py::RunDocTest::test_mod_configyaml.py PASSED         [  5%]
+tests/test_doctest.py::RunDocTest::test_mod_confyaml.py PASSED           [  5%]
 tests/test_doctest.py::RunDocTest::test_mod_counter.py PASSED            [ 10%]
 tests/test_doctest.py::RunDocTest::test_mod_nodelist.py PASSED           [ 15%]
 tests/test_doctest.py::RunDocTest::test_mod_ping.py PASSED               [ 21%]
 tests/test_doctest.py::RunDocTest::test_mod_position.py PASSED           [ 26%]
 tests/test_pycodestyle.py::RunPyCodeStyle::test_mod___about__ PASSED     [ 31%]
 tests/test_pycodestyle.py::RunPyCodeStyle::test_mod___init__ PASSED      [ 36%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_configyaml PASSED    [ 42%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_confyaml PASSED      [ 42%]
 tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_counter PASSED       [ 47%]
 tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_netnode PASSED       [ 52%]
 tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_nodelist PASSED      [ 57%]
@@ -38,4 +38,4 @@ tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_setup PASSED         [ 89%]
 tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_test_doctest PASSED  [ 94%]
 tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_test_pycodestyle PASSED [100%]
 
-========================== 19 passed in 1.69 seconds ===========================
+========================== 19 passed in 1.71 seconds ===========================

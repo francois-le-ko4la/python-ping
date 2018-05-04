@@ -12,7 +12,7 @@
 """
 
 from pytping.screen import ScreenCurses
-from pytping.configyaml import ConfigYAML
+from pytping.confyaml import ConfigYAML
 from pytping.netnode import NetworkNode
 from pytping.nodelist import NetworkNodeList
 
@@ -25,8 +25,7 @@ class PythonPing(object):
     Launch the screen manager
     """
     def __init__(self, inputfile):
-        self.__yaml = ConfigYAML(inputfile)
-        self.__config = self.__yaml.config
+        self.__config = ConfigYAML(inputfile)
         self.__host_list = NetworkNodeList()
         for label in self.__config:
             current_node = NetworkNode(label,

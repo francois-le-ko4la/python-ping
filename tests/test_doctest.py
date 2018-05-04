@@ -18,7 +18,7 @@ import unittest
 import subprocess
 from pytping import __about__
 
-modulelist = ['configyaml.py',
+modulelist = ['confyaml.py',
               'counter.py',
               'ping.py',
               'position.py',
