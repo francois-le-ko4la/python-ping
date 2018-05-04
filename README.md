@@ -34,7 +34,7 @@ make install
 
 ## Test:
 
-This module has been tested and validated on Ubuntu.
+This module has been [tested and validated](./last_check.log) on Ubuntu.
 ```shell
 make test
 ```
@@ -64,7 +64,7 @@ required arguments:
 Enjoy...
 ```
 
-Configuration file should be write according to this example:
+Configuration file should be written according to this example:
 ```yaml
 Internet access:
   host: www.google.fr
