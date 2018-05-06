@@ -61,15 +61,15 @@ class ConfigYAML(dict):
 
     @property
     def filename(self):
-        return self['filename']
+        return self[Default.key_filename]
 
     @filename.setter
     def filename(self, filename):
         if pathlib.Path(filename).exists():
-            self['filename'] = str(filename)
+            self[Default.key_filename] = str(filename)
             with open(filename, 'r') as yaml_file:
                 try:
-                    self['data'] = yaml.load(yaml_file)
+                    self[Default.key_data] = yaml.load(yaml_file)
                 except yaml.YAMLError:
                     raise ValueError(Default.msg_badyaml)
         else:

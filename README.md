@@ -241,9 +241,6 @@ Use:
     dict_keys(['Internet access', 'vCenter', 'ESX1', 'ESX2'])
     >>> print(len(config))
     4
-    >>> for member in config:
-    >>>     print(member)
-    zekf,
     >>> #import json
     >>> #print(json.dumps(config, indent=4))
 ```
