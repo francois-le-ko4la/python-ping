@@ -77,22 +77,24 @@ class NetworkNodeList(dict):
     """
 
     def __init__(self):
+        super().__init__()
         self.__obj_type = NetworkNode("", "", "")
         self['type'] = self.__obj_type
-        self.__dict__['data'] = []
+        self['data'] = []
         self.__currentindex = 0
         self.__index = 0
 
     def __len__(self):
-        return len(self['data'])
+        return len(super().__getitem__('data'))
 
     def __iter__(self):
-        return self
+        return iter(super().__getitem__('data'))
 
     def __next__(self):
         try:
             key = self.__currentindex
-            member = self['data'][key]
+            member = super().__getitem__('data')
+            member = member[self.__currentindex]
         except IndexError:
             self.__currentindex = 0
             raise StopIteration()
@@ -104,8 +106,7 @@ class NetworkNodeList(dict):
         add a member
         """
         if isinstance(value, type(self['type'])):
-            self.__dict__['data'].append(value)
-            self['data'] = self.__dict__['data']
+            self['data'].append(value)
         else:
             raise TypeError("This object is not a NetworkNode")
 
