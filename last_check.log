@@ -3,7 +3,7 @@ Searching for pytest
 Best match: pytest 3.5.1
 Processing pytest-3.5.1-py3.6.egg
 
-Using /home/ko4la/GIT/pyt-ping/.eggs/pytest-3.5.1-py3.6.egg
+Using /home/ko4la/GIT/python-ping/.eggs/pytest-3.5.1-py3.6.egg
 running egg_info
 writing pytping.egg-info/PKG-INFO
 writing dependency_links to pytping.egg-info/dependency_links.txt
@@ -15,7 +15,7 @@ running build_ext
 ============================= test session starts ==============================
 platform linux -- Python 3.6.5, pytest-3.5.1, py-1.5.3, pluggy-0.6.0 -- /usr/bin/python3
 cachedir: .pytest_cache
-rootdir: /home/ko4la/GIT/pyt-ping, inifile: setup.cfg
+rootdir: /home/ko4la/GIT/python-ping, inifile: setup.cfg
 collecting ... collected 18 items
 
 tests/test_doctest.py::RunDocTest::test_mod_counter.py PASSED            [  5%]
@@ -37,4 +37,4 @@ tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_setup PASSED         [ 88%]
 tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_test_doctest PASSED  [ 94%]
 tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_test_pycodestyle PASSED [100%]
 
-========================== 18 passed in 1.62 seconds ===========================
+========================== 18 passed in 1.61 seconds ===========================

@@ -90,10 +90,9 @@ ESX2:
 │   ├── packages_pytping.png
 │   └── screen.png
 ├── pytping
-│   ├── _ _about_ _.py
-│   ├── confyaml.py
+│   ├── __about__.py
 │   ├── counter.py
-│   ├── _ _init_ _.py
+│   ├── __init__.py
 │   ├── main.py
 │   ├── netnode.py
 │   ├── nodelist.py
@@ -145,14 +144,6 @@ PyYAML==3.12
 ![alt text](pictures/classes_pytping.png)
 
 ### Objects
-[ConfigYAML()](#configyaml)<br />
-[ConfigYAML.__getitem__(self, key)](#configyamlgetitemself-key)<br />
-[ConfigYAML.__init__(self, filename)](#configyamlinitself-filename)<br />
-[ConfigYAML.__iter__(self)](#configyamliterself)<br />
-[ConfigYAML.__len__(self)](#configyamllenself)<br />
-[ConfigYAML.__load(self)](#configyaml__loadself)<br />
-[ConfigYAML.items(self)](#configyamlitemsself)<br />
-[ConfigYAML.keys(self)](#configyamlkeysself)<br />
 [Counter()](#counter)<br />
 [@Property: Counter.value](#property-countervalue)<br />
 [Counter.__init__(self, max_value)](#counterinitself-max_value)<br />
@@ -185,106 +176,8 @@ PyYAML==3.12
 [PingNetworkNode.__init__(self, host, port)](#pingnetworknodeinitself-host-port)<br />
 [PingNetworkNode.__ping(self)](#pingnetworknode__pingself)<br />
 [PingNetworkNode.__socket(self)](#pingnetworknode__socketself)<br />
-[PytFile()](#pytfile)<br />
-[@Property: PytFile.filename](#property-pytfilefilename)<br />
-[PytFile.__init__(self, filename)](#pytfileinitself-filename)<br />
-[PytFile.__repr__(self)](#pytfilereprself)<br />
-[PytFile.__str__(self)](#pytfilestrself)<br />
-[PytFile.read(self)](#pytfilereadself)<br />
-[PythonPing()](#pythonping)<br />
-[PythonPing.__init__(self, inputfile)](#pythonpinginitself-inputfile)<br />
-[PythonPing.run(self)](#pythonpingrunself)<br />
-[ScreenCurses()](#screencurses)<br />
-[ScreenCurses.__init__(self, host_list)](#screencursesinitself-host_list)<br />
-[ScreenCurses.__refresh(self)](#screencurses__refreshself)<br />
-[ScreenCurses.build(self)](#screencursesbuildself)<br />
-[ScreenCurses.menubar(self)](#screencursesmenubarself)<br />
-[ScreenCurses.run(self)](#screencursesrunself)<br />
 
 
-#### ConfigYAML()
-```python
-class ConfigYAML(dict):
-```
-
-```
-This class manage YAML config file
-
-Args:
-    - filename (str): /path/to/the/config/file
-
-Use:
-    >>> # pathlib to run the test everywhere
-    >>> import pathlib
-    >>> path = str(pathlib.Path(__file__).resolve().parent) + "/"
-    >>> config = ConfigYAML(path + '../bin/config.yml.samp')
-    Traceback (most recent call last):
-    ...
-    OSError: File not found !
-    >>> config = ConfigYAML(path + '../LICENSE')
-    Traceback (most recent call last):
-    ...
-    ValueError: Can't load the YAML...
-    >>> config = ConfigYAML(path + '../bin/config.yml.sample')
-    >>> print(config['Internet access'])
-    {'host': 'www.google.fr', 'port': 80}
-    >>> print(config.keys())
-    dict_keys(['Internet access', 'vCenter', 'ESX1', 'ESX2'])
-    >>> print(len(config))
-    4
-    >>> #import json
-    >>> #print(json.dumps(config, indent=4))
-```
-
-##### ConfigYAML.__getitem__(self, key)
-```python
-def ConfigYAML.__getitem__(self, key):
-```
-> <br />
-> x.__getitem__(y) <==> x[y]<br />
-> <br />
-##### ConfigYAML.__init__(self, filename)
-```python
-def ConfigYAML.__init__(self, filename):
-```
-> <br />
-> Initialize self.  See help(type(self)) for accurate signature.<br />
-> <br />
-##### ConfigYAML.__iter__(self)
-```python
-def ConfigYAML.__iter__(self):
-```
-> <br />
-> Implement iter(self).<br />
-> <br />
-##### ConfigYAML.__len__(self)
-```python
-def ConfigYAML.__len__(self):
-```
-> <br />
-> Return len(self).<br />
-> <br />
-##### ConfigYAML.__load(self)
-```python
-def ConfigYAML.__load(self):
-```
-> <br />
-> Docstring empty<br />
-> <br />
-##### ConfigYAML.items(self)
-```python
-def ConfigYAML.items(self):
-```
-> <br />
-> D.items() -> a set-like object providing a view on D's items<br />
-> <br />
-##### ConfigYAML.keys(self)
-```python
-def ConfigYAML.keys(self):
-```
-> <br />
-> D.keys() -> a set-like object providing a view on D's keys<br />
-> <br />
 #### Counter()
 ```python
 class Counter(object):
@@ -712,174 +605,4 @@ def PingNetworkNode.__socket(self):
 ```
 > <br />
 > Docstring empty<br />
-> <br />
-#### PytFile()
-```python
-class PytFile(object):
-```
-
-```
->>> fstab = PytFile("/etc/fstab")
->>> print(fstab.filename.stem)
-fstab
->>> print(fstab)
-/etc/fstab
->>> license = PytFile("../LICENSE")
->>> print(license.filename.stem)
-LICENSE
->>> #print(license.read())
-```
-
-##### @Property: PytFile.filename
-```python
-@property
-def PytFile.filename(self):
-@filename.setter
-def PytFile.filename(self, value):
-
-```
-> <br />
-> @Property<br />
-> <br />
-##### PytFile.__init__(self, filename)
-```python
-def PytFile.__init__(self, filename):
-```
-> <br />
-> Initialize self.  See help(type(self)) for accurate signature.<br />
-> <br />
-##### PytFile.__repr__(self)
-```python
-def PytFile.__repr__(self):
-```
-> <br />
-> Return repr(self).<br />
-> <br />
-##### PytFile.__str__(self)
-```python
-def PytFile.__str__(self):
-```
-> <br />
-> Return str(self).<br />
-> <br />
-##### PytFile.read(self)
-```python
-def PytFile.read(self):
-```
-> <br />
-> Docstring empty<br />
-> <br />
-#### PythonPing()
-```python
-class PythonPing(object):
-```
-
-```
-Main class
-Use YAML config file
-Create NetworkNodeList
-Launch the screen manager
-```
-
-##### PythonPing.__init__(self, inputfile)
-```python
-def PythonPing.__init__(self, inputfile):
-```
-> <br />
-> self.__config = ConfigYAML(inputfile) <br />
-> <br />
-##### PythonPing.run(self)
-```python
-def PythonPing.run(self):
-```
-> <br />
-> start screen<br />
-> <br />
-#### ScreenCurses()
-```python
-class ScreenCurses(object):
-```
-
-```
-This class manage the screen.
-
-+-----------------------------------------------------------------+
-|                                                                 |
-|     +-------------+  +-------------+  +-------------+           |
-|     | NetworkNode |  | NetworkNode |  | NetworkNode |           |
-|     +-------------+  +-------------+  +-------------+           |
-|                                                                 |
-|                                                                 |
-|                                                                 |
-|                                                                 |
-|                                                                 |
-|                                                                 |
-|                                                                 |
-|                                                                 |
-|                                                                 |
-|                                                                 |
-|                                                                 |
-+-----------------------------------------------------------------+
-|  Press ESC to EXIT (*)                                          |
-+-----------------------------------------------------------------+
-
-+-------------+
-| NetworkNode |    Network Node : label, IP, status
-+-------------+
-
-(*)                Progress
-```
-
-##### ScreenCurses.__init__(self, host_list)
-```python
-def ScreenCurses.__init__(self, host_list):
-```
-> <br />
-> Initialize self.  See help(type(self)) for accurate signature.<br />
-> <br />
-##### ScreenCurses.__refresh(self)
-```python
-def ScreenCurses.__refresh(self):
-```
-> <br />
-> Docstring empty<br />
-> <br />
-##### ScreenCurses.build(self)
-```python
-def ScreenCurses.build(self):
-```
-> <br />
-> Build the screen<br />
-> <br />
-> <b>Args:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
-> <br />
-> <b>Returns:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
-> <br />
-##### ScreenCurses.menubar(self)
-```python
-def ScreenCurses.menubar(self):
-```
-> <br />
-> draw the bar<br />
-> <br />
-> <b>Args:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
-> <br />
-> <b>Returns:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
-> <br />
-##### ScreenCurses.run(self)
-```python
-def ScreenCurses.run(self):
-```
-> <br />
-> Curses getch loop<br />
-> <br />
-> <b>Args:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
-> <br />
-> <b>Returns:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
 > <br />
