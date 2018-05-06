@@ -14,6 +14,7 @@
 
 import pathlib
 import yaml
+from pytping.pytfile import PytFile
 
 
 class Default:
@@ -32,20 +33,18 @@ class ConfigYAML(dict):
         - filename (str): /path/to/the/config/file
 
     Use:
+        >>> # pathlib to run the test everywhere
         >>> import pathlib
-        >>> path_pyth = (pathlib.Path(__file__).resolve().parent)
-        >>> conf = pathlib.PurePath(path_pyth, '../bin/config.yml.samp')
-        >>> config = ConfigYAML(conf)
+        >>> path = str(pathlib.Path(__file__).resolve().parent) + "/"
+        >>> config = ConfigYAML(path + '../bin/config.yml.samp')
         Traceback (most recent call last):
         ...
         OSError: File not found !
-        >>> conf = pathlib.PurePath(path_pyth, '../LICENSE')
-        >>> config = ConfigYAML(conf)
+        >>> config = ConfigYAML(path + '../LICENSE')
         Traceback (most recent call last):
         ...
         ValueError: Can't load the YAML...
-        >>> conf = pathlib.PurePath(path_pyth, '../bin/config.yml.sample')
-        >>> config = ConfigYAML(conf)
+        >>> config = ConfigYAML(path + '../bin/config.yml.sample')
         >>> print(config['Internet access'])
         {'host': 'www.google.fr', 'port': 80}
         >>> print(config.keys())
@@ -57,23 +56,15 @@ class ConfigYAML(dict):
     """
     def __init__(self, filename):
         super().__init__()
-        self.filename = filename
+        self.__configfile = PytFile(filename)
+        self.__load()
 
-    @property
-    def filename(self):
-        return self[Default.key_filename]
-
-    @filename.setter
-    def filename(self, filename):
-        if pathlib.Path(filename).exists():
-            self[Default.key_filename] = str(filename)
-            with open(filename, 'r') as yaml_file:
-                try:
-                    self[Default.key_data] = yaml.load(yaml_file)
-                except yaml.YAMLError:
-                    raise ValueError(Default.msg_badyaml)
-        else:
-            raise IOError(Default.msg_ioerror)
+    def __load(self):
+        try:
+            self[Default.key_filename] = str(self.__configfile)
+            self[Default.key_data] = yaml.load(self.__configfile.read())
+        except yaml.YAMLError:
+            raise ValueError(Default.msg_badyaml)
 
     def __getitem__(self, key):
         current_data = super().__getitem__(Default.key_data)

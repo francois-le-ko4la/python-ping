@@ -159,11 +159,11 @@ zope==4.0b4
 
 ### Objects
 [ConfigYAML()](#configyaml)<br />
-[@Property: ConfigYAML.filename](#property-configyamlfilename)<br />
 [ConfigYAML.__getitem__(self, key)](#configyamlgetitemself-key)<br />
 [ConfigYAML.__init__(self, filename)](#configyamlinitself-filename)<br />
 [ConfigYAML.__iter__(self)](#configyamliterself)<br />
 [ConfigYAML.__len__(self)](#configyamllenself)<br />
+[ConfigYAML.__load(self)](#configyaml__loadself)<br />
 [ConfigYAML.items(self)](#configyamlitemsself)<br />
 [ConfigYAML.keys(self)](#configyamlkeysself)<br />
 [Counter()](#counter)<br />
@@ -198,6 +198,12 @@ zope==4.0b4
 [PingNetworkNode.__init__(self, host, port)](#pingnetworknodeinitself-host-port)<br />
 [PingNetworkNode.__ping(self)](#pingnetworknode__pingself)<br />
 [PingNetworkNode.__socket(self)](#pingnetworknode__socketself)<br />
+[PytFile()](#pytfile)<br />
+[@Property: PytFile.filename](#property-pytfilefilename)<br />
+[PytFile.__init__(self, filename)](#pytfileinitself-filename)<br />
+[PytFile.__repr__(self)](#pytfilereprself)<br />
+[PytFile.__str__(self)](#pytfilestrself)<br />
+[PytFile.read(self)](#pytfilereadself)<br />
 [PythonPing()](#pythonping)<br />
 [PythonPing.__init__(self, inputfile)](#pythonpinginitself-inputfile)<br />
 [PythonPing.run(self)](#pythonpingrunself)<br />
@@ -221,20 +227,18 @@ Args:
     - filename (str): /path/to/the/config/file
 
 Use:
+    >>> # pathlib to run the test everywhere
     >>> import pathlib
-    >>> path_pyth = (pathlib.Path(__file__).resolve().parent)
-    >>> conf = pathlib.PurePath(path_pyth, '../bin/config.yml.samp')
-    >>> config = ConfigYAML(conf)
+    >>> path = str(pathlib.Path(__file__).resolve().parent) + "/"
+    >>> config = ConfigYAML(path + '../bin/config.yml.samp')
     Traceback (most recent call last):
     ...
     OSError: File not found !
-    >>> conf = pathlib.PurePath(path_pyth, '../LICENSE')
-    >>> config = ConfigYAML(conf)
+    >>> config = ConfigYAML(path + '../LICENSE')
     Traceback (most recent call last):
     ...
     ValueError: Can't load the YAML...
-    >>> conf = pathlib.PurePath(path_pyth, '../bin/config.yml.sample')
-    >>> config = ConfigYAML(conf)
+    >>> config = ConfigYAML(path + '../bin/config.yml.sample')
     >>> print(config['Internet access'])
     {'host': 'www.google.fr', 'port': 80}
     >>> print(config.keys())
@@ -245,17 +249,6 @@ Use:
     >>> #print(json.dumps(config, indent=4))
 ```
 
-##### @Property: ConfigYAML.filename
-```python
-@property
-def ConfigYAML.filename(self):
-@filename.setter
-def ConfigYAML.filename(self, filename):
-
-```
-> <br />
-> @Property<br />
-> <br />
 ##### ConfigYAML.__getitem__(self, key)
 ```python
 def ConfigYAML.__getitem__(self, key):
@@ -283,6 +276,13 @@ def ConfigYAML.__len__(self):
 ```
 > <br />
 > Return len(self).<br />
+> <br />
+##### ConfigYAML.__load(self)
+```python
+def ConfigYAML.__load(self):
+```
+> <br />
+> Docstring empty<br />
 > <br />
 ##### ConfigYAML.items(self)
 ```python
@@ -722,6 +722,62 @@ def PingNetworkNode.__ping(self):
 ##### PingNetworkNode.__socket(self)
 ```python
 def PingNetworkNode.__socket(self):
+```
+> <br />
+> Docstring empty<br />
+> <br />
+#### PytFile()
+```python
+class PytFile(object):
+```
+
+```
+>>> fstab = PytFile("/etc/fstab")
+>>> print(fstab.filename.stem)
+fstab
+>>> print(fstab)
+/etc/fstab
+>>> license = PytFile("../LICENSE")
+>>> print(license.filename.stem)
+LICENSE
+>>> #print(license.read())
+```
+
+##### @Property: PytFile.filename
+```python
+@property
+def PytFile.filename(self):
+@filename.setter
+def PytFile.filename(self, value):
+
+```
+> <br />
+> @Property<br />
+> <br />
+##### PytFile.__init__(self, filename)
+```python
+def PytFile.__init__(self, filename):
+```
+> <br />
+> Initialize self.  See help(type(self)) for accurate signature.<br />
+> <br />
+##### PytFile.__repr__(self)
+```python
+def PytFile.__repr__(self):
+```
+> <br />
+> Return repr(self).<br />
+> <br />
+##### PytFile.__str__(self)
+```python
+def PytFile.__str__(self):
+```
+> <br />
+> Return str(self).<br />
+> <br />
+##### PytFile.read(self)
+```python
+def PytFile.read(self):
 ```
 > <br />
 > Docstring empty<br />
