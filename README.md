@@ -76,7 +76,7 @@ ESX2:
 ```
 
 ## Project Structure
-
+```
 .
 ├── bin
 │   ├── config.yml.sample
@@ -109,6 +109,7 @@ ESX2:
 └── tests
     ├── test_doctest.py
     └── test_pycodestyle.py
+```
 
 ## Todo:
 
