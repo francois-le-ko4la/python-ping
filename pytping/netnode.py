@@ -39,6 +39,10 @@ class NetworkNode(object):
         """
         return self.__isconnected
 
+    @property
+    def rtt(self):
+        return str(self.__ping.rtt)
+
     def __refresh(self):
         if self.__started is not True:
             return

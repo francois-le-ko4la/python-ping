@@ -158,6 +158,7 @@ PyYAML==3.12
 [ElementPosition.__init__(self)](#elementpositioninitself)<br />
 [NetworkNode()](#networknode)<br />
 [@Property: NetworkNode.isconnected](#property-networknodeisconnected)<br />
+[@Property: NetworkNode.rtt](#property-networknodertt)<br />
 [NetworkNode.__init__(self, label, host, port)](#networknodeinitself-label-host-port)<br />
 [NetworkNode.__refresh(self)](#networknode__refreshself)<br />
 [NetworkNode.start(self)](#networknodestartself)<br />
@@ -173,6 +174,7 @@ PyYAML==3.12
 [@Property: PingNetworkNode.host](#property-pingnetworknodehost)<br />
 [@Property: PingNetworkNode.isconnected](#property-pingnetworknodeisconnected)<br />
 [@Property: PingNetworkNode.port](#property-pingnetworknodeport)<br />
+[@Property: PingNetworkNode.rtt](#property-pingnetworknodertt)<br />
 [PingNetworkNode.__init__(self, host, port)](#pingnetworknodeinitself-host-port)<br />
 [PingNetworkNode.__ping(self)](#pingnetworknode__pingself)<br />
 [PingNetworkNode.__socket(self)](#pingnetworknode__socketself)<br />
@@ -390,6 +392,15 @@ def NetworkNode.isconnected(self):
 > <b>@Property:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  bool: True if the node is connected. False otherwise.<br />
 > <br />
+##### @Property: NetworkNode.rtt
+```python
+@property
+def NetworkNode.rtt(self):
+
+```
+> <br />
+> @Property<br />
+> <br />
 ##### NetworkNode.__init__(self, label, host, port)
 ```python
 def NetworkNode.__init__(self, label, host, port):
@@ -543,9 +554,13 @@ Else, we use socket API.
     >>> a = PingNetworkNode("www.google.fr", 80)
     >>> print(a.isconnected)
     True
+    >>> print(a.rtt)
+    azked
     >>> a = PingNetworkNode("localhost", "ICMP")
     >>> print(a.isconnected)
     True
+    >>> print(a.rtt)
+    zfezelk
     >>> a = PingNetworkNode("10.10.9.1", "ICMP")
     >>> print(a.isconnected)
     False
@@ -584,6 +599,15 @@ def PingNetworkNode.port(self, port):
 > <br />
 > <b>@Property:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  str/int: "ICMP" or port number<br />
+> <br />
+##### @Property: PingNetworkNode.rtt
+```python
+@property
+def PingNetworkNode.rtt(self):
+
+```
+> <br />
+> <b>@Property:</b><br />
 > <br />
 ##### PingNetworkNode.__init__(self, host, port)
 ```python

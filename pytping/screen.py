@@ -15,6 +15,7 @@ export NCURSES_NO_UTF8_ACS=1
 import curses
 from threading import Timer
 import time
+from pytping import __about__
 from pytping.position import ElementPosition
 from pytping.counter import Counter
 
@@ -51,13 +52,14 @@ class ScreenCurses(object):
     |                                                                 |
     |                                                                 |
     +-----------------------------------------------------------------+
-    |  Press ESC to EXIT (*)                                          |
+    |  XXXXX | XXXX (*)                                               |
     +-----------------------------------------------------------------+
 
     +-------------+
     | NetworkNode |    Network Node : label, IP, status
     +-------------+
 
+    XXX                Text
     (*)                Progress
 
     """
@@ -94,8 +96,11 @@ class ScreenCurses(object):
         box = self.screen.subwin(3, self.width, self.height - 3, 0)
         box.border()
         box.box()
-        box.addstr(1, 2, Template.msg + " " +
-                   Template.progress[self.__count.value])
+        txt = "{}({}) | {} {}".format(__about__.__name__,
+                                      __about__.__version__,
+                                      Template.msg,
+                                      Template.progress[self.__count.value])
+        box.addstr(1, 2, txt)
 
     def __refresh(self):
         if self.__started:
@@ -146,6 +151,8 @@ class ScreenCurses(object):
             box.box()
             box.addstr("Ping")
             box.addstr(1, 2, host.label)
+            box.addstr(1, Template.box_width - len("  " + host.rtt) - 2,
+                       "  " + host.rtt)
             box.addstr(2, 5, host.host)
             if host.isconnected:
                 box.addstr(2, Template.box_width - 4,

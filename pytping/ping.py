@@ -9,6 +9,7 @@ print(myhost.isconnected)
 
 import subprocess
 import socket
+import time
 
 
 class Default:
@@ -44,6 +45,7 @@ class PingNetworkNode(object):
     def __init__(self, host, port):
         self.__host = None
         self.__port = None
+        self.__rtt = None
         self.host = host
         self.port = port
 
@@ -61,6 +63,15 @@ class PingNetworkNode(object):
             self.__host = host
         else:
             raise TypeError(Default.msg_typeerror)
+
+    @property
+    def rtt(self):
+        """
+        @Property:
+        """
+        if self.__rtt is 'UKN':
+            return self.__rtt
+        return self.__rtt
 
     @property
     def port(self):
@@ -91,18 +102,26 @@ class PingNetworkNode(object):
     def __socket(self):
         try:
             socket.setdefaulttimeout(Default.timeout)
+            start = time.time()
             socket.socket().connect((self.__host, self.__port))
+            self.__rtt = "{} ms".format(int(100000 *
+                                        (time.time() - start)) / 100)
+
         except Exception:
+            self.__rtt = "UKN"
             return False
         return True
 
     def __ping(self):
         try:
-            subprocess.run(Default.ping_cmd + self.__host,
-                           shell=True,
-                           check=True,
-                           stdout=subprocess.PIPE,
-                           stderr=subprocess.PIPE)
+            proc = subprocess.Popen(Default.ping_cmd + self.__host,
+                                    shell=True,
+                                    stdout=subprocess.PIPE,
+                                    stderr=subprocess.PIPE)
+            rtt = proc.stdout.read()
+            rtt = (((rtt.decode("utf-8").split("\n"))[1]).split("="))[3]
+            self.__rtt = rtt
             return True
         except Exception:
+            self.__rtt = "UKN"
             return False

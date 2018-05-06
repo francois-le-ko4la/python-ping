@@ -7,6 +7,6 @@ vCenter:
 ESX1:
   host: 192.168.1.230
   port: 22
-ESX2:
+ESX2(I):
   host: 192.168.1.240
   port: ICMP

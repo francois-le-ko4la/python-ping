@@ -37,4 +37,4 @@ tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_setup PASSED         [ 88%]
 tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_test_doctest PASSED  [ 94%]
 tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_test_pycodestyle PASSED [100%]
 
-========================== 18 passed in 1.61 seconds ===========================
+========================== 18 passed in 1.59 seconds ===========================
