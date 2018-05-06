@@ -159,14 +159,11 @@ zope==4.0b4
 
 ### Objects
 [ConfigYAML()](#configyaml)<br />
-[ConfigYAML.__getconfig(self)](#configyaml__getconfigself)<br />
+[@Property: ConfigYAML.filename](#property-configyamlfilename)<br />
 [ConfigYAML.__getitem__(self, key)](#configyamlgetitemself-key)<br />
 [ConfigYAML.__init__(self, filename)](#configyamlinitself-filename)<br />
 [ConfigYAML.__iter__(self)](#configyamliterself)<br />
 [ConfigYAML.__len__(self)](#configyamllenself)<br />
-[ConfigYAML.__repr__(self)](#configyamlreprself)<br />
-[ConfigYAML.__set_filename(self, filename)](#configyaml__set_filenameself-filename)<br />
-[ConfigYAML.__str__(self)](#configyamlstrself)<br />
 [ConfigYAML.items(self)](#configyamlitemsself)<br />
 [ConfigYAML.keys(self)](#configyamlkeysself)<br />
 [Counter()](#counter)<br />
@@ -244,15 +241,23 @@ Use:
     dict_keys(['Internet access', 'vCenter', 'ESX1', 'ESX2'])
     >>> print(len(config))
     4
+    >>> for member in config:
+    >>>     print(member)
+    zekf,
+    >>> #import json
+    >>> #print(json.dumps(config, indent=4))
 ```
 
-##### ConfigYAML.__getconfig(self)
+##### @Property: ConfigYAML.filename
 ```python
-def ConfigYAML.__getconfig(self):
+@property
+def ConfigYAML.filename(self):
+@filename.setter
+def ConfigYAML.filename(self, filename):
+
 ```
 > <br />
-> <b>@Property:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  config (dict)<br />
+> @Property<br />
 > <br />
 ##### ConfigYAML.__getitem__(self, key)
 ```python
@@ -281,27 +286,6 @@ def ConfigYAML.__len__(self):
 ```
 > <br />
 > Return len(self).<br />
-> <br />
-##### ConfigYAML.__repr__(self)
-```python
-def ConfigYAML.__repr__(self):
-```
-> <br />
-> Return repr(self).<br />
-> <br />
-##### ConfigYAML.__set_filename(self, filename)
-```python
-def ConfigYAML.__set_filename(self, filename):
-```
-> <br />
-> Docstring empty<br />
-> <br />
-##### ConfigYAML.__str__(self)
-```python
-def ConfigYAML.__str__(self):
-```
-> <br />
-> Return str(self).<br />
 > <br />
 ##### ConfigYAML.items(self)
 ```python
