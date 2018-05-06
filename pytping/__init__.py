@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 """
 # pytping
+
+![alt text](./pictures/screen.png)
+
 ## Why:
 
 When you have to check a network node, you use ping command and all is fine.
@@ -23,38 +26,6 @@ __This project is not :__
 - a tool (MultiPing/PingInfoView) replacement
 - a network analyzer
 - a CMDB tool
-
-## Screenshot:
-
-![alt text](./pictures/screen.png)
-
-## Package description:
-
-This package loads the configuration values defined in external YAML file and
-ping network nodes.
-
-The following files comprise the `pytping` package:
-* `LICENSE`: The license file. `pytping` is released under the terms
-of the GNU General Public License (GPL), version 3.
-* `README.md`: This readme file.
-* `Makefile`: Generic management tasks.
-* `setup.py`: Package and distribution management.
-* `setup.cfg`: The setuptools setup file.
-
-The package contents itself are in the `pytping` directory:
-* `__init__.py` Initialization file for the Python package.
-* `__about__.py` Global parameters
-* `confyaml.py` Config file management
-* `counter.py` Simple counter to make a progress animation
-* `netnode.py` NetworkNode def
-* `nodelist.py` NetworkNode management
-* `ping.py` check host/port
-* `position.py` Element position management
-* `pyping.py` main function
-* `screen.py` Screen management
-
-The script is in the bin directory:
-* `pyt-ping.py`: The script to run
 
 ## Setup:
 
@@ -107,6 +78,41 @@ ESX2:
   port: ICMP
 ```
 
+## Project Structure
+
+.
+├── bin
+│   ├── config.yml.sample
+│   └── pyt-ping.py
+├── last_check.log
+├── LICENSE
+├── Makefile
+├── MANIFEST.in
+├── pictures
+│   ├── classes_pytping.png
+│   ├── packages_pytping.png
+│   └── screen.png
+├── pytping
+│   ├── _ _about_ _.py
+│   ├── confyaml.py
+│   ├── counter.py
+│   ├── _ _init_ _.py
+│   ├── main.py
+│   ├── netnode.py
+│   ├── nodelist.py
+│   ├── ping.py
+│   ├── position.py
+│   ├── pyping.py
+│   └── screen.py
+├── README.md
+├── requirements.txt
+├── runtime.txt
+├── setup.cfg
+├── setup.py
+└── tests
+    ├── test_doctest.py
+    └── test_pycodestyle.py
+
 ## Todo:
 
 - [X] Create the project
@@ -119,16 +125,10 @@ ESX2:
 - [X] Clean & last check
 - [ ] Release
 
-## Note:
+## License
 
-This script is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
-version 3 of the License, or (at your option) any later version.
+pytping is distributed under the [GPLv3 license](./LICENSE)
 
-This script is provided in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 """
 
 from pytping import __about__
