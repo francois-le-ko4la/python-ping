@@ -124,7 +124,7 @@ ESX2:
 
 ## License
 
-pytping is distributed under the [GPLv3 license](./LICENSE)
+This package is distributed under the [GPLv3 license](./LICENSE)
 ## Dev notes
 ### Runtime
 
