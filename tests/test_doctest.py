@@ -18,8 +18,7 @@ import unittest
 import subprocess
 from pytping import __about__
 
-modulelist = ['confyaml.py',
-              'counter.py',
+modulelist = ['counter.py',
               'ping.py',
               'position.py',
               'nodelist.py']

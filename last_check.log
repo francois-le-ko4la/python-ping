@@ -3,7 +3,7 @@ Searching for pytest
 Best match: pytest 3.5.1
 Processing pytest-3.5.1-py3.6.egg
 
-Using /home/ko4la/GIT/new/pyt-ping/.eggs/pytest-3.5.1-py3.6.egg
+Using /home/ko4la/GIT/pyt-ping/.eggs/pytest-3.5.1-py3.6.egg
 running egg_info
 writing pytping.egg-info/PKG-INFO
 writing dependency_links to pytping.egg-info/dependency_links.txt
@@ -15,29 +15,26 @@ running build_ext
 ============================= test session starts ==============================
 platform linux -- Python 3.6.5, pytest-3.5.1, py-1.5.3, pluggy-0.6.0 -- /usr/bin/python3
 cachedir: .pytest_cache
-rootdir: /home/ko4la/GIT/new/pyt-ping, inifile: setup.cfg
-collecting ... collected 21 items
+rootdir: /home/ko4la/GIT/pyt-ping, inifile: setup.cfg
+collecting ... collected 18 items
 
-tests/test_doctest.py::RunDocTest::test_mod_confyaml.py PASSED           [  4%]
-tests/test_doctest.py::RunDocTest::test_mod_counter.py PASSED            [  9%]
-tests/test_doctest.py::RunDocTest::test_mod_nodelist.py PASSED           [ 14%]
-tests/test_doctest.py::RunDocTest::test_mod_ping.py PASSED               [ 19%]
-tests/test_doctest.py::RunDocTest::test_mod_position.py PASSED           [ 23%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_mod___about__ PASSED     [ 28%]
+tests/test_doctest.py::RunDocTest::test_mod_counter.py PASSED            [  5%]
+tests/test_doctest.py::RunDocTest::test_mod_nodelist.py PASSED           [ 11%]
+tests/test_doctest.py::RunDocTest::test_mod_ping.py PASSED               [ 16%]
+tests/test_doctest.py::RunDocTest::test_mod_position.py PASSED           [ 22%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod___about__ PASSED     [ 27%]
 tests/test_pycodestyle.py::RunPyCodeStyle::test_mod___init__ PASSED      [ 33%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_confyaml PASSED      [ 38%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_counter PASSED       [ 42%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_main PASSED          [ 47%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_netnode PASSED       [ 52%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_nodelist PASSED      [ 57%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_counter PASSED       [ 38%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_main PASSED          [ 44%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_netnode PASSED       [ 50%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_nodelist PASSED      [ 55%]
 tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_ping PASSED          [ 61%]
 tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_position PASSED      [ 66%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_pyping PASSED        [ 71%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_pyt-ping PASSED      [ 76%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_pytfile PASSED       [ 80%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_screen PASSED        [ 85%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_setup PASSED         [ 90%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_test_doctest PASSED  [ 95%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_pyping PASSED        [ 72%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_pyt-ping PASSED      [ 77%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_screen PASSED        [ 83%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_setup PASSED         [ 88%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_test_doctest PASSED  [ 94%]
 tests/test_pycodestyle.py::RunPyCodeStyle::test_mod_test_pycodestyle PASSED [100%]
 
-========================== 21 passed in 1.73 seconds ===========================
+========================== 18 passed in 1.62 seconds ===========================

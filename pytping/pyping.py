@@ -11,8 +11,8 @@
 
 """
 
+from pytconfig.config import PytConfigFile
 from pytping.screen import ScreenCurses
-from pytping.confyaml import ConfigYAML
 from pytping.netnode import NetworkNode
 from pytping.nodelist import NetworkNodeList
 
@@ -25,7 +25,8 @@ class PythonPing(object):
     Launch the screen manager
     """
     def __init__(self, inputfile):
-        self.__config = ConfigYAML(inputfile)
+        """ self.__config = ConfigYAML(inputfile) """
+        self.__config = PytConfigFile(inputfile, PytConfigFile.isyaml)
         self.__host_list = NetworkNodeList()
         for label in self.__config:
             current_node = NetworkNode(label,

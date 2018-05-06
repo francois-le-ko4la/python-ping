@@ -20,6 +20,7 @@ default:
 
 init:
 	@pip3 install -r requirements.txt
+	@sudo pip3 install https://github.com/francois-le-ko4la/python-config-file/archive/0.1.4.tar.gz
 
 dev:
 	@sudo python3 setup.py develop
@@ -29,6 +30,7 @@ uninstall:
 	@sudo -H pip3 uninstall -y $(PACKAGE_NAME)
 
 install:
+	@$(MAKE) init
 	@sudo ./setup.py install
 
 clean:

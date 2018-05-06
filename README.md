@@ -136,22 +136,9 @@ python-3.6.x
 ### Requirements
 
 ```
-more_itertools==4.1.0
-pluggy==0.6.0
 setuptools==39.0.1
 pycodestyle==2.3.1
-six==1.11.0
-zope.interface==4.3.2
-attrs==17.4.0
-py==1.5.3
-argcomplete==1.9.4
-attr==0.3.1
-colorama==0.3.9
-funcsigs==1.0.2
-numpy==1.14.3
-Twisted==18.4.0
 PyYAML==3.12
-zope==4.0b4
 
 ```
 ### UML Diagram
@@ -799,7 +786,7 @@ Launch the screen manager
 def PythonPing.__init__(self, inputfile):
 ```
 > <br />
-> Initialize self.  See help(type(self)) for accurate signature.<br />
+> self.__config = ConfigYAML(inputfile) <br />
 > <br />
 ##### PythonPing.run(self)
 ```python
