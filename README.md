@@ -141,7 +141,7 @@ PyYAML==3.12
 
 ```
 ### UML Diagram
-![alt text](/home/ko4la/GIT/python-ping/pictures/classes_pytping.png)
+![alt text](pictures/classes_pytping.png)
 
 ### Objects
 [Counter()](#counter)<br />
