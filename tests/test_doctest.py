@@ -18,11 +18,6 @@ import unittest
 import subprocess
 from pytping import __about__
 
-modulelist = ['counter.py',
-              'ping.py',
-              'position.py',
-              'nodelist.py']
-
 
 class RunDocTest(unittest.TestCase):
     def run_doctest(self, current_file):
@@ -37,19 +32,21 @@ class RunDocTest(unittest.TestCase):
             self.assertTrue(False)
 
 
+code_folder = '../' + __about__.__pkg_name__ + '/'
 path = pathlib.Path(
-                    pathlib.PurePath(
-                            pathlib.Path(__file__).resolve().parent, '../')
-                    ).resolve()
-
+    pathlib.PurePath(
+        pathlib.Path(__file__).resolve().parent, code_folder)
+).resolve()
 sys.path.append(path)
 
-for current_file in modulelist:
+for current_file in list(path.glob('**/*.py')):
+    current_file = pathlib.Path(current_file)
+
     def ch(current_file):
         return lambda self: self.run_doctest(current_file)
     setattr(RunDocTest,
-            "test_mod_{}".format(current_file),
-            ch(__about__.__name__ + "/" + current_file)
+            "test_mod_{}".format(current_file.name),
+            ch(str(current_file))
             )
 
 

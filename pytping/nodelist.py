@@ -92,7 +92,7 @@ class NetworkNodeList(dict):
 
     def __next__(self):
         try:
-            key = self.__currentindex
+            # key = self.__currentindex
             member = super().__getitem__('data')
             member = member[self.__currentindex]
         except IndexError:

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# pylint: disable=R0903
 """
 
   ####    ####   #####   ######  ######  #    #
@@ -21,6 +22,7 @@ from pytping.counter import Counter
 
 
 class Template:
+    """ params """
     box_width = 30
     box_margin_x = 3
     box_margin_y = 1
@@ -140,11 +142,12 @@ class ScreenCurses(object):
                 Template.box_margin_y + 1
 
             try:
-                box = self.screen.subwin(Template.box_height,
-                                         Template.box_width,
-                                         pos_y,
-                                         pos_x
-                                         )
+                box = self.screen.subwin(
+                    Template.box_height,
+                    Template.box_width,
+                    pos_y,
+                    pos_x
+                )
 
             except Exception:
                 return

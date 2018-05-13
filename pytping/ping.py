@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# pylint: disable=R0903
 """
 
 sudo iptables -P OUTPUT ACCEPT
@@ -83,7 +84,7 @@ class PingNetworkNode(object):
 
     @port.setter
     def port(self, port):
-        if isinstance(port, str) or isinstance(port, int):
+        if isinstance(port, (int, str)):
             self.__port = port
         else:
             raise TypeError(Default.msg_typeerror)
@@ -104,8 +105,8 @@ class PingNetworkNode(object):
             socket.setdefaulttimeout(Default.timeout)
             start = time.time()
             socket.socket().connect((self.__host, self.__port))
-            self.__rtt = "{} ms".format(int(100000 *
-                                        (time.time() - start)) / 100)
+            self.__rtt = "{} ms".format(
+                int(100000 * (time.time() - start)) / 100)
 
         except Exception:
             self.__rtt = "UKN"

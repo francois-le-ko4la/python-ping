@@ -41,6 +41,9 @@ class NetworkNode(object):
 
     @property
     def rtt(self):
+        """
+        provide device rtt
+        """
         return str(self.__ping.rtt)
 
     def __refresh(self):

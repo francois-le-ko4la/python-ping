@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# pylint: disable=R0903, W0105
+
 """
 
  #####    #   #  #####      #    #    #   ####

@@ -141,12 +141,11 @@ PyYAML==3.12
 
 ```
 ### UML Diagram
-![alt text](pictures/classes_pytping.png)
+![alt text](/home/ko4la/GIT/python-ping/pictures/classes_pytping.png)
 
 ### Objects
 [Counter()](#counter)<br />
 [@Property: Counter.value](#property-countervalue)<br />
-[Counter.__init__(self, max_value)](#counterinitself-max_value)<br />
 [Counter.reset(self)](#counterresetself)<br />
 [ElementPosition()](#elementposition)<br />
 [@Property: ElementPosition.column](#property-elementpositioncolumn)<br />
@@ -155,19 +154,12 @@ PyYAML==3.12
 [@Property: ElementPosition.ratio](#property-elementpositionratio)<br />
 [@Property: ElementPosition.row](#property-elementpositionrow)<br />
 [@Property: ElementPosition.stripe_size](#property-elementpositionstripe_size)<br />
-[ElementPosition.__init__(self)](#elementpositioninitself)<br />
 [NetworkNode()](#networknode)<br />
 [@Property: NetworkNode.isconnected](#property-networknodeisconnected)<br />
 [@Property: NetworkNode.rtt](#property-networknodertt)<br />
-[NetworkNode.__init__(self, label, host, port)](#networknodeinitself-label-host-port)<br />
-[NetworkNode.__refresh(self)](#networknode__refreshself)<br />
 [NetworkNode.start(self)](#networknodestartself)<br />
 [NetworkNode.stop(self)](#networknodestopself)<br />
 [NetworkNodeList()](#networknodelist)<br />
-[NetworkNodeList.__init__(self)](#networknodelistinitself)<br />
-[NetworkNodeList.__iter__(self)](#networknodelistiterself)<br />
-[NetworkNodeList.__len__(self)](#networknodelistlenself)<br />
-[NetworkNodeList.__next__(self)](#networknodelistnextself)<br />
 [NetworkNodeList.append(self, value)](#networknodelistappendself-value)<br />
 [NetworkNodeList.items(self)](#networknodelistitemsself)<br />
 [PingNetworkNode()](#pingnetworknode)<br />
@@ -175,9 +167,6 @@ PyYAML==3.12
 [@Property: PingNetworkNode.isconnected](#property-pingnetworknodeisconnected)<br />
 [@Property: PingNetworkNode.port](#property-pingnetworknodeport)<br />
 [@Property: PingNetworkNode.rtt](#property-pingnetworknodertt)<br />
-[PingNetworkNode.__init__(self, host, port)](#pingnetworknodeinitself-host-port)<br />
-[PingNetworkNode.__ping(self)](#pingnetworknode__pingself)<br />
-[PingNetworkNode.__socket(self)](#pingnetworknode__socketself)<br />
 
 
 #### Counter()
@@ -224,13 +213,6 @@ def Counter.value(self):
 > <br />
 > <b>@Property:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  current value (int)<br />
-> <br />
-##### Counter.__init__(self, max_value)
-```python
-def Counter.__init__(self, max_value):
-```
-> <br />
-> Initialize self.  See help(type(self)) for accurate signature.<br />
 > <br />
 ##### Counter.reset(self)
 ```python
@@ -363,13 +345,6 @@ def ElementPosition.stripe_size(self, value):
 > <b>@Property:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: stripe size<br />
 > <br />
-##### ElementPosition.__init__(self)
-```python
-def ElementPosition.__init__(self):
-```
-> <br />
-> Initialize self.  See help(type(self)) for accurate signature.<br />
-> <br />
 #### NetworkNode()
 ```python
 class NetworkNode(object):
@@ -399,21 +374,7 @@ def NetworkNode.rtt(self):
 
 ```
 > <br />
-> @Property<br />
-> <br />
-##### NetworkNode.__init__(self, label, host, port)
-```python
-def NetworkNode.__init__(self, label, host, port):
-```
-> <br />
-> Initialize self.  See help(type(self)) for accurate signature.<br />
-> <br />
-##### NetworkNode.__refresh(self)
-```python
-def NetworkNode.__refresh(self):
-```
-> <br />
-> Docstring empty<br />
+> provide device rtt<br />
 > <br />
 ##### NetworkNode.start(self)
 ```python
@@ -497,34 +458,6 @@ NetworkNodeList.append => list().append
     TypeError: This object is not a NetworkNode
 ```
 
-##### NetworkNodeList.__init__(self)
-```python
-def NetworkNodeList.__init__(self):
-```
-> <br />
-> Initialize self.  See help(type(self)) for accurate signature.<br />
-> <br />
-##### NetworkNodeList.__iter__(self)
-```python
-def NetworkNodeList.__iter__(self):
-```
-> <br />
-> Implement iter(self).<br />
-> <br />
-##### NetworkNodeList.__len__(self)
-```python
-def NetworkNodeList.__len__(self):
-```
-> <br />
-> Return len(self).<br />
-> <br />
-##### NetworkNodeList.__next__(self)
-```python
-def NetworkNodeList.__next__(self):
-```
-> <br />
-> Docstring empty<br />
-> <br />
 ##### NetworkNodeList.append(self, value)
 ```python
 def NetworkNodeList.append(self, value):
@@ -554,13 +487,9 @@ Else, we use socket API.
     >>> a = PingNetworkNode("www.google.fr", 80)
     >>> print(a.isconnected)
     True
-    >>> print(a.rtt)
-    azked
     >>> a = PingNetworkNode("localhost", "ICMP")
     >>> print(a.isconnected)
     True
-    >>> print(a.rtt)
-    zfezelk
     >>> a = PingNetworkNode("10.10.9.1", "ICMP")
     >>> print(a.isconnected)
     False
@@ -608,25 +537,4 @@ def PingNetworkNode.rtt(self):
 ```
 > <br />
 > <b>@Property:</b><br />
-> <br />
-##### PingNetworkNode.__init__(self, host, port)
-```python
-def PingNetworkNode.__init__(self, host, port):
-```
-> <br />
-> Initialize self.  See help(type(self)) for accurate signature.<br />
-> <br />
-##### PingNetworkNode.__ping(self)
-```python
-def PingNetworkNode.__ping(self):
-```
-> <br />
-> Docstring empty<br />
-> <br />
-##### PingNetworkNode.__socket(self)
-```python
-def PingNetworkNode.__socket(self):
-```
-> <br />
-> Docstring empty<br />
 > <br />

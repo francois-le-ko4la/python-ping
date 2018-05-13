@@ -131,9 +131,9 @@ This package is distributed under the [GPLv3 license](./LICENSE)
 
 """
 
-from pytping import __about__
 from pytconfig.file import PytFile
 from pytconfig.config import PytConfigFile
+from pytping import __about__
 from pytping.position import ElementPosition
 from pytping.counter import Counter
 from pytping.screen import ScreenCurses
