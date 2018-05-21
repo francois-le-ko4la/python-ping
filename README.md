@@ -84,13 +84,13 @@ ESX2:
 
 My test environment:
 
-- CPU
+- CPU:
     - 1 x Intel(R) Core(TM) i5-4250U CPU @ 1.30GHz
     - 2 thread per core
     - 2 core per socket
 - Mem : 8GB (6927MiB)
 
-With 4 network node:
+With 4 network nodes:
 - %CPU: <1% (average) - 2% (higher rate)
 - %MEM: 0.3%
 - 6 Thread : 1 main thread, 1 screen thread, 1 thread per network node
@@ -111,9 +111,11 @@ With 4 network node:
 │   └── screen.png
 ├── pytping
 │   ├── __about__.py
+│   ├── __config__.py
 │   ├── counter.py
 │   ├── __init__.py
 │   ├── main.py
+│   ├── multithreading.py
 │   ├── netnode.py
 │   ├── nodelist.py
 │   ├── ping.py
@@ -284,7 +286,6 @@ Use:
     >>> mthr.start() ; print("other task");time.sleep(0.3) ; mthr.stop()
     lorem ipsum dolor sit amet consectetur
     other task
-    lorem ipsum dolor sit amet consectetur
     lorem ipsum dolor sit amet consectetur
     lorem ipsum dolor sit amet consectetur
 ```
