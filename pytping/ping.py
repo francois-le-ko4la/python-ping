@@ -11,16 +11,7 @@ print(myhost.isconnected)
 import subprocess
 import socket
 import time
-
-
-class Default:
-    """
-    PingNetworkNode parameters
-    """
-    timeout = 0.5
-    ICMP = "ICMP"
-    msg_typeerror = "PingNetworkNode: invalid input type"
-    ping_cmd = "ping -c 1 -w 1 "
+from pytping.__config__ import DEFAULT
 
 
 class PingNetworkNode(object):
@@ -63,7 +54,7 @@ class PingNetworkNode(object):
         if isinstance(host, str):
             self.__host = host
         else:
-            raise TypeError(Default.msg_typeerror)
+            raise TypeError(DEFAULT["msg_typeerror"])
 
     @property
     def rtt(self):
@@ -87,7 +78,7 @@ class PingNetworkNode(object):
         if isinstance(port, (int, str)):
             self.__port = port
         else:
-            raise TypeError(Default.msg_typeerror)
+            raise TypeError(DEFAULT["msg_typeerror"])
 
     @property
     def isconnected(self):
@@ -95,14 +86,14 @@ class PingNetworkNode(object):
         @Property:
             bool: True if the node is connected. False otherwise.
         """
-        if isinstance(self.__port, str) and Default.ICMP in self.__port:
+        if isinstance(self.__port, str) and DEFAULT["ICMP"] in self.__port:
             return self.__ping()
         else:
             return self.__socket()
 
     def __socket(self):
         try:
-            socket.setdefaulttimeout(Default.timeout)
+            socket.setdefaulttimeout(DEFAULT["timeout"])
             start = time.time()
             socket.socket().connect((self.__host, self.__port))
             self.__rtt = "{} ms".format(
@@ -115,10 +106,11 @@ class PingNetworkNode(object):
 
     def __ping(self):
         try:
-            proc = subprocess.Popen(Default.ping_cmd + self.__host,
+            proc = subprocess.Popen(DEFAULT["ping_cmd"] + self.__host,
                                     shell=True,
                                     stdout=subprocess.PIPE,
                                     stderr=subprocess.PIPE)
+            p_status = proc.wait()
             rtt = proc.stdout.read()
             rtt = (((rtt.decode("utf-8").split("\n"))[1]).split("="))[3]
             self.__rtt = rtt

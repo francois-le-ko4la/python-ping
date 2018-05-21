@@ -40,7 +40,9 @@ class PythonPing(object):
 
     def run(self):
         """
-        start screen
+        Start curses screen
+        User can stop this app with [ESC] key.
+        In the end stop all process
         """
         self.__screen.run()
         """ EXIT """

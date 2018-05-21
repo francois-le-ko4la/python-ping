@@ -9,9 +9,9 @@
 
 When you have to check a network node, you use ping command and all is fine.
 Sometimes, you have to manage multiple nodes. As a consequence, you have to
-open multiple terminal windows to ping the nodes. In the real life, this kind
+open multiple terminals to ping the nodes. In the real life, this kind
 of tasks are not really interresting and you have to switch between the
-windows. Of course, at the same time, you have to remember IP address.
+terminals. Of course, at the same time, you have to remember IP address.
 
 Basically, you have many ping tools on Windows.
 My objective is to provide a __simple/light tool__ that can be used quickly
@@ -22,10 +22,10 @@ environments. A windows library exists and allow you to adapt the screen
 module.
 
 __This project is not :__
-- a ping command replacement
-- a tool (MultiPing/PingInfoView) replacement
-- a network analyzer
-- a CMDB tool
+:x: a ping command replacement
+:x: a tool (MultiPing/PingInfoView) replacement
+:x: a network analyzer
+:x: a CMDB tool
 
 ## Setup:
 
@@ -44,7 +44,12 @@ $ make test
 
 ## Use:
 
-Use the script provided in this package :
+- Check network permissions to ping
+```shell
+sudo iptables -P OUTPUT ACCEPT
+```
+- Use the script provided in this package :
+
 ```shell
 $ pyt-ping.py -h
 usage: pyt-ping.py [-h] [-v] -i INPUT
@@ -77,6 +82,21 @@ ESX2:
   host: 192.168.1.240
   port: ICMP
 ```
+
+## Feedback
+
+My test environment:
+
+- CPU
+    - 1 x Intel(R) Core(TM) i5-4250U CPU @ 1.30GHz
+    - 2 thread per core
+    - 2 core per socket
+- Mem : 8GB (6927MiB)
+
+With 4 network node:
+- %CPU: <1% (average) - 2% (higher rate)
+- %MEM: 0.3%
+- 6 Thread : 1 main thread, 1 screen thread, 1 thread per network node
 
 ## Project Structure
 ```
@@ -123,7 +143,7 @@ ESX2:
 - [X] Write Doc/stringdoc
 - [X] Run PEP8 validation
 - [X] Clean & last check
-- [ ] Release
+- [X] Release
 
 ## License
 
@@ -141,3 +161,8 @@ from pytping.ping import PingNetworkNode
 from pytping.netnode import NetworkNode
 from pytping.nodelist import NetworkNodeList
 from pytping.pyping import PythonPing
+
+
+__version__ = __about__.__version__
+__author__ = __about__.__author__
+__license__ = __about__.__license__

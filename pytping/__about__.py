@@ -12,7 +12,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 """
 
 __pkg_name__ = 'pytping'
-__version__ = '0.1.0.dev1'
+__version__ = '0.1.5'
 __author__ = 'Ko4lA'
 __email__ = 'francois@le.ko4la.fr'
 __description__ = 'The funniest ping tool'

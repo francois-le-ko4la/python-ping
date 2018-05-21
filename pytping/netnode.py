@@ -11,8 +11,9 @@
 
 """
 
-from threading import Timer
 from pytping.ping import PingNetworkNode
+from pytping.multithreading import MultiThread
+from pytping.__config__ import DEFAULT
 
 
 class NetworkNode(object):
@@ -23,13 +24,12 @@ class NetworkNode(object):
     - port
     """
     def __init__(self, label, host, port):
-        self.__timer = None
         self.__isconnected = False
-        self.__started = False
         self.label = label
         self.host = host
         self.__ping = PingNetworkNode(host, port)
         self.__port = port
+        self.__mthr = MultiThread(self.__refresh, DEFAULT["refresh"])
 
     @property
     def isconnected(self):
@@ -47,11 +47,7 @@ class NetworkNode(object):
         return str(self.__ping.rtt)
 
     def __refresh(self):
-        if self.__started is not True:
-            return
         self.__isconnected = self.__ping.isconnected
-        self.__timer = Timer(2, self.__refresh)
-        self.__timer.start()
 
     def stop(self):
         """
@@ -63,7 +59,7 @@ class NetworkNode(object):
         Returns:
             None
         """
-        self.__started = False
+        self.__mthr.stop()
 
     def start(self):
         """
@@ -75,5 +71,4 @@ class NetworkNode(object):
         Returns:
             None
         """
-        self.__started = True
-        self.__refresh()
+        self.__mthr.start()
