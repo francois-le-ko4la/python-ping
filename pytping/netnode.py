@@ -11,9 +11,9 @@
 
 """
 
-from pytping.ping import PingNetworkNode
-from pytping.multithreading import MultiThread
-from pytping.__config__ import DEFAULT
+from pytping import PingNetworkNode
+from pytping import PThread
+from pytping import DEFAULT
 
 
 class NetworkNode(object):
@@ -29,7 +29,7 @@ class NetworkNode(object):
         self.host = host
         self.__ping = PingNetworkNode(host, port)
         self.__port = port
-        self.__mthr = MultiThread(self.__refresh, DEFAULT["refresh"])
+        self.__mthr = PThread(self.__refresh, DEFAULT["refresh"])
 
     @property
     def isconnected(self):

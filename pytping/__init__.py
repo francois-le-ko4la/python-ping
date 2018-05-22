@@ -153,9 +153,10 @@ This package is distributed under the [GPLv3 license](./LICENSE)
 
 """
 
-from pytconfig.file import PytFile
-from pytconfig.config import PytConfigFile
+from pytconfig import PytFile, PytConfigFile
+from pthread import PThread
 from pytping import __about__
+from pytping.__config__ import TEMPLATE, DEFAULT
 from pytping.position import ElementPosition
 from pytping.counter import Counter
 from pytping.screen import ScreenCurses

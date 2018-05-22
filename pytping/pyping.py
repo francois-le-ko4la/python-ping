@@ -13,10 +13,10 @@
 
 """
 
-from pytconfig.config import PytConfigFile
-from pytping.screen import ScreenCurses
-from pytping.netnode import NetworkNode
-from pytping.nodelist import NetworkNodeList
+from pytconfig import PytConfigFile
+from pytping import ScreenCurses
+from pytping import NetworkNode
+from pytping import NetworkNodeList
 
 
 class PythonPing(object):

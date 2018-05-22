@@ -14,12 +14,12 @@
 
 
 DEFAULT = {
-        "timeout": 0.5,
-        "refresh": 0.8,
-        "refresh_screen": 0.8,
-        "ICMP": "ICMP",
-        "msg_typeerror": "PingNetworkNode: invalid input type",
-        "ping_cmd": "ping -c 1 -w 1 "
+    "timeout": 0.5,
+    "refresh": 0.8,
+    "refresh_screen": 0.8,
+    "ICMP": "ICMP",
+    "msg_typeerror": "PingNetworkNode: invalid input type",
+    "ping_cmd": "ping -c 1 -w 1 "
 }
 
 TEMPLATE = {

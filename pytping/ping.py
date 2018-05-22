@@ -11,7 +11,7 @@ print(myhost.isconnected)
 import subprocess
 import socket
 import time
-from pytping.__config__ import DEFAULT
+from pytping import DEFAULT
 
 
 class PingNetworkNode(object):

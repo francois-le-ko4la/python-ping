@@ -19,7 +19,7 @@ for member in a  :
     print(member)
 """
 
-from pytping.netnode import NetworkNode
+from pytping import NetworkNode
 
 
 class NetworkNodeList(dict):
@@ -55,6 +55,7 @@ class NetworkNodeList(dict):
     len(NetworkNodeList()) => len(list())
     NetworkNodeList.append => list().append
 
+        >>> from pytping import NetworkNode
         >>> a = NetworkNodeList()
         >>> b = NetworkNode("", "", "")
         >>> c = NetworkNode("", "", "")

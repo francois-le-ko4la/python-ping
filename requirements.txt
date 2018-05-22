@@ -1,3 +1,4 @@
-setuptools==39.0.1
+pthread==0.1.0
 pycodestyle==2.3.1
-PyYAML==3.12
+pytconfig==0.1.7
+setuptools==39.0.1

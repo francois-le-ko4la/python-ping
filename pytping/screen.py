@@ -14,12 +14,11 @@ export NCURSES_NO_UTF8_ACS=1
 """
 
 import curses
-import time
 from pytping import __about__
-from pytping.position import ElementPosition
-from pytping.counter import Counter
-from pytping.__config__ import TEMPLATE, DEFAULT
-from pytping.multithreading import MultiThread
+from pytping import ElementPosition
+from pytping import PThread
+from pytping import Counter
+from pytping import TEMPLATE, DEFAULT
 
 
 class ScreenCurses(object):
@@ -59,7 +58,7 @@ class ScreenCurses(object):
         self.__host_list = host_list
         self.__count = Counter(3)
         self.__elemnt_position = ElementPosition()
-        self.__mthr = MultiThread(self.build, DEFAULT["refresh_screen"])
+        self.__mthr = PThread(self.build, DEFAULT["refresh_screen"])
         self.screen = curses.initscr()
         self.screen.immedok(True)
         self.height, self.width = self.screen.getmaxyx()

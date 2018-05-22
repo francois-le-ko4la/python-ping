@@ -14,7 +14,7 @@ import pathlib
 import argparse
 import os
 from pytping import __about__
-from pytping.pyping import PythonPing
+from pytping import PythonPing
 
 
 PARSER = argparse.ArgumentParser(

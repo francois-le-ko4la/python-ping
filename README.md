@@ -157,9 +157,10 @@ python-3.6.x
 ### Requirements
 
 ```
-setuptools==39.0.1
+pthread==0.1.0
 pycodestyle==2.3.1
-PyYAML==3.12
+pytconfig==0.1.7
+setuptools==39.0.1
 
 ```
 ### UML Diagram
@@ -170,10 +171,6 @@ PyYAML==3.12
 [@Property Counter.value](#property-countervalue)<br />
 [Counter.reset()](#counterreset)<br />
 [run()](#run)<br />
-[MultiThread()](#multithread)<br />
-[@Property MultiThread.func](#property-multithreadfunc)<br />
-[MultiThread.run()](#multithreadrun)<br />
-[MultiThread.stop()](#multithreadstop)<br />
 [NetworkNode()](#networknode)<br />
 [@Property NetworkNode.isconnected](#property-networknodeisconnected)<br />
 [@Property NetworkNode.rtt](#property-networknodertt)<br />
@@ -266,75 +263,6 @@ def run():
 ```
 > <br />
 > CLI runner<br />
-> <br />
-#### MultiThread()
-```python
-class MultiThread(Thread):
-```
-
-```
-A class that represents a thread of control.
-This class subclassed Thread class :
-    class Thread(builtins.object)
-
-We specify the activity by passing a callable object to the constructor.
-
-Use:
-    >>> import time
-    >>> def mytask(): print("lorem ipsum dolor sit amet consectetur")
-    >>> mthr = MultiThread(mytask, 0.1)
-    >>> mthr.start() ; print("other task");time.sleep(0.3) ; mthr.stop()
-    lorem ipsum dolor sit amet consectetur
-    other task
-    lorem ipsum dolor sit amet consectetur
-    lorem ipsum dolor sit amet consectetur
-```
-
-##### @Property MultiThread.func
-```python
-@property
-def MultiThread.func(self):
-```
-> <br />
-> Returns the callable object defined by Thread constructor.<br />
-> <br />
-> <b>Args:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None.<br />
-> <br />
-> <b>Returns:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  callable object<br />
-> <br />
-##### MultiThread.run()
-```python
-
-def MultiThread.run(self):
-```
-> <br />
-> Method (override) representing the thread's activity.<br />
-> This method will raise a RuntimeError if called more than once on the<br />
-> same thread object.<br />
-> <br />
-> <b>Args:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None.<br />
-> <br />
-> <b>Returns:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None.<br />
-> <br />
-##### MultiThread.stop()
-```python
-
-def MultiThread.stop(self):
-```
-> <br />
-> Wait until the thread terminates.<br />
-> This blocks the calling thread until the thread whose join() method is<br />
-> called terminates -- either normally or through an unhandled exception.<br />
-> <br />
-> <b>Args:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None.<br />
-> <br />
-> <b>Returns:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None.<br />
 > <br />
 #### NetworkNode()
 ```python
@@ -429,6 +357,7 @@ str(NetworkNodeList()) => str(ALL)
 len(NetworkNodeList()) => len(list())
 NetworkNodeList.append => list().append
 
+    >>> from pytping import NetworkNode
     >>> a = NetworkNodeList()
     >>> b = NetworkNode("", "", "")
     >>> c = NetworkNode("", "", "")
