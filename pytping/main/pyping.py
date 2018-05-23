@@ -14,9 +14,9 @@
 """
 
 from pytconfig import PytConfigFile
-from pytping import ScreenCurses
-from pytping import NetworkNode
-from pytping import NetworkNodeList
+from pytping.screen.curse import ScreenCurses
+from pytping.netnode.list import NetworkNodeList
+from pytping.netnode.node import NetworkNode
 
 
 class PythonPing(object):

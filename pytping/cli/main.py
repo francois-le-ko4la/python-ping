@@ -13,8 +13,8 @@
 import pathlib
 import argparse
 import os
-from pytping import __about__
-from pytping import PythonPing
+from pytping.util import __about__
+from pytping.main import PythonPing
 
 
 PARSER = argparse.ArgumentParser(

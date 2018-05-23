@@ -18,10 +18,6 @@ default:
 	@echo '    make test       test'
 	@echo
 
-init:
-	@sudo pip3 install https://github.com/francois-le-ko4la/python-config-file/archive/v0.1.7.tar.gz
-	@sudo pip3 install https://github.com/francois-le-ko4la/python-multithreading/archive/v0.1.0.tar.gz
-
 dev:
 	@sudo python3 setup.py develop
 
@@ -30,7 +26,6 @@ uninstall:
 	@sudo -H pip3 uninstall -y $(PACKAGE_NAME)
 
 install:
-	@$(MAKE) init
 	@sudo ./setup.py install
 
 clean:
@@ -40,7 +35,7 @@ clean:
 
 doc:
 	@pip3 show $(PACKAGE_NAME)
-	@pyreverse $(PACKAGE_DIR) -S -f ALL -o png -p $(PACKAGE_NAME)
+	@pyreverse $(PACKAGE_DIR) -f ALL -o png -p $(PACKAGE_NAME)
 	@mv *.png pictures/
 	@export_docstring2md.py -i $(PACKAGE_DIR) -o README.md -r requirements.txt -t runtime.txt -u pictures/classes_$(PACKAGE_NAME).png
 

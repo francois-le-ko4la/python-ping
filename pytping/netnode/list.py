@@ -9,19 +9,7 @@
  #    #  #       #    #  #    #  #       #   #   #    #
  #    #  ######  #    #  #####   ######  #    #   ####
 
-a = MembersObj()
-b = test()
-a.append({'zefjh':b })
-a.append({'sdjsdlv':b})
-
-print(a.items())
-for member in a  :
-    print(member)
 """
-
-from pytping import NetworkNode
-
-
 class NetworkNodeList(dict):
 
     """
@@ -57,30 +45,29 @@ class NetworkNodeList(dict):
 
         >>> from pytping import NetworkNode
         >>> a = NetworkNodeList()
-        >>> b = NetworkNode("", "", "")
-        >>> c = NetworkNode("", "", "")
+        >>> b = "node1"
+        >>> c = "node2"
         >>> a.append(b)
         >>> print(len(a))
         1
         >>> for member in a: print(type(member))
-        <class 'pytping.netnode.NetworkNode'>
+        <class 'str'>
         >>> a.append(c)
         >>> print(len(a))
         2
         >>> for member in a: print(type(member))
-        <class 'pytping.netnode.NetworkNode'>
-        <class 'pytping.netnode.NetworkNode'>
+        <class 'str'>
+        <class 'str'>
         >>> a.append(3)
         Traceback (most recent call last):
         ...
-        TypeError: This object is not a NetworkNode
+        TypeError: This object is not a <class 'str'>
 
     """
 
     def __init__(self):
         super().__init__()
-        self.__obj_type = NetworkNode("", "", "")
-        self['type'] = self.__obj_type
+        self.__obj_type = None
         self['data'] = []
         self.__currentindex = 0
         self.__index = 0
@@ -106,10 +93,13 @@ class NetworkNodeList(dict):
         """
         add a member
         """
-        if isinstance(value, type(self['type'])):
+        if self.__obj_type is None:
+            self.__obj_type = type(value)
+
+        if isinstance(value, self.__obj_type):
             self['data'].append(value)
         else:
-            raise TypeError("This object is not a NetworkNode")
+            raise TypeError("This object is not a " + str(self.__obj_type))
 
     def items(self):
         """

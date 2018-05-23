@@ -11,9 +11,9 @@
 
 """
 
-from pytping import PingNetworkNode
-from pytping import PThread
-from pytping import DEFAULT
+from pthread import PThread
+from pytping.util import DEFAULT
+from pytping.netnode.ping import PingNetworkNode
 
 
 class NetworkNode(object):

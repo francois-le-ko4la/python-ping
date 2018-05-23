@@ -12,7 +12,7 @@
 
 """
 
-from pytping import main
+from pytping.cli import main
 
 
 if __name__ == '__main__':

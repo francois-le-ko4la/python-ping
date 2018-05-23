@@ -9,20 +9,19 @@ Sometimes, you have to manage multiple nodes. As a consequence, you have to
 open multiple terminals to ping the nodes. In the real life, this kind
 of tasks are not really interresting and you have to switch between the
 terminals. Of course, at the same time, you have to remember IP address.
-
 Basically, you have many ping tools on Windows.
 My objective is to provide a __simple/light tool__ that can be used quickly
 on linux environments.
-
 The GUI has been build with `curses` library provided by system V/posix
 environments. A windows library exists and allow you to adapt the screen
 module.
 
 __This project is not :__
-:x: a ping command replacement
-:x: a tool (MultiPing/PingInfoView) replacement
-:x: a network analyzer
-:x: a CMDB tool
+
+- :x: a ping command replacement
+- :x: a tool (MultiPing/PingInfoView) replacement
+- :x: a network analyzer
+- :x: a CMDB tool
 
 ## Setup:
 
@@ -35,6 +34,7 @@ $ make install
 ## Test:
 
 This module has been [tested and validated](./last_check.log) on Ubuntu.
+
 ```shell
 $ make test
 ```
@@ -42,29 +42,28 @@ $ make test
 ## Use:
 
 - Check network permissions to ping
+
 ```shell
 sudo iptables -P OUTPUT ACCEPT
 ```
+
 - Use the script provided in this package :
 
 ```shell
 $ pyt-ping.py -h
 usage: pyt-ping.py [-h] [-v] -i INPUT
-
 Ping tool...
-
 optional arguments:
   -h, --help            show this help message and exit
   -v, --version         show program's version number and exit
-
 required arguments:
   -i INPUT, --input INPUT
                         Input file name
-
 Enjoy...
 ```
 
 Configuration file should be written according to this example:
+
 ```yaml
 Internet access:
   host: www.google.fr
@@ -83,7 +82,6 @@ ESX2:
 ## Feedback
 
 My test environment:
-
 - CPU:
     - 1 x Intel(R) Core(TM) i5-4250U CPU @ 1.30GHz
     - 2 thread per core
@@ -96,6 +94,7 @@ With 4 network nodes:
 - 6 Thread : 1 main thread, 1 screen thread, 1 thread per network node
 
 ## Project Structure
+
 ```
 .
 ├── bin
@@ -106,22 +105,33 @@ With 4 network nodes:
 ├── Makefile
 ├── MANIFEST.in
 ├── pictures
+│   ├── classes.png
 │   ├── classes_pytping.png
+│   ├── packages.png
 │   ├── packages_pytping.png
 │   └── screen.png
 ├── pytping
-│   ├── __about__.py
-│   ├── __config__.py
-│   ├── counter.py
+│   ├── cli
+│   │   ├── __init__.py
+│   │   └── main.py
 │   ├── __init__.py
-│   ├── main.py
-│   ├── multithreading.py
-│   ├── netnode.py
-│   ├── nodelist.py
-│   ├── ping.py
-│   ├── position.py
-│   ├── pyping.py
-│   └── screen.py
+│   ├── main
+│   │   ├── __init__.py
+│   │   └── pyping.py
+│   ├── netnode
+│   │   ├── __init__.py
+│   │   ├── list.py
+│   │   ├── node.py
+│   │   └── ping.py
+│   ├── screen
+│   │   ├── counter.py
+│   │   ├── curse.py
+│   │   ├── __init__.py
+│   │   └── position.py
+│   └── util
+│       ├── __about__.py
+│       ├── __config__.py
+│       └── __init__.py
 ├── README.md
 ├── requirements.txt
 ├── runtime.txt
@@ -130,6 +140,7 @@ With 4 network nodes:
 └── tests
     ├── test_doctest.py
     └── test_pycodestyle.py
+
 ```
 
 ## Todo:
@@ -157,33 +168,39 @@ python-3.6.x
 ### Requirements
 
 ```
-pthread==0.1.0
-pycodestyle==2.3.1
-pytconfig==0.1.7
-setuptools==39.0.1
+pycodestyle>=2.3.1
+setuptools>=39.0.1
+https://github.com/francois-le-ko4la/python-config-file/archive/v0.1.7.tar.gz
+https://github.com/francois-le-ko4la/python-multithreading/archive/v0.1.0.tar.gz
 
 ```
 ### UML Diagram
 ![alt text](pictures/classes_pytping.png)
 
 ### Objects
-[Counter()](#counter)<br />
-[@Property Counter.value](#property-countervalue)<br />
-[Counter.reset()](#counterreset)<br />
 [run()](#run)<br />
+[PythonPing()](#pythonping)<br />
+[PythonPing.run()](#pythonpingrun)<br />
+[NetworkNodeList()](#networknodelist)<br />
+[NetworkNodeList.append()](#networknodelistappend)<br />
+[NetworkNodeList.items()](#networknodelistitems)<br />
 [NetworkNode()](#networknode)<br />
 [@Property NetworkNode.isconnected](#property-networknodeisconnected)<br />
 [@Property NetworkNode.rtt](#property-networknodertt)<br />
 [NetworkNode.stop()](#networknodestop)<br />
 [NetworkNode.start()](#networknodestart)<br />
-[NetworkNodeList()](#networknodelist)<br />
-[NetworkNodeList.append()](#networknodelistappend)<br />
-[NetworkNodeList.items()](#networknodelistitems)<br />
 [PingNetworkNode()](#pingnetworknode)<br />
 [@Property PingNetworkNode.host](#property-pingnetworknodehost)<br />
 [@Property PingNetworkNode.rtt](#property-pingnetworknodertt)<br />
 [@Property PingNetworkNode.port](#property-pingnetworknodeport)<br />
 [@Property PingNetworkNode.isconnected](#property-pingnetworknodeisconnected)<br />
+[Counter()](#counter)<br />
+[@Property Counter.value](#property-countervalue)<br />
+[Counter.reset()](#counterreset)<br />
+[ScreenCurses()](#screencurses)<br />
+[ScreenCurses.menubar()](#screencursesmenubar)<br />
+[ScreenCurses.build()](#screencursesbuild)<br />
+[ScreenCurses.run()](#screencursesrun)<br />
 [ElementPosition()](#elementposition)<br />
 [@Property ElementPosition.stripe_size](#property-elementpositionstripe_size)<br />
 [@Property ElementPosition.element_size](#property-elementpositionelement_size)<br />
@@ -191,71 +208,7 @@ setuptools==39.0.1
 [@Property ElementPosition.current_id](#property-elementpositioncurrent_id)<br />
 [@Property ElementPosition.row](#property-elementpositionrow)<br />
 [@Property ElementPosition.column](#property-elementpositioncolumn)<br />
-[PythonPing()](#pythonping)<br />
-[PythonPing.run()](#pythonpingrun)<br />
-[ScreenCurses()](#screencurses)<br />
-[ScreenCurses.menubar()](#screencursesmenubar)<br />
-[ScreenCurses.build()](#screencursesbuild)<br />
-[ScreenCurses.run()](#screencursesrun)<br />
 
-#### Counter()
-```python
-class Counter(object):
-```
-
-```
-This class count from 0 to max_value.
-In the end, we restart the count.
-
-+-----+    +-----+    +-----+           +-------+
-|  0  | -> |  1  | -> |  2  | -> ... -> |  max  |
-+-----+    +-----+    +-----+           +-------+
-  ^                                         |
-  |                                         |
-  +-----------------------------------------+
-
-Attributes:
-    value (int): current value
-
-Test:
-    python3 -m doctest -v <module>
-
-Use:
-    >>> max_value = 2
-    >>> a = Counter(max_value)
-    >>> print(a.value)
-    0
-    >>> print(a.value)
-    1
-    >>> print(a.value)
-    2
-    >>> print(a.value)
-    0
-```
-
-##### @Property Counter.value
-```python
-@property
-def Counter.value(self):
-```
-> <br />
-> <b>@Property:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  current value (int)<br />
-> <br />
-##### Counter.reset()
-```python
-
-def Counter.reset(self):
-```
-> <br />
-> reset current value<br />
-> <br />
-> <b>Args:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
-> <br />
-> <b>Returns:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
-> <br />
 #### run()
 ```python
 
@@ -263,6 +216,101 @@ def run():
 ```
 > <br />
 > CLI runner<br />
+> <br />
+#### PythonPing()
+```python
+class PythonPing(object):
+```
+
+```
+Main class
+Use YAML config file
+Create NetworkNodeList
+Launch the screen manager
+```
+
+##### PythonPing.run()
+```python
+
+def PythonPing.run(self):
+```
+> <br />
+> Start curses screen<br />
+> User can stop this app with [ESC] key.<br />
+> In the end stop all process<br />
+> <br />
+#### NetworkNodeList()
+```python
+class NetworkNodeList(dict):
+```
+
+```
+{} to store a python object's members (NetworkNode).
+We want to test object type before store.
+We use a dict() in order to make a complex object :
+
+   +-------------------------------------+ --*
+   |  label                              |   |
+   | +------+    +------------+          |   |- __str__
+   | | type | => |  obj type  |     obj  |   |  __iter__
+   | +------+    +------------+          |   |  ...
+   |                                     |   |
+   | +------+    +------------+  *       |   |     --*
+   | | data | => |  Object 0  |  |       |   |       |
+   | +------+    +------------+  |       |   |       |
+   |             +------------+  |       |   |       |
+   |             |  Object 1  |  |- list |   |       |- append
+   |             +------------+  |       |   |       |  items
+   |                  ...        |       |   |       |  __len__
+   |             +------------+  |       |   |       |  __next__
+   |             |  Object n  |  |       |   |       |
+   |             +------------+  *       |   |     --*
+   +-------------------------------------+ --*
+
+Obj type is protected by design and is NetworkNode type.
+A new element type is compare with Obj type.
+Another type will create a raise exception.
+
+str(NetworkNodeList()) => str(ALL)
+len(NetworkNodeList()) => len(list())
+NetworkNodeList.append => list().append
+
+    >>> from pytping import NetworkNode
+    >>> a = NetworkNodeList()
+    >>> b = "node1"
+    >>> c = "node2"
+    >>> a.append(b)
+    >>> print(len(a))
+    1
+    >>> for member in a: print(type(member))
+    <class 'str'>
+    >>> a.append(c)
+    >>> print(len(a))
+    2
+    >>> for member in a: print(type(member))
+    <class 'str'>
+    <class 'str'>
+    >>> a.append(3)
+    Traceback (most recent call last):
+    ...
+    TypeError: This object is not a <class 'str'>
+```
+
+##### NetworkNodeList.append()
+```python
+
+def NetworkNodeList.append(self, value):
+```
+> <br />
+> add a member<br />
+> <br />
+##### NetworkNodeList.items()
+```python
+
+def NetworkNodeList.items(self):
+```
+> <br />
+> get members<br />
 > <br />
 #### NetworkNode()
 ```python
@@ -321,79 +369,6 @@ def NetworkNode.start(self):
 > <b>Returns:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
 > <br />
-#### NetworkNodeList()
-```python
-class NetworkNodeList(dict):
-```
-
-```
-{} to store a python object's members (NetworkNode).
-We want to test object type before store.
-We use a dict() in order to make a complex object :
-
-   +-------------------------------------+ --*
-   |  label                              |   |
-   | +------+    +------------+          |   |- __str__
-   | | type | => |  obj type  |     obj  |   |  __iter__
-   | +------+    +------------+          |   |  ...
-   |                                     |   |
-   | +------+    +------------+  *       |   |     --*
-   | | data | => |  Object 0  |  |       |   |       |
-   | +------+    +------------+  |       |   |       |
-   |             +------------+  |       |   |       |
-   |             |  Object 1  |  |- list |   |       |- append
-   |             +------------+  |       |   |       |  items
-   |                  ...        |       |   |       |  __len__
-   |             +------------+  |       |   |       |  __next__
-   |             |  Object n  |  |       |   |       |
-   |             +------------+  *       |   |     --*
-   +-------------------------------------+ --*
-
-Obj type is protected by design and is NetworkNode type.
-A new element type is compare with Obj type.
-Another type will create a raise exception.
-
-str(NetworkNodeList()) => str(ALL)
-len(NetworkNodeList()) => len(list())
-NetworkNodeList.append => list().append
-
-    >>> from pytping import NetworkNode
-    >>> a = NetworkNodeList()
-    >>> b = NetworkNode("", "", "")
-    >>> c = NetworkNode("", "", "")
-    >>> a.append(b)
-    >>> print(len(a))
-    1
-    >>> for member in a: print(type(member))
-    <class 'pytping.netnode.NetworkNode'>
-    >>> a.append(c)
-    >>> print(len(a))
-    2
-    >>> for member in a: print(type(member))
-    <class 'pytping.netnode.NetworkNode'>
-    <class 'pytping.netnode.NetworkNode'>
-    >>> a.append(3)
-    Traceback (most recent call last):
-    ...
-    TypeError: This object is not a NetworkNode
-```
-
-##### NetworkNodeList.append()
-```python
-
-def NetworkNodeList.append(self, value):
-```
-> <br />
-> add a member<br />
-> <br />
-##### NetworkNodeList.items()
-```python
-
-def NetworkNodeList.items(self):
-```
-> <br />
-> get members<br />
-> <br />
 #### PingNetworkNode()
 ```python
 class PingNetworkNode(object):
@@ -451,6 +426,142 @@ def PingNetworkNode.isconnected(self):
 > <br />
 > <b>@Property:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  bool: True if the node is connected. False otherwise.<br />
+> <br />
+#### Counter()
+```python
+class Counter(object):
+```
+
+```
+This class count from 0 to max_value.
+In the end, we restart the count.
+
++-----+    +-----+    +-----+           +-------+
+|  0  | -> |  1  | -> |  2  | -> ... -> |  max  |
++-----+    +-----+    +-----+           +-------+
+  ^                                         |
+  |                                         |
+  +-----------------------------------------+
+
+Attributes:
+    value (int): current value
+
+Test:
+    python3 -m doctest -v <module>
+
+Use:
+    >>> max_value = 2
+    >>> a = Counter(max_value)
+    >>> print(a.value)
+    0
+    >>> print(a.value)
+    1
+    >>> print(a.value)
+    2
+    >>> print(a.value)
+    0
+```
+
+##### @Property Counter.value
+```python
+@property
+def Counter.value(self):
+```
+> <br />
+> <b>@Property:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  current value (int)<br />
+> <br />
+##### Counter.reset()
+```python
+
+def Counter.reset(self):
+```
+> <br />
+> reset current value<br />
+> <br />
+> <b>Args:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
+> <br />
+> <b>Returns:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
+> <br />
+#### ScreenCurses()
+```python
+class ScreenCurses(object):
+```
+
+```
+This class manage the screen.
+
++-----------------------------------------------------------------+
+|                                                                 |
+|     +-------------+  +-------------+  +-------------+           |
+|     | NetworkNode |  | NetworkNode |  | NetworkNode |           |
+|     +-------------+  +-------------+  +-------------+           |
+|                                                                 |
+|                                                                 |
+|                                                                 |
+|                                                                 |
+|                                                                 |
+|                                                                 |
+|                                                                 |
+|                                                                 |
+|                                                                 |
+|                                                                 |
+|                                                                 |
++-----------------------------------------------------------------+
+|  XXXXX | XXXX (*)                                               |
++-----------------------------------------------------------------+
+
++-------------+
+| NetworkNode |    Network Node : label, IP, status
++-------------+
+
+XXX                Text
+(*)                Progress
+```
+
+##### ScreenCurses.menubar()
+```python
+
+def ScreenCurses.menubar(self):
+```
+> <br />
+> draw the bar<br />
+> <br />
+> <b>Args:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
+> <br />
+> <b>Returns:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
+> <br />
+##### ScreenCurses.build()
+```python
+
+def ScreenCurses.build(self):
+```
+> <br />
+> Build the screen<br />
+> <br />
+> <b>Args:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
+> <br />
+> <b>Returns:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
+> <br />
+##### ScreenCurses.run()
+```python
+
+def ScreenCurses.run(self):
+```
+> <br />
+> Curses getch loop<br />
+> <br />
+> <b>Args:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
+> <br />
+> <b>Returns:</b><br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
 > <br />
 #### ElementPosition()
 ```python
@@ -557,105 +668,5 @@ def ElementPosition.column(self):
 > <br />
 > <b>@Property:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: column<br />
-> <br />
-#### PythonPing()
-```python
-class PythonPing(object):
-```
-
-```
-Main class
-Use YAML config file
-Create NetworkNodeList
-Launch the screen manager
-```
-
-##### PythonPing.run()
-```python
-
-def PythonPing.run(self):
-```
-> <br />
-> Start curses screen<br />
-> User can stop this app with [ESC] key.<br />
-> In the end stop all process<br />
-> <br />
-#### ScreenCurses()
-```python
-class ScreenCurses(object):
-```
-
-```
-This class manage the screen.
-
-+-----------------------------------------------------------------+
-|                                                                 |
-|     +-------------+  +-------------+  +-------------+           |
-|     | NetworkNode |  | NetworkNode |  | NetworkNode |           |
-|     +-------------+  +-------------+  +-------------+           |
-|                                                                 |
-|                                                                 |
-|                                                                 |
-|                                                                 |
-|                                                                 |
-|                                                                 |
-|                                                                 |
-|                                                                 |
-|                                                                 |
-|                                                                 |
-|                                                                 |
-+-----------------------------------------------------------------+
-|  XXXXX | XXXX (*)                                               |
-+-----------------------------------------------------------------+
-
-+-------------+
-| NetworkNode |    Network Node : label, IP, status
-+-------------+
-
-XXX                Text
-(*)                Progress
-```
-
-##### ScreenCurses.menubar()
-```python
-
-def ScreenCurses.menubar(self):
-```
-> <br />
-> draw the bar<br />
-> <br />
-> <b>Args:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
-> <br />
-> <b>Returns:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
-> <br />
-##### ScreenCurses.build()
-```python
-
-def ScreenCurses.build(self):
-```
-> <br />
-> Build the screen<br />
-> <br />
-> <b>Args:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
-> <br />
-> <b>Returns:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
-> <br />
-##### ScreenCurses.run()
-```python
-
-def ScreenCurses.run(self):
-```
-> <br />
-> Curses getch loop<br />
-> <br />
-> <b>Args:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
-> <br />
-> <b>Returns:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
 > <br />
 

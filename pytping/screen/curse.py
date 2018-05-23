@@ -14,11 +14,11 @@ export NCURSES_NO_UTF8_ACS=1
 """
 
 import curses
-from pytping import __about__
-from pytping import ElementPosition
-from pytping import PThread
-from pytping import Counter
-from pytping import TEMPLATE, DEFAULT
+from pthread import PThread
+from pytping.util import __about__
+from pytping.util import TEMPLATE, DEFAULT
+from pytping.screen.position import ElementPosition
+from pytping.screen.counter import Counter
 
 
 class ScreenCurses(object):
