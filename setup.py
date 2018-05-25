@@ -15,9 +15,13 @@ Test:
 import os
 from setuptools import setup
 from setuptools.config import read_configuration
+import warnings
+
+
+warnings.filterwarnings("ignore")
 
 cfg = read_configuration('./setup.cfg')
-#print(cfg)
+# print(cfg)
 cfg["options"].update(cfg["metadata"])
-cfg=cfg["options"]
-setup(use_scm_version = True, **cfg)
+cfg = cfg["options"]
+setup(use_scm_version=False, **cfg)

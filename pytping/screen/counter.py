@@ -11,6 +11,7 @@
   #####  #######  #####  #     #    #
 
 """
+from collections import deque
 
 
 class Counter(object):
@@ -24,6 +25,34 @@ class Counter(object):
       ^                                         |
       |                                         |
       +-----------------------------------------+
+
+
+    The first release was a done with basic idea:
+        if self.__value is (self.__max_value + 1):
+            self.reset()
+
+        result = self.__value
+        self.__value += 1
+        return result
+
+    Now we suggest a collection:
+        >>> from collections import deque
+        >>> c=deque(range(3))
+        >>> print(c)
+        deque([0, 1, 2])
+        >>> len(c)
+        3
+        >>> c[0]
+        0
+        >>> c.rotate(-1)
+        >>> c[0]
+        1
+        >>> c.rotate(-1)
+        >>> c[0]
+        2
+        >>> c.rotate(-1)
+        >>> c[0]
+        0
 
     Attributes:
         value (int): current value
@@ -45,9 +74,8 @@ class Counter(object):
 
     """
     def __init__(self, max_value):
-        self.__value = None
-        self.__max_value = max_value
-        self.reset()
+        self.__collection = deque(range(int(max_value + 1)))
+        self.__collection.rotate(1)
 
     @property
     def value(self):
@@ -55,21 +83,5 @@ class Counter(object):
         @Property:
             current value (int)
         """
-        if self.__value is (self.__max_value + 1):
-            self.reset()
-
-        result = self.__value
-        self.__value += 1
-        return result
-
-    def reset(self):
-        """
-        reset current value
-
-        Args:
-            None
-
-        Returns:
-            None
-        """
-        self.__value = 0
+        self.__collection.rotate(-1)
+        return self.__collection[0]

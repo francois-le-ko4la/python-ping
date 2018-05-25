@@ -19,24 +19,25 @@ default:
 	@echo
 
 dev:
-	@sudo python3 setup.py develop
-
-uninstall:
-	@pip3 show $(PACKAGE_NAME)
-	@sudo -H pip3 uninstall -y $(PACKAGE_NAME)
+	@pip3 install -e .
 
 install:
-	@sudo ./setup.py install
+	@pip3 install . --process-dependency-links
+
+uninstall:
+	@pip3 uninstall -y $(PACKAGE_NAME)
 
 clean:
-	@sudo rm -Rf *.egg *.egg-info .cache .coverage .tox build dist docs/build htmlcov .pytest_cache
+	@sudo rm -Rf .eggs *.egg-info .cache .coverage .tox build dist docs/build htmlcov .pytest_cache
 	@sudo find -depth -type d -name __pycache__ -exec rm -Rf {} \;
 	@sudo find -type f -name '*.pyc' -delete
 
-doc:
-	@pip3 show $(PACKAGE_NAME)
-	@pyreverse $(PACKAGE_DIR) -f ALL -o png -p $(PACKAGE_NAME)
+fulldoc:
+	@pyreverse $(PACKAGE_NAME) -f ALL -o png -p $(PACKAGE_NAME)
 	@mv *.png pictures/
+	@$(MAKE) doc
+
+doc:
 	@export_docstring2md.py -i $(PACKAGE_DIR) -o README.md -r requirements.txt -t runtime.txt -u pictures/classes_$(PACKAGE_NAME).png
 
 release:
@@ -45,8 +46,7 @@ release:
 	@$(MAKE) doc
 
 requirements:
-	@pip3 show $(PACKAGE_NAME)
-	@pipreqs .
+	@pipreqs . --force
 
 publish:
 	@$(MAKE) test

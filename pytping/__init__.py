@@ -158,6 +158,11 @@ With 4 network nodes:
 - [X] Run PEP8 validation
 - [X] Clean & last check
 - [X] Release
+- [X] change (un)install process
+- [X] remove MANIFEST.in
+- [X] manage global var: __version__....
+- [X] improve the doc
+- [X] Release 0.4.3
 
 ## License
 

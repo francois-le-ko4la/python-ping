@@ -154,6 +154,11 @@ With 4 network nodes:
 - [X] Run PEP8 validation
 - [X] Clean & last check
 - [X] Release
+- [X] change (un)install process
+- [X] remove MANIFEST.in
+- [X] manage global var: __version__....
+- [X] improve the doc
+- [X] Release 0.4.3
 
 ## License
 
@@ -196,7 +201,6 @@ https://github.com/francois-le-ko4la/python-multithreading/archive/v0.1.0.tar.gz
 [@Property PingNetworkNode.isconnected](#property-pingnetworknodeisconnected)<br />
 [Counter()](#counter)<br />
 [@Property Counter.value](#property-countervalue)<br />
-[Counter.reset()](#counterreset)<br />
 [ScreenCurses()](#screencurses)<br />
 [ScreenCurses.menubar()](#screencursesmenubar)<br />
 [ScreenCurses.build()](#screencursesbuild)<br />
@@ -443,6 +447,34 @@ In the end, we restart the count.
   |                                         |
   +-----------------------------------------+
 
+
+The first release was a done with basic idea:
+    if self.__value is (self.__max_value + 1):
+        self.reset()
+
+    result = self.__value
+    self.__value += 1
+    return result
+
+Now we suggest a collection:
+    >>> from collections import deque
+    >>> c=deque(range(3))
+    >>> print(c)
+    deque([0, 1, 2])
+    >>> len(c)
+    3
+    >>> c[0]
+    0
+    >>> c.rotate(-1)
+    >>> c[0]
+    1
+    >>> c.rotate(-1)
+    >>> c[0]
+    2
+    >>> c.rotate(-1)
+    >>> c[0]
+    0
+
 Attributes:
     value (int): current value
 
@@ -470,20 +502,6 @@ def Counter.value(self):
 > <br />
 > <b>@Property:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  current value (int)<br />
-> <br />
-##### Counter.reset()
-```python
-
-def Counter.reset(self):
-```
-> <br />
-> reset current value<br />
-> <br />
-> <b>Args:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
-> <br />
-> <b>Returns:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
 > <br />
 #### ScreenCurses()
 ```python

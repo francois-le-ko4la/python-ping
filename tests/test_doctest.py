@@ -16,7 +16,10 @@ import pathlib
 import doctest
 import unittest
 import subprocess
-from pytping import __about__
+from pytping.util import __about__
+
+
+blacklist = ["__about__.py"]
 
 
 class RunDocTest(unittest.TestCase):
@@ -42,12 +45,14 @@ sys.path.append(path)
 for current_file in list(path.glob('**/*.py')):
     current_file = pathlib.Path(current_file)
 
-    def ch(current_file):
-        return lambda self: self.run_doctest(current_file)
-    setattr(RunDocTest,
+    if current_file.name in blacklist is False:
+        def ch(current_file):
+            return lambda self: self.run_doctest(current_file)
+        setattr(
+            RunDocTest,
             "test_mod_{}".format(current_file.name),
             ch(str(current_file))
-            )
+        )
 
 
 if __name__ == "__main__":
