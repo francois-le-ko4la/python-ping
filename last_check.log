@@ -11,22 +11,30 @@ running build_ext
 platform linux -- Python 3.6.5, pytest-3.5.1, py-1.5.3, pluggy-0.6.0 -- /usr/bin/python3
 cachedir: .pytest_cache
 rootdir: /home/ko4la/GIT/python-ping, inifile: setup.cfg
-collecting ... collected 15 items
+collecting ... collected 23 items
 
-tests/test_pycodestyle.py::RunPyCodeStyle::test___about__.py PASSED      [  6%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test___config__.py PASSED     [ 13%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test___init__.py PASSED       [ 20%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_counter.py PASSED        [ 26%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_curse.py PASSED          [ 33%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_list.py PASSED           [ 40%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_main.py PASSED           [ 46%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_node.py PASSED           [ 53%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_ping.py PASSED           [ 60%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_position.py PASSED       [ 66%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_pyping.py PASSED         [ 73%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_pyt-ping.py PASSED       [ 80%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_setup.py PASSED          [ 86%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_test_doctest.py PASSED   [ 93%]
+tests/test_doctest.py::RunDocTest::test_mod_counter.py PASSED            [  4%]
+tests/test_doctest.py::RunDocTest::test_mod_curse.py PASSED              [  8%]
+tests/test_doctest.py::RunDocTest::test_mod_list.py PASSED               [ 13%]
+tests/test_doctest.py::RunDocTest::test_mod_main.py PASSED               [ 17%]
+tests/test_doctest.py::RunDocTest::test_mod_node.py PASSED               [ 21%]
+tests/test_doctest.py::RunDocTest::test_mod_ping.py PASSED               [ 26%]
+tests/test_doctest.py::RunDocTest::test_mod_position.py PASSED           [ 30%]
+tests/test_doctest.py::RunDocTest::test_mod_pyping.py PASSED             [ 34%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test___about__.py PASSED      [ 39%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test___config__.py PASSED     [ 43%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test___init__.py PASSED       [ 47%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_counter.py PASSED        [ 52%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_curse.py PASSED          [ 56%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_list.py PASSED           [ 60%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_main.py PASSED           [ 65%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_node.py PASSED           [ 69%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_ping.py PASSED           [ 73%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_position.py PASSED       [ 78%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_pyping.py PASSED         [ 82%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_pyt-ping.py PASSED       [ 86%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_setup.py PASSED          [ 91%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_test_doctest.py PASSED   [ 95%]
 tests/test_pycodestyle.py::RunPyCodeStyle::test_test_pycodestyle.py PASSED [100%]
 
-========================== 15 passed in 0.25 seconds ===========================
+========================== 23 passed in 3.10 seconds ===========================

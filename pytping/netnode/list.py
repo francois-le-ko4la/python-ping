@@ -45,7 +45,7 @@ class NetworkNodeList(dict):
     len(NetworkNodeList()) => len(list())
     NetworkNodeList.append => list().append
 
-        >>> from pytping import NetworkNode
+        >>> from pytping.netnode.node import NetworkNode
         >>> a = NetworkNodeList()
         >>> b = "node1"
         >>> c = "node2"

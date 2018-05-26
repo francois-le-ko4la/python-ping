@@ -19,7 +19,11 @@ import subprocess
 from pytping.util import __about__
 
 
-blacklist = ["__about__.py"]
+blacklist = ["__init__.py", "__about__.py", "__config__.py"]
+
+
+def ch(current_file):
+    return lambda self: self.run_doctest(current_file)
 
 
 class RunDocTest(unittest.TestCase):
@@ -44,10 +48,10 @@ sys.path.append(path)
 
 for current_file in list(path.glob('**/*.py')):
     current_file = pathlib.Path(current_file)
+    print(current_file.name)
+    print(current_file.name in blacklist)
 
-    if current_file.name in blacklist is False:
-        def ch(current_file):
-            return lambda self: self.run_doctest(current_file)
+    if current_file.name not in blacklist:
         setattr(
             RunDocTest,
             "test_mod_{}".format(current_file.name),

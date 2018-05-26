@@ -11,7 +11,7 @@
 
 """
 
-from pthread import PThread
+from pythread import PThread
 from pytping.util import DEFAULT
 from pytping.netnode.ping import PingNetworkNode
 
