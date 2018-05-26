@@ -163,6 +163,8 @@ With 4 network nodes:
 - [X] manage global var: __version__....
 - [X] improve the doc
 - [X] Release 0.4.3
+- [X] improve (un)install process
+- [X] Release 0.5.0
 
 ## License
 

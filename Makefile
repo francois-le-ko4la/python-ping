@@ -45,7 +45,7 @@ fulldoc:
 	@$(MAKE) doc
 
 doc:
-	@export_docstring2md.py -i $(PACKAGE_DIR) -o README.md -r requirements.txt -t runtime.txt -u pictures/classes_$(PACKAGE_NAME).png
+	@export_docstring2md.py -i $(PACKAGE_DIR) -o README.md -t runtime.txt -u pictures/classes_$(PACKAGE_NAME).png
 
 release:
 	@$(MAKE) clean
