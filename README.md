@@ -159,6 +159,8 @@ With 4 network nodes:
 - [X] manage global var: __version__....
 - [X] improve the doc
 - [X] Release 0.4.3
+- [X] improve (un)install process
+- [X] Release 0.5.0
 
 ## License
 
@@ -168,15 +170,6 @@ This package is distributed under the [GPLv3 license](./LICENSE)
 
 ```
 python-3.6.x
-
-```
-### Requirements
-
-```
-pycodestyle>=2.3.1
-setuptools>=39.0.1
-https://github.com/francois-le-ko4la/python-config-file/archive/v0.1.7.tar.gz
-https://github.com/francois-le-ko4la/python-multithreading/archive/v0.1.0.tar.gz
 
 ```
 ### UML Diagram

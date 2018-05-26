@@ -22,10 +22,17 @@ dev:
 	@pip3 install -e .
 
 install:
-	@pip3 install . --process-dependency-links
+	$(MAKE) clean
+	@./setup.py sdist bdist_wheel
+	@sudo -H pip3 install . --process-dependency-links
+upgrade:
+	@$(MAKE) clean
+	@./setup.py sdist bdist_wheel
+	@sudo -H pip3 install . --process-dependency-links --upgrade
 
 uninstall:
-	@pip3 uninstall -y $(PACKAGE_NAME)
+	@pip3 show $(PACKAGE_NAME)
+	@sudo -H pip3 uninstall -y $(PACKAGE_NAME)
 
 clean:
 	@sudo rm -Rf .eggs *.egg-info .cache .coverage .tox build dist docs/build htmlcov .pytest_cache
@@ -38,19 +45,15 @@ fulldoc:
 	@$(MAKE) doc
 
 doc:
-	@export_docstring2md.py -i $(PACKAGE_DIR) -o README.md -r requirements.txt -t runtime.txt -u pictures/classes_$(PACKAGE_NAME).png
+	@export_docstring2md.py -i $(PACKAGE_DIR) -o README.md -t runtime.txt -u pictures/classes_$(PACKAGE_NAME).png
 
 release:
 	@$(MAKE) clean
 	@$(MAKE) install
 	@$(MAKE) doc
 
-requirements:
-	@pipreqs . --force
-
 publish:
 	@$(MAKE) test
-	@pipreqs .
 	@git add .
 	@git commit
 	@git push

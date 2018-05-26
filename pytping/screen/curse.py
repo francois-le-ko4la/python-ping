@@ -14,7 +14,7 @@ export NCURSES_NO_UTF8_ACS=1
 """
 
 import curses
-from pthread import PThread
+from pythread import PThread
 from pytping.util import __about__
 from pytping.util import TEMPLATE, DEFAULT
 from pytping.screen.position import ElementPosition
