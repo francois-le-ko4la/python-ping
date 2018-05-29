@@ -3,4 +3,5 @@
 """
 util
 """
+from pytping.util import *
 from pytping.main.pyping import PythonPing

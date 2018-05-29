@@ -15,9 +15,9 @@ export NCURSES_NO_UTF8_ACS=1
 
 import curses
 from pythread import PThread
-from pytping.util import __about__
+from pytping.util.__about__ import __pkg_name__, __version__
 from pytping.util import TEMPLATE, DEFAULT
-from pytping.screen.position import ElementPosition
+from pytping.screen.location import ElementLocation
 from pytping.screen.counter import Counter
 
 
@@ -56,8 +56,8 @@ class ScreenCurses(object):
     def __init__(self, host_list):
         self.__timer = ""
         self.__host_list = host_list
-        self.__count = Counter(3)
-        self.__elemnt_position = ElementPosition()
+        self.__count = Counter(len(TEMPLATE["progress"]) - 1)
+        self.__elemnt_position = ElementLocation()
         self.__mthr = PThread(self.build, DEFAULT["refresh_screen"])
         self.screen = curses.initscr()
         self.screen.immedok(True)
@@ -86,10 +86,12 @@ class ScreenCurses(object):
         box = self.screen.subwin(3, self.width, self.height - 3, 0)
         box.border()
         box.box()
-        txt = "{}({}) | {} {}".format(__about__.__pkg_name__,
-                                      __about__.__version__,
-                                      TEMPLATE["msg"],
-                                      TEMPLATE["progress"][self.__count.value])
+        txt = "{}({}) | {} {}".format(
+            __pkg_name__,
+            __version__,
+            TEMPLATE["msg"],
+            TEMPLATE["progress"][self.__count.value]
+        )
         box.addstr(1, 2, txt)
 
     def build(self):
@@ -110,8 +112,7 @@ class ScreenCurses(object):
         self.screen.border(0)
         self.menubar()
 
-        i = 0
-        for host in self.__host_list:
+        for i, host in enumerate(self.__host_list):
             self.__elemnt_position.current_id = i
 
             pos_x = self.__elemnt_position.column * \
@@ -132,18 +133,17 @@ class ScreenCurses(object):
             except Exception:
                 return
             box.box()
-            box.addstr("Ping")
+            box.addstr(TEMPLATE["box_label"])
             box.addstr(1, 2, host.label)
             box.addstr(1, TEMPLATE["box_width"] - len("  " + host.rtt) - 2,
                        "  " + host.rtt)
             box.addstr(2, 5, host.host)
             if host.isconnected:
                 box.addstr(2, TEMPLATE["box_width"] - 4,
-                           "OK", curses.color_pair(4))
+                           TEMPLATE["node_ok"], curses.color_pair(4))
             else:
                 box.addstr(2, TEMPLATE["box_width"] - 4,
-                           "KO", curses.color_pair(5))
-            i = i + 1
+                           TEMPLATE["node_ko"], curses.color_pair(5))
 
     def run(self):
         """

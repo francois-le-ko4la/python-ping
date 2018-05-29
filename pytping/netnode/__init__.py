@@ -3,5 +3,6 @@
 """
 node
 """
+from pytping.util import *
 from pytping.netnode.list import NetworkNodeList
 from pytping.netnode.node import NetworkNode

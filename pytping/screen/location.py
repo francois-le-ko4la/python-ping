@@ -19,7 +19,7 @@ def calc_limit(stripe_size, element_size, current_id):
 import numbers
 
 
-class ElementPosition(object):
+class ElementLocation(object):
     """
     Calc element position according to element stripe size and
     stripe size.
@@ -47,7 +47,7 @@ class ElementPosition(object):
       +--------------------------------------------+
 
     Use:
-       >>> a = ElementPosition()
+       >>> a = ElementLocation()
        >>> a.element_size = 3
        >>> a.stripe_size = 11
        >>> a.current_id = 0

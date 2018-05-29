@@ -10,17 +10,17 @@
  #    #  #    #     #    #    #
 
 """
-import pathlib
 import argparse
 import os
-from pytping.util import __about__
+from pytping.util.__about__ import __version__
+from pytping.util.__config__ import __script__, __script_description__
 from pytping.main import PythonPing
 
 
 PARSER = argparse.ArgumentParser(
-    prog=pathlib.Path(__file__).name,
+    prog=__script__,
     formatter_class=argparse.RawDescriptionHelpFormatter,
-    description=__about__.__script_description__,
+    description=__script_description__,
     epilog="Enjoy...",
     add_help=False
 )
@@ -36,7 +36,7 @@ OPTION.add_argument(
     '-v',
     '--version',
     action='version',
-    version=__about__.__version__
+    version=__version__
 )
 
 REQUIRED = PARSER.add_argument_group('required arguments')
@@ -56,3 +56,6 @@ def run():
     os.environ["NCURSES_NO_UTF8_ACS"] = "1"
     pyt_ping = PythonPing(args.input)
     pyt_ping.run()
+
+
+__all__ = ["run"]

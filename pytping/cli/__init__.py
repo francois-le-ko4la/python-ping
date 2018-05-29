@@ -3,4 +3,5 @@
 """
 util
 """
-from pytping.cli import main
+from pytping.util import *
+from pytping.cli.main import *

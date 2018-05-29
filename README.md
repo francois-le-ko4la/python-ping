@@ -165,17 +165,21 @@ With 4 network nodes:
 ## License
 
 This package is distributed under the [GPLv3 license](./LICENSE)
-
 ### Runtime
 
 ```
+
 python-3.6.x
 
+
 ```
+
 ### UML Diagram
 ![alt text](pictures/classes_pytping.png)
 
+
 ### Objects
+
 [run()](#run)<br />
 [PythonPing()](#pythonping)<br />
 [PythonPing.run()](#pythonpingrun)<br />
@@ -198,13 +202,16 @@ python-3.6.x
 [ScreenCurses.menubar()](#screencursesmenubar)<br />
 [ScreenCurses.build()](#screencursesbuild)<br />
 [ScreenCurses.run()](#screencursesrun)<br />
-[ElementPosition()](#elementposition)<br />
-[@Property ElementPosition.stripe_size](#property-elementpositionstripe_size)<br />
-[@Property ElementPosition.element_size](#property-elementpositionelement_size)<br />
-[@Property ElementPosition.ratio](#property-elementpositionratio)<br />
-[@Property ElementPosition.current_id](#property-elementpositioncurrent_id)<br />
-[@Property ElementPosition.row](#property-elementpositionrow)<br />
-[@Property ElementPosition.column](#property-elementpositioncolumn)<br />
+[ElementLocation()](#elementlocation)<br />
+[@Property ElementLocation.stripe_size](#property-elementlocationstripe_size)<br />
+[@Property ElementLocation.element_size](#property-elementlocationelement_size)<br />
+[@Property ElementLocation.ratio](#property-elementlocationratio)<br />
+[@Property ElementLocation.current_id](#property-elementlocationcurrent_id)<br />
+[@Property ElementLocation.row](#property-elementlocationrow)<br />
+[@Property ElementLocation.column](#property-elementlocationcolumn)<br />
+[PytPingError()](#pytpingerror)<br />
+[PytPingPortConfigError()](#pytpingportconfigerror)<br />
+
 
 #### run()
 ```python
@@ -272,7 +279,7 @@ str(NetworkNodeList()) => str(ALL)
 len(NetworkNodeList()) => len(list())
 NetworkNodeList.append => list().append
 
-    >>> from pytping import NetworkNode
+    >>> from pytping.netnode.node import NetworkNode
     >>> a = NetworkNodeList()
     >>> b = "node1"
     >>> c = "node2"
@@ -574,9 +581,9 @@ def ScreenCurses.run(self):
 > <b>Returns:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
 > <br />
-#### ElementPosition()
+#### ElementLocation()
 ```python
-class ElementPosition(object):
+class ElementLocation(object):
 ```
 
 ```
@@ -606,7 +613,7 @@ stripe size.
   +--------------------------------------------+
 
 Use:
-   >>> a = ElementPosition()
+   >>> a = ElementLocation()
    >>> a.element_size = 3
    >>> a.stripe_size = 11
    >>> a.current_id = 0
@@ -626,58 +633,74 @@ Use:
    0
 ```
 
-##### @Property ElementPosition.stripe_size
+##### @Property ElementLocation.stripe_size
 ```python
 @property
-def ElementPosition.stripe_size(self):
+def ElementLocation.stripe_size(self):
 ```
 > <br />
 > <b>@Property:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: stripe size<br />
 > <br />
-##### @Property ElementPosition.element_size
+##### @Property ElementLocation.element_size
 ```python
 @property
-def ElementPosition.element_size(self):
+def ElementLocation.element_size(self):
 ```
 > <br />
 > <b>@Property:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: element size<br />
 > <br />
-##### @Property ElementPosition.ratio
+##### @Property ElementLocation.ratio
 ```python
 @property
-def ElementPosition.ratio(self):
+def ElementLocation.ratio(self):
 ```
 > <br />
 > <b>@Property:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: number of element per stripe<br />
 > <br />
-##### @Property ElementPosition.current_id
+##### @Property ElementLocation.current_id
 ```python
 @property
-def ElementPosition.current_id(self):
+def ElementLocation.current_id(self):
 ```
 > <br />
 > <b>@Property:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: current element id<br />
 > <br />
-##### @Property ElementPosition.row
+##### @Property ElementLocation.row
 ```python
 @property
-def ElementPosition.row(self):
+def ElementLocation.row(self):
 ```
 > <br />
 > <b>@Property:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: row<br />
 > <br />
-##### @Property ElementPosition.column
+##### @Property ElementLocation.column
 ```python
 @property
-def ElementPosition.column(self):
+def ElementLocation.column(self):
 ```
 > <br />
 > <b>@Property:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: column<br />
 > <br />
+#### PytPingError()
+```python
+class PytPingError(Exception):
+```
 
+```
+Generic exception for pytping
+```
+
+#### PytPingPortConfigError()
+```python
+class PytPingPortConfigError(PytPingError):
+```
+
+```
+Error: the port is not validated.
+```

@@ -78,7 +78,7 @@ class PingNetworkNode(object):
         if isinstance(port, (int, str)):
             self.__port = port
         else:
-            raise TypeError(DEFAULT["msg_typeerror"])
+            raise PytPingPortConfigError(port)
 
     @property
     def isconnected(self):

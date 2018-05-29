@@ -171,8 +171,7 @@ With 4 network nodes:
 This package is distributed under the [GPLv3 license](./LICENSE)
 
 """
-from pytping.util import __version__, __author__, __license__
-from pytping.util import DEFAULT, TEMPLATE
+from pytping.util import *
 import pytping.main
 import pytping.netnode
 import pytping.screen

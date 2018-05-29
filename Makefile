@@ -19,15 +19,11 @@ default:
 	@echo
 
 dev:
-	@pip3 install -e .
+	@sudo -H pip3 install -e . --process-dependency-links
 
 install:
 	$(MAKE) clean
-	@./setup.py sdist bdist_wheel
-	@sudo -H pip3 install . --process-dependency-links
-upgrade:
-	@$(MAKE) clean
-	@./setup.py sdist bdist_wheel
+	#@./setup.py sdist bdist_wheel
 	@sudo -H pip3 install . --process-dependency-links --upgrade
 
 uninstall:
