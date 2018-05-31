@@ -19,12 +19,12 @@ default:
 	@echo
 
 dev:
-	@sudo -H pip3 install -e . --process-dependency-links
+	@sudo -H pip3 install -e .
 
 install:
 	$(MAKE) clean
-	#@./setup.py sdist bdist_wheel
-	@sudo -H pip3 install . --process-dependency-links --upgrade
+	@./setup.py release
+	@sudo -H pip3 install --extra-index-url https://francois-le-ko4la.github.io/pep-503/ . --upgrade
 
 uninstall:
 	@pip3 show $(PACKAGE_NAME)

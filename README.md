@@ -26,8 +26,8 @@ __This project is not :__
 ## Setup:
 
 ```shell
-$ git clone https://github.com/francois-le-ko4la/pyt-ping.git
-$ cd pyt-ping
+$ git clone https://github.com/francois-le-ko4la/python-ping.git
+$ cd python-ping
 $ make install
 ```
 
@@ -90,7 +90,7 @@ My test environment:
 
 With 4 network nodes:
 - %CPU: <1% (average) - 2% (higher rate)
-- %MEM: 0.3%
+- %MEM: ~0.4%
 - 6 Thread : 1 main thread, 1 screen thread, 1 thread per network node
 
 ## Project Structure
@@ -154,13 +154,17 @@ With 4 network nodes:
 - [X] Run PEP8 validation
 - [X] Clean & last check
 - [X] Release
-- [X] change (un)install process
-- [X] remove MANIFEST.in
-- [X] manage global var: __version__....
-- [X] improve the doc
+- [X] Change (un)install process
+- [X] Remove MANIFEST.in
+- [X] Manage global var: __ version __....
+- [X] Improve the doc
 - [X] Release 0.4.3
-- [X] improve (un)install process
+- [X] Improve (un)install process
 - [X] Release 0.5.0
+- [X] Validate preq install
+- [X] Improve screenshot
+- [X] Fix doc
+- [X] Release 0.5.1
 
 ## License
 
