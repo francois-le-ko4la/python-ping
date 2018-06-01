@@ -25,6 +25,13 @@ __This project is not :__
 
 ## Setup:
 
+- PIP3:
+
+```shell
+sudo pip3 install --extra-index-url https://francois-le-ko4la.github.io/pep-503/ pytping --upgrade
+```
+
+- Or GIT:
 ```shell
 $ git clone https://github.com/francois-le-ko4la/python-ping.git
 $ cd python-ping
