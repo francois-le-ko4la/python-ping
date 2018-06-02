@@ -29,17 +29,31 @@ __This project is not :__
 
 ## Setup:
 
-- PIP3:
+We use Ubuntu to develop this package and python is a core component of the
+operating system. Our makefile, has been written according to this
+environment.
+In other environment, user should use "pip3" command to install thhis package.
+If you use virtualenv, then you will not use sudo to launch the setup.
+
+- To use the package:
 
 ```shell
-sudo pip3 install --extra-index-url https://francois-le-ko4la.github.io/pep-503/ pytping --upgrade
+$ [sudo] pip3 install --extra-index-url https://francois-le-ko4la.github.io/pep-503/ pytping --upgrade
 ```
 
-- Or GIT:
+- Or GIT to test & dev:
 ```shell
 $ git clone https://github.com/francois-le-ko4la/python-ping.git
 $ cd python-ping
+```
+
+If you want a quick setup on Ubuntu:
+```shell
 $ make install
+```
+Other:
+```shell
+$ [sudo] pip3 install --extra-index-url https://francois-le-ko4la.github.io/pep-503/ . --upgrade
 ```
 
 ## Test:
@@ -47,7 +61,7 @@ $ make install
 This module has been [tested and validated](./last_check.log) on Ubuntu.
 
 ```shell
-$ make test
+$ [sudo] ./setup test
 ```
 
 ## Use:
@@ -55,7 +69,7 @@ $ make test
 - Check network permissions to ping
 
 ```shell
-sudo iptables -P OUTPUT ACCEPT
+$ sudo iptables -P OUTPUT ACCEPT
 ```
 
 - Use the script provided in this package :
@@ -177,6 +191,13 @@ With 4 network nodes:
 - [X] Fix doc
 - [X] Perf logs
 - [X] Release 0.5.1
+- [X] test the Python version
+- [X] Install automatically pytest
+- [X] Fix doc (install)
+- [X] Release 0.5.2
+- [ ] Clean the UML model using NamedTuple and chain
+- [ ] Add/remove a network node & save the config
+- [ ] Use Snap method
 
 ## License
 
