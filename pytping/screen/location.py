@@ -17,11 +17,41 @@ def calc_limit(stripe_size, element_size, current_id):
 """
 
 import numbers
+from collections import namedtuple
+from pytping.util import TEMPLATE
 
 
-class ElementLocation(object):
+class NodeSubWin(namedtuple('NodeSubWin', ['height', 'width', 'y', 'x'])):
     """
-    Calc element position according to element stripe size and
+    >>> a = NodeSubWin()
+    >>> for i in range(5): a.get_nodesubwin(80, i)
+    NodeSubWin(height=4, width=30, y=2, x=3)
+    NodeSubWin(height=4, width=30, y=2, x=36)
+    NodeSubWin(height=4, width=30, y=7, x=3)
+    NodeSubWin(height=4, width=30, y=7, x=36)
+    NodeSubWin(height=4, width=30, y=12, x=3)
+    """
+    def __new__(cls, height=0, width=0, y=0, x=0):
+        return super(NodeSubWin, cls).__new__(cls, height, width, y, x)
+
+    def __init__(self, height=0, width=0, y=0, x=0):
+        self.elemlocation = ElemLocation()
+        self.elemlocation.element_size = TEMPLATE["box_width"] + \
+            TEMPLATE["box_margin_x"]
+
+    def get_nodesubwin(self, screen_width, id_value):
+        self.elemlocation.stripe_size = screen_width - 2
+        host_location = self.elemlocation.getposyx(id_value)
+        height = TEMPLATE["box_height"]
+        width = TEMPLATE["box_width"]
+        y = host_location.y
+        x = host_location.x
+        return NodeSubWin(height, width, y, x)
+
+
+class ElemLocation(namedtuple('ElemLocation', ['y', 'x'])):
+    """
+    Calc element logical position according to element stripe size and
     stripe size.
 
       +------------+
@@ -47,31 +77,43 @@ class ElementLocation(object):
       +--------------------------------------------+
 
     Use:
-       >>> a = ElementLocation()
-       >>> a.element_size = 3
-       >>> a.stripe_size = 11
-       >>> a.current_id = 0
-       >>> print(a.row)
-       0
-       >>> print(a.column)
-       0
-       >>> a.current_id = 2
-       >>> print(a.row)
-       0
-       >>> print(a.column)
-       2
-       >>> a.current_id = 3
-       >>> print(a.row)
-       1
-       >>> print(a.column)
-       0
-
+        >>> # simple test
+        >>> a = ElemLocation()
+        >>> a.element_size = 3
+        >>> a.stripe_size = 11
+        >>> for i in range(5): a.getlogposyx(i)
+        ElemLocation(y=0, x=0)
+        ElemLocation(y=0, x=1)
+        ElemLocation(y=0, x=2)
+        ElemLocation(y=1, x=0)
+        ElemLocation(y=1, x=1)
+        >>> # real test
+        >>> a = ElemLocation()
+        >>> a.element_size = TEMPLATE["box_width"] + TEMPLATE["box_margin_x"]
+        >>> a.element_size
+        33
+        >>> a.stripe_size = 80 - 2
+        >>> a.stripe_size
+        78
+        >>> for i in range(5): a.getposyx(i)
+        ElemLocation(y=2, x=3)
+        ElemLocation(y=2, x=36)
+        ElemLocation(y=7, x=3)
+        ElemLocation(y=7, x=36)
+        ElemLocation(y=12, x=3)
     """
-    def __init__(self):
+
+    __slot__ = ('y', 'x')
+
+    def __new__(cls, y=0, x=0):
+        return super().__new__(cls, y=y, x=x)
+
+    def __init__(self, y=0, x=0):
+        super().__init__()
         self.__stripe_size = None
         self.__element_size = None
         self.__current_id = None
-        self.current_id = 0
+        self.__current_id = 0
 
     @property
     def stripe_size(self):
@@ -114,33 +156,21 @@ class ElementLocation(object):
             current_ratio = 1
         return current_ratio
 
-    @property
-    def current_id(self):
-        """
-        @Property:
-            int: current element id
-        """
-        return self.__current_id
-
-    @current_id.setter
-    def current_id(self, value):
-        if isinstance(value, numbers.Integral):
-            self.__current_id = value
+    def getlogposyx(self, current_id):
+        if isinstance(current_id, numbers.Integral):
+            self.__current_id = current_id
+            row = int(self.__current_id/self.ratio)
+            column = self.__current_id - (row * self.ratio)
+            self = ElemLocation(y=row, x=column)
+            return self
         else:
             raise TypeError("invalid current_id")
 
-    @property
-    def row(self):
-        """
-        @Property:
-            int: row
-        """
-        return int(self.__current_id/self.ratio)
+    def getposyx(self, current_id):
+        self = self.getlogposyx(current_id)
+        x = self.x * (TEMPLATE["box_width"] + TEMPLATE["box_margin_x"]) + \
+            TEMPLATE["box_margin_x"]
+        y = self.y * (TEMPLATE["box_height"] + TEMPLATE["box_margin_y"]) + \
+            TEMPLATE["box_margin_y"] + 1
 
-    @property
-    def column(self):
-        """
-        @Property:
-            int: column
-        """
-        return self.__current_id - (self.row * self.ratio)
+        return ElemLocation(y=y, x=x)

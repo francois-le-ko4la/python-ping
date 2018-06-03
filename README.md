@@ -235,13 +235,14 @@ python-3.6.x
 [ScreenCurses.menubar()](#screencursesmenubar)<br />
 [ScreenCurses.build()](#screencursesbuild)<br />
 [ScreenCurses.run()](#screencursesrun)<br />
-[ElementLocation()](#elementlocation)<br />
-[@Property ElementLocation.stripe_size](#property-elementlocationstripe_size)<br />
-[@Property ElementLocation.element_size](#property-elementlocationelement_size)<br />
-[@Property ElementLocation.ratio](#property-elementlocationratio)<br />
-[@Property ElementLocation.current_id](#property-elementlocationcurrent_id)<br />
-[@Property ElementLocation.row](#property-elementlocationrow)<br />
-[@Property ElementLocation.column](#property-elementlocationcolumn)<br />
+[NodeSubWin()](#nodesubwin)<br />
+[NodeSubWin.get_nodesubwin()](#nodesubwinget_nodesubwin)<br />
+[ElemLocation()](#elemlocation)<br />
+[@Property ElemLocation.stripe_size](#property-elemlocationstripe_size)<br />
+[@Property ElemLocation.element_size](#property-elemlocationelement_size)<br />
+[@Property ElemLocation.ratio](#property-elemlocationratio)<br />
+[ElemLocation.getlogposyx()](#elemlocationgetlogposyx)<br />
+[ElemLocation.getposyx()](#elemlocationgetposyx)<br />
 [PytPingError()](#pytpingerror)<br />
 [PytPingPortConfigError()](#pytpingportconfigerror)<br />
 
@@ -614,13 +615,36 @@ def ScreenCurses.run(self):
 > <b>Returns:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None<br />
 > <br />
-#### ElementLocation()
+#### NodeSubWin()
 ```python
-class ElementLocation(object):
+class NodeSubWin():
 ```
 
 ```
-Calc element position according to element stripe size and
+>>> a = NodeSubWin()
+>>> for i in range(5): a.get_nodesubwin(80, i)
+NodeSubWin(height=4, width=30, y=2, x=3)
+NodeSubWin(height=4, width=30, y=2, x=36)
+NodeSubWin(height=4, width=30, y=7, x=3)
+NodeSubWin(height=4, width=30, y=7, x=36)
+NodeSubWin(height=4, width=30, y=12, x=3)
+```
+
+##### NodeSubWin.get_nodesubwin()
+```python
+
+def NodeSubWin.get_nodesubwin(self, screen_width, id_value):
+```
+> <br />
+> None<br />
+> <br />
+#### ElemLocation()
+```python
+class ElemLocation():
+```
+
+```
+Calc element logical position according to element stripe size and
 stripe size.
 
   +------------+
@@ -646,79 +670,74 @@ stripe size.
   +--------------------------------------------+
 
 Use:
-   >>> a = ElementLocation()
-   >>> a.element_size = 3
-   >>> a.stripe_size = 11
-   >>> a.current_id = 0
-   >>> print(a.row)
-   0
-   >>> print(a.column)
-   0
-   >>> a.current_id = 2
-   >>> print(a.row)
-   0
-   >>> print(a.column)
-   2
-   >>> a.current_id = 3
-   >>> print(a.row)
-   1
-   >>> print(a.column)
-   0
+    >>> # simple test
+    >>> a = ElemLocation()
+    >>> a.element_size = 3
+    >>> a.stripe_size = 11
+    >>> for i in range(5): a.getlogposyx(i)
+    ElemLocation(y=0, x=0)
+    ElemLocation(y=0, x=1)
+    ElemLocation(y=0, x=2)
+    ElemLocation(y=1, x=0)
+    ElemLocation(y=1, x=1)
+    >>> # real test
+    >>> a = ElemLocation()
+    >>> a.element_size = TEMPLATE["box_width"] + TEMPLATE["box_margin_x"]
+    >>> a.element_size
+    33
+    >>> a.stripe_size = 80 - 2
+    >>> a.stripe_size
+    78
+    >>> for i in range(5): a.getposyx(i)
+    ElemLocation(y=2, x=3)
+    ElemLocation(y=2, x=36)
+    ElemLocation(y=7, x=3)
+    ElemLocation(y=7, x=36)
+    ElemLocation(y=12, x=3)
 ```
 
-##### @Property ElementLocation.stripe_size
+##### @Property ElemLocation.stripe_size
 ```python
 @property
-def ElementLocation.stripe_size(self):
+def ElemLocation.stripe_size(self):
 ```
 > <br />
 > <b>@Property:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: stripe size<br />
 > <br />
-##### @Property ElementLocation.element_size
+##### @Property ElemLocation.element_size
 ```python
 @property
-def ElementLocation.element_size(self):
+def ElemLocation.element_size(self):
 ```
 > <br />
 > <b>@Property:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: element size<br />
 > <br />
-##### @Property ElementLocation.ratio
+##### @Property ElemLocation.ratio
 ```python
 @property
-def ElementLocation.ratio(self):
+def ElemLocation.ratio(self):
 ```
 > <br />
 > <b>@Property:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: number of element per stripe<br />
 > <br />
-##### @Property ElementLocation.current_id
+##### ElemLocation.getlogposyx()
 ```python
-@property
-def ElementLocation.current_id(self):
+
+def ElemLocation.getlogposyx(self, current_id):
 ```
 > <br />
-> <b>@Property:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: current element id<br />
+> None<br />
 > <br />
-##### @Property ElementLocation.row
+##### ElemLocation.getposyx()
 ```python
-@property
-def ElementLocation.row(self):
+
+def ElemLocation.getposyx(self, current_id):
 ```
 > <br />
-> <b>@Property:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: row<br />
-> <br />
-##### @Property ElementLocation.column
-```python
-@property
-def ElementLocation.column(self):
-```
-> <br />
-> <b>@Property:</b><br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int: column<br />
+> None<br />
 > <br />
 #### PytPingError()
 ```python

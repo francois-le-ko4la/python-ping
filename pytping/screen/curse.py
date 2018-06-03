@@ -17,7 +17,7 @@ import curses
 from pythread import PThread
 from pytping.util.__about__ import __pkg_name__, __version__
 from pytping.util import TEMPLATE, DEFAULT
-from pytping.screen.location import ElementLocation
+from pytping.screen.location import NodeSubWin
 from pytping.screen.counter import Counter
 
 
@@ -57,7 +57,7 @@ class ScreenCurses(object):
         self.__timer = ""
         self.__host_list = host_list
         self.__count = Counter(len(TEMPLATE["progress"]) - 1)
-        self.__elemnt_position = ElementLocation()
+        self.__elemnt_position = NodeSubWin()
         self.__mthr = PThread(self.build, DEFAULT["refresh_screen"])
         self.screen = curses.initscr()
         self.screen.immedok(True)
@@ -105,29 +105,14 @@ class ScreenCurses(object):
             None
         """
         self.height, self.width = self.screen.getmaxyx()
-
-        self.__elemnt_position.stripe_size = self.width - 2
-        self.__elemnt_position.element_size = TEMPLATE["box_width"] + \
-            TEMPLATE["box_margin_x"]
         self.screen.border(0)
         self.menubar()
 
         for i, host in enumerate(self.__host_list):
-            self.__elemnt_position.current_id = i
-
-            pos_x = self.__elemnt_position.column * \
-                (TEMPLATE["box_width"] + TEMPLATE["box_margin_x"]) + \
-                TEMPLATE["box_margin_x"]
-            pos_y = self.__elemnt_position.row * \
-                (TEMPLATE["box_height"] + TEMPLATE["box_margin_y"]) + \
-                TEMPLATE["box_margin_y"] + 1
 
             try:
                 box = self.screen.subwin(
-                    TEMPLATE["box_height"],
-                    TEMPLATE["box_width"],
-                    pos_y,
-                    pos_x
+                    *self.__elemnt_position.get_nodesubwin(self.width, i)
                 )
 
             except Exception:
