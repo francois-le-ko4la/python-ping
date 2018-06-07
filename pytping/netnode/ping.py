@@ -11,7 +11,11 @@ print(myhost.isconnected)
 import subprocess
 import socket
 import time
-from pytping.util import DEFAULT
+from pytping import (
+    CONFIG,
+    PytPingPortConfigError,
+    PytPingHostConfigError
+)
 
 
 class PingNetworkNode(object):
@@ -54,7 +58,7 @@ class PingNetworkNode(object):
         if isinstance(host, str):
             self.__host = host
         else:
-            raise TypeError(DEFAULT["msg_typeerror"])
+            raise PytPingHostConfigError(host)
 
     @property
     def rtt(self):
@@ -86,14 +90,14 @@ class PingNetworkNode(object):
         @Property:
             bool: True if the node is connected. False otherwise.
         """
-        if isinstance(self.__port, str) and DEFAULT["ICMP"] in self.__port:
+        if isinstance(self.__port, str) and CONFIG.ICMP in self.__port:
             return self.__ping()
         else:
             return self.__socket()
 
     def __socket(self):
         try:
-            socket.setdefaulttimeout(DEFAULT["timeout"])
+            socket.setdefaulttimeout(CONFIG.timeout)
             start = time.time()
             socket.socket().connect((self.__host, self.__port))
             self.__rtt = "{} ms".format(
@@ -106,7 +110,7 @@ class PingNetworkNode(object):
 
     def __ping(self):
         try:
-            proc = subprocess.Popen(DEFAULT["ping_cmd"] + self.__host,
+            proc = subprocess.Popen(CONFIG.ping_cmd + self.__host,
                                     shell=True,
                                     stdout=subprocess.PIPE,
                                     stderr=subprocess.PIPE)

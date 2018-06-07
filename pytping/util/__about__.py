@@ -38,4 +38,11 @@ __author__ = META["Author"]
 __url__ = META["Download-URL"]
 __license__ = META["License"]
 __description__ = META["Summary"]
-__all__ = ["__version__", "__email__", "__author__", "__url__", "__license__"]
+__all__ = [
+    "__pkg_name__",
+    "__version__",
+    "__email__",
+    "__author__",
+    "__url__",
+    "__license__"
+]

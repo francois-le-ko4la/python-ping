@@ -12,24 +12,34 @@
 """
 
 from pythread import PThread
-from pytping.util import DEFAULT
+from pytping import CONFIG
 from pytping.netnode.ping import PingNetworkNode
 
 
-class NetworkNode(object):
+class NetworkNode(PingNetworkNode):
     """
     Define a network node :
     - label
     - host
     - port
+    use:
+        >>> import time
+        >>> node = NetworkNode("label", "www.google.fr", 80)
+        >>> # start hyperthreading
+        >>> node.start()
+        >>> time.sleep(0.2)
+        >>> node.isconnected
+        True
+        >>> "ms" in node.rtt # '3.63 ms'
+        True
+        >>> node.label
+        'label'
     """
     def __init__(self, label, host, port):
+        super().__init__(host, port)
         self.__isconnected = False
         self.label = label
-        self.host = host
-        self.__ping = PingNetworkNode(host, port)
-        self.__port = port
-        self.__mthr = PThread(self.__refresh, DEFAULT["refresh"])
+        self.__mthr = PThread(self.__refresh, CONFIG.refresh)
 
     @property
     def isconnected(self):
@@ -39,15 +49,8 @@ class NetworkNode(object):
         """
         return self.__isconnected
 
-    @property
-    def rtt(self):
-        """
-        provide device rtt
-        """
-        return str(self.__ping.rtt)
-
     def __refresh(self):
-        self.__isconnected = self.__ping.isconnected
+        self.__isconnected = super().isconnected
 
     def stop(self):
         """

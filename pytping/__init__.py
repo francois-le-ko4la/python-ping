@@ -53,7 +53,7 @@ $ make install
 ```
 Other:
 ```shell
-$ [sudo] pip3 install --extra-index-url https://francois-le-ko4la.github.io/pep-503/ . --upgrade
+$ [sudo] pip3 install --extra-index-url https://francois-le-ko4la.github.io/pep-503/ pytping --upgrade
 ```
 
 ## Test:
@@ -195,6 +195,7 @@ With 4 network nodes:
 - [X] Install automatically pytest
 - [X] Fix doc (install)
 - [X] Release 0.5.2
+- [X] Clean the config file
 - [ ] Clean the UML model using NamedTuple and chain
 - [ ] Add/remove a network node & save the config
 - [ ] Use Snap method
@@ -210,11 +211,11 @@ from pytping.util import (
     __author__,
     __url__,
     __license__,
-    DEFAULT,
-    TEMPLATE,
+    CONFIG,
     PytPingError,
-    PytPingPortConfigError
-) 
+    PytPingPortConfigError,
+    PytPingHostConfigError
+)
 import pytping.main
 import pytping.netnode
 import pytping.screen

@@ -49,7 +49,7 @@ $ make install
 ```
 Other:
 ```shell
-$ [sudo] pip3 install --extra-index-url https://francois-le-ko4la.github.io/pep-503/ . --upgrade
+$ [sudo] pip3 install --extra-index-url https://francois-le-ko4la.github.io/pep-503/ pytping --upgrade
 ```
 
 ## Test:
@@ -191,6 +191,7 @@ With 4 network nodes:
 - [X] Install automatically pytest
 - [X] Fix doc (install)
 - [X] Release 0.5.2
+- [X] Clean the config file
 - [ ] Clean the UML model using NamedTuple and chain
 - [ ] Add/remove a network node & save the config
 - [ ] Use Snap method
@@ -221,7 +222,6 @@ python-3.6.x
 [NetworkNodeList.items()](#networknodelistitems)<br />
 [NetworkNode()](#networknode)<br />
 [@Property NetworkNode.isconnected](#property-networknodeisconnected)<br />
-[@Property NetworkNode.rtt](#property-networknodertt)<br />
 [NetworkNode.stop()](#networknodestop)<br />
 [NetworkNode.start()](#networknodestart)<br />
 [PingNetworkNode()](#pingnetworknode)<br />
@@ -243,8 +243,14 @@ python-3.6.x
 [@Property ElemLocation.ratio](#property-elemlocationratio)<br />
 [ElemLocation.getlogposyx()](#elemlocationgetlogposyx)<br />
 [ElemLocation.getposyx()](#elemlocationgetposyx)<br />
+[CNetworkNode()](#cnetworknode)<br />
+[CNetworkNode.get_nodesubwin()](#cnetworknodeget_nodesubwin)<br />
+[CNetworkNode.get_nodelabel()](#cnetworknodeget_nodelabel)<br />
+[CNetworkNode.get_nodename()](#cnetworknodeget_nodename)<br />
+[CNetworkNode.get_nodertt()](#cnetworknodeget_nodertt)<br />
 [PytPingError()](#pytpingerror)<br />
 [PytPingPortConfigError()](#pytpingportconfigerror)<br />
+[PytPingHostConfigError()](#pytpinghostconfigerror)<br />
 
 
 #### run()
@@ -352,7 +358,7 @@ def NetworkNodeList.items(self):
 > <br />
 #### NetworkNode()
 ```python
-class NetworkNode(object):
+class NetworkNode(PingNetworkNode):
 ```
 
 ```
@@ -360,6 +366,18 @@ Define a network node :
 - label
 - host
 - port
+use:
+    >>> import time
+    >>> node = NetworkNode("label", "www.google.fr", 80)
+    >>> # start hyperthreading
+    >>> node.start()
+    >>> time.sleep(0.2)
+    >>> node.isconnected
+    True
+    >>> "ms" in node.rtt # '3.63 ms'
+    True
+    >>> node.label
+    'label'
 ```
 
 ##### @Property NetworkNode.isconnected
@@ -370,14 +388,6 @@ def NetworkNode.isconnected(self):
 > <br />
 > <b>@Property:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  bool: True if the node is connected. False otherwise.<br />
-> <br />
-##### @Property NetworkNode.rtt
-```python
-@property
-def NetworkNode.rtt(self):
-```
-> <br />
-> provide device rtt<br />
 > <br />
 ##### NetworkNode.stop()
 ```python
@@ -636,7 +646,7 @@ NodeSubWin(height=4, width=30, y=12, x=3)
 def NodeSubWin.get_nodesubwin(self, screen_width, id_value):
 ```
 > <br />
-> None<br />
+> Calc NamedTuple in order to create SubWin<br />
 > <br />
 #### ElemLocation()
 ```python
@@ -682,7 +692,7 @@ Use:
     ElemLocation(y=1, x=1)
     >>> # real test
     >>> a = ElemLocation()
-    >>> a.element_size = TEMPLATE["box_width"] + TEMPLATE["box_margin_x"]
+    >>> a.element_size = CONFIG.box["width"] + CONFIG.box["margin_x"]
     >>> a.element_size
     33
     >>> a.stripe_size = 80 - 2
@@ -729,7 +739,7 @@ def ElemLocation.ratio(self):
 def ElemLocation.getlogposyx(self, current_id):
 ```
 > <br />
-> None<br />
+> Get logical position<br />
 > <br />
 ##### ElemLocation.getposyx()
 ```python
@@ -737,7 +747,75 @@ def ElemLocation.getlogposyx(self, current_id):
 def ElemLocation.getposyx(self, current_id):
 ```
 > <br />
-> None<br />
+> Get real position<br />
+> <br />
+#### CNetworkNode()
+```python
+class CNetworkNode(NetworkNode):
+```
+
+```
+Define a network node :
+- label (netnode.NetworkNode)
+- host (netnode.NetworkNode)
+- port (netnode.NetworkNode)
+- get_nodesubwin() (value & position)
+- get_nodelabel() (value & position)
+- get_nodename() (value & position)
+- get_nodertt() (value & position)
+
+use:
+    >>> import time
+    >>> node = CNetworkNode("label", "localhost", "ICMP")
+    >>> # start hyperthreading
+    >>> node.start()
+    >>> time.sleep(0.2)
+    >>> node.isconnected
+    True
+    >>> "ms" in node.rtt # '3.63 ms'
+    True
+    >>> node.label
+    'label'
+    >>> node.get_nodesubwin(80,0)
+    NodeSubWin(height=4, width=30, y=2, x=3)
+    >>> node.get_nodelabel()
+    StrPos(y=1, x=2, ch='label')
+    >>> node.get_nodename()
+    StrPos(y=2, x=5, ch='localhost')
+    >>> node.get_nodertt()
+```
+
+##### CNetworkNode.get_nodesubwin()
+```python
+
+def CNetworkNode.get_nodesubwin(self, screen_width, id_value):
+```
+> <br />
+> NamedTuple to create subwin<br />
+> <br />
+##### CNetworkNode.get_nodelabel()
+```python
+
+def CNetworkNode.get_nodelabel(self):
+```
+> <br />
+> NamedTuple to create the node label<br />
+> <br />
+##### CNetworkNode.get_nodename()
+```python
+
+def CNetworkNode.get_nodename(self):
+```
+> <br />
+> NamedTuple to create the nodename<br />
+> <br />
+##### CNetworkNode.get_nodertt()
+```python
+
+def CNetworkNode.get_nodertt(self):
+```
+> <br />
+> NamedTuple to create the rtt<br />
 > <br />
 #### PytPingError()
 ```python
@@ -755,4 +833,13 @@ class PytPingPortConfigError(PytPingError):
 
 ```
 Error: the port is not validated.
+```
+
+#### PytPingHostConfigError()
+```python
+class PytPingHostConfigError(PytPingError):
+```
+
+```
+Error: the host is not validated.
 ```

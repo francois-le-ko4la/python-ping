@@ -15,9 +15,8 @@ export NCURSES_NO_UTF8_ACS=1
 
 import curses
 from pythread import PThread
-from pytping.util.__about__ import __pkg_name__, __version__
-from pytping.util import TEMPLATE, DEFAULT
-from pytping.screen.location import NodeSubWin
+from pytping import CONFIG
+from pytping.util import __pkg_name__, __version__
 from pytping.screen.counter import Counter
 
 
@@ -56,9 +55,8 @@ class ScreenCurses(object):
     def __init__(self, host_list):
         self.__timer = ""
         self.__host_list = host_list
-        self.__count = Counter(len(TEMPLATE["progress"]) - 1)
-        self.__elemnt_position = NodeSubWin()
-        self.__mthr = PThread(self.build, DEFAULT["refresh_screen"])
+        self.__count = Counter(len(CONFIG.progress) - 1)
+        self.__mthr = PThread(self.build, CONFIG.refresh_screen)
         self.screen = curses.initscr()
         self.screen.immedok(True)
         self.height, self.width = self.screen.getmaxyx()
@@ -89,8 +87,8 @@ class ScreenCurses(object):
         txt = "{}({}) | {} {}".format(
             __pkg_name__,
             __version__,
-            TEMPLATE["msg"],
-            TEMPLATE["progress"][self.__count.value]
+            CONFIG.msg,
+            CONFIG.progress[self.__count.value]
         )
         box.addstr(1, 2, txt)
 
@@ -112,23 +110,22 @@ class ScreenCurses(object):
 
             try:
                 box = self.screen.subwin(
-                    *self.__elemnt_position.get_nodesubwin(self.width, i)
+                    *host.get_nodesubwin(self.width, i)
                 )
 
             except Exception:
                 return
             box.box()
-            box.addstr(TEMPLATE["box_label"])
-            box.addstr(1, 2, host.label)
-            box.addstr(1, TEMPLATE["box_width"] - len("  " + host.rtt) - 2,
-                       "  " + host.rtt)
-            box.addstr(2, 5, host.host)
+            box.addstr(0, 0, CONFIG.box["label"])
+            box.addstr(*host.get_nodelabel())
+            box.addstr(*host.get_nodertt())
+            box.addstr(*host.get_nodename())
             if host.isconnected:
-                box.addstr(2, TEMPLATE["box_width"] - 4,
-                           TEMPLATE["node_ok"], curses.color_pair(4))
+                box.addstr(2, CONFIG.box["width"] - 4,
+                           CONFIG.node["ok"], curses.color_pair(4))
             else:
-                box.addstr(2, TEMPLATE["box_width"] - 4,
-                           TEMPLATE["node_ko"], curses.color_pair(5))
+                box.addstr(2, CONFIG.box["width"] - 4,
+                           CONFIG.node["ko"], curses.color_pair(5))
 
     def run(self):
         """

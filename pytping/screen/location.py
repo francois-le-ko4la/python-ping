@@ -18,7 +18,7 @@ def calc_limit(stripe_size, element_size, current_id):
 
 import numbers
 from collections import namedtuple
-from pytping.util import TEMPLATE
+from pytping import CONFIG
 
 
 class NodeSubWin(namedtuple('NodeSubWin', ['height', 'width', 'y', 'x'])):
@@ -36,14 +36,17 @@ class NodeSubWin(namedtuple('NodeSubWin', ['height', 'width', 'y', 'x'])):
 
     def __init__(self, height=0, width=0, y=0, x=0):
         self.elemlocation = ElemLocation()
-        self.elemlocation.element_size = TEMPLATE["box_width"] + \
-            TEMPLATE["box_margin_x"]
+        self.elemlocation.element_size = CONFIG.box["width"] + \
+            CONFIG.box["margin_x"]
 
     def get_nodesubwin(self, screen_width, id_value):
+        """
+        Calc NamedTuple in order to create SubWin
+        """
         self.elemlocation.stripe_size = screen_width - 2
         host_location = self.elemlocation.getposyx(id_value)
-        height = TEMPLATE["box_height"]
-        width = TEMPLATE["box_width"]
+        height = CONFIG.box["height"]
+        width = CONFIG.box["width"]
         y = host_location.y
         x = host_location.x
         return NodeSubWin(height, width, y, x)
@@ -89,7 +92,7 @@ class ElemLocation(namedtuple('ElemLocation', ['y', 'x'])):
         ElemLocation(y=1, x=1)
         >>> # real test
         >>> a = ElemLocation()
-        >>> a.element_size = TEMPLATE["box_width"] + TEMPLATE["box_margin_x"]
+        >>> a.element_size = CONFIG.box["width"] + CONFIG.box["margin_x"]
         >>> a.element_size
         33
         >>> a.stripe_size = 80 - 2
@@ -157,6 +160,9 @@ class ElemLocation(namedtuple('ElemLocation', ['y', 'x'])):
         return current_ratio
 
     def getlogposyx(self, current_id):
+        """
+        Get logical position
+        """
         if isinstance(current_id, numbers.Integral):
             self.__current_id = current_id
             row = int(self.__current_id/self.ratio)
@@ -167,10 +173,13 @@ class ElemLocation(namedtuple('ElemLocation', ['y', 'x'])):
             raise TypeError("invalid current_id")
 
     def getposyx(self, current_id):
+        """
+        Get real position
+        """
         self = self.getlogposyx(current_id)
-        x = self.x * (TEMPLATE["box_width"] + TEMPLATE["box_margin_x"]) + \
-            TEMPLATE["box_margin_x"]
-        y = self.y * (TEMPLATE["box_height"] + TEMPLATE["box_margin_y"]) + \
-            TEMPLATE["box_margin_y"] + 1
+        x = self.x * (CONFIG.box["width"] + CONFIG.box["margin_x"]) + \
+            CONFIG.box["margin_x"]
+        y = self.y * (CONFIG.box["height"] + CONFIG.box["margin_y"]) + \
+            CONFIG.box["margin_y"] + 1
 
         return ElemLocation(y=y, x=x)

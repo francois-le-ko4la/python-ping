@@ -27,9 +27,18 @@ class PytPingPortConfigError(PytPingError):
         super().__init__("Port \"{}\" not valid!".format(port))
 
 
+class PytPingHostConfigError(PytPingError):
+    """
+    Error: the host is not validated.
+    """
+    def __init__(self, host):
+        super().__init__("Host \"{}\" not valid!".format(host))
+
+
 __all__ = [
     'PytPingError',
-    'PytPingPortConfigError'
+    'PytPingPortConfigError',
+    'PytPingHostConfigError'
 ]
 
 

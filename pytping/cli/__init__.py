@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-util
+This package allow us to definr the CLI Runner.
 """
-from pytping.util import *
-from pytping.cli.main import *
+from .main import run

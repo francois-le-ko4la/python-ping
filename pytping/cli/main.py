@@ -12,15 +12,14 @@
 """
 import argparse
 import os
-from pytping.util.__about__ import __version__
-from pytping.util.__config__ import __script__, __script_description__
+from pytping import __version__, CONFIG
 from pytping.main import PythonPing
 
 
 PARSER = argparse.ArgumentParser(
-    prog=__script__,
+    prog=CONFIG.script['bin'],
     formatter_class=argparse.RawDescriptionHelpFormatter,
-    description=__script_description__,
+    description=CONFIG.script['description'],
     epilog="Enjoy...",
     add_help=False
 )

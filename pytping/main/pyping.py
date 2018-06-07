@@ -13,10 +13,10 @@
 
 """
 
-from pytconfig import PytConfigFile
+from conf2tuple import NamedTupleConfig
 from pytping.screen.curse import ScreenCurses
 from pytping.netnode.list import NetworkNodeList
-from pytping.netnode.node import NetworkNode
+from pytping.screen.node import CNetworkNode
 
 
 class PythonPing(object):
@@ -28,12 +28,14 @@ class PythonPing(object):
     """
     def __init__(self, inputfile):
         """ self.__config = ConfigYAML(inputfile) """
-        self.__config = PytConfigFile(inputfile, PytConfigFile.isyaml)
+        self.__config = NamedTupleConfig(inputfile, NamedTupleConfig.isyaml)
         self.__host_list = NetworkNodeList()
-        for label in self.__config:
-            current_node = NetworkNode(label,
-                                       self.__config[label]['host'],
-                                       self.__config[label]['port'])
+        for node in self.__config.config.nodes:
+            current_node = CNetworkNode(
+                node,
+                self.__config.config.nodes[node]['host'],
+                self.__config.config.nodes[node]['port']
+            )
             current_node.start()
             self.__host_list.append(current_node)
         self.__screen = ScreenCurses(self.__host_list)
