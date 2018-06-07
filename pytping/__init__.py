@@ -90,18 +90,21 @@ Enjoy...
 Configuration file should be written according to this example:
 
 ```yaml
-Internet access:
-  host: www.google.fr
-  port: 80
-vCenter:
-  host: 192.168.1.12
-  port: ICMP
-ESX1:
-  host: 192.168.1.230
-  port: 23
-ESX2:
-  host: 192.168.1.240
-  port: ICMP
+---
+nodes:
+  Internet:
+    host: www.google.fr
+    port: 80
+  vCenter:
+    host: 192.168.1.12
+    port: ICMP
+  ESX1:
+    host: 192.168.1.230
+    port: 22
+  ESX2:
+    host: 192.168.1.240
+    port: ICMP
+...
 ```
 
 ## Feedback

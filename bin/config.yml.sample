@@ -1,3 +1,4 @@
+---
 nodes:
   Internet:
     host: www.google.fr
@@ -11,3 +12,4 @@ nodes:
   ESX2:
     host: 192.168.1.240
     port: ICMP
+...
