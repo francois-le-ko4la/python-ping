@@ -1,0 +1,18 @@
+---
+nodes:
+  Internet(80):
+    host: www.google.fr
+    port: 80
+  Google IPV6(ICMP):
+    host: 2001:4860:4860::8888
+    port: ICMP
+  Google IPV6(53):
+    host: 2001:4860:4860::8888
+    port: 53
+  ESX1(22):
+    host: 192.168.1.230
+    port: 22
+  ESX2(ICMP):
+    host: 192.168.1.240
+    port: ICMP
+...

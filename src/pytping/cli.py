@@ -1,26 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
+"""Define CLI."""
 
- #    #    ##       #    #    #
- ##  ##   #  #      #    ##   #
- # ## #  #    #     #    # #  #
- #    #  ######     #    #  # #
- #    #  #    #     #    #   ##
- #    #  #    #     #    #    #
-
-"""
 import argparse
 import os
-from pytping import __version__, CONFIG
-from pytping.main import PythonPing
 
+from pytping.__about__ import __version__
+from pytping.__config__ import Config
+from pytping.pyping import PythonPing
 
 PARSER = argparse.ArgumentParser(
-    prog=CONFIG.script['bin'],
     formatter_class=argparse.RawDescriptionHelpFormatter,
-    description=CONFIG.script['description'],
-    epilog="Enjoy...",
+    description=Config.DESCRIPTION.value,
     add_help=False
 )
 
@@ -47,14 +38,9 @@ REQUIRED.add_argument(
 )
 
 
-def run():
-    """
-    CLI runner
-    """
+def run() -> None:
+    """Define CLI runner."""
     args = PARSER.parse_args()
     os.environ["NCURSES_NO_UTF8_ACS"] = "1"
     pyt_ping = PythonPing(args.input)
     pyt_ping.run()
-
-
-__all__ = ["run"]

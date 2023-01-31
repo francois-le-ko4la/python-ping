@@ -1,6 +1,6 @@
 # Makefile
 
-PACKAGE_NAME = `sudo ./setup.py --name`
+PACKAGE_NAME = "pytping"
 PACKAGE_DIR = $(PACKAGE_NAME)
 MAKE := $(MAKE) --no-print-directory
 SHELL = bash
@@ -10,53 +10,42 @@ default:
 	@echo
 	@echo 'Usage:'
 	@echo
-	@echo '    make install    install the packages'
-	@echo '    make uninstall  remove the package'
-	@echo '    make clean      clean temp file'
-	@echo '    make doc        make the README'
-	@echo '    make publish    push the last version on GH'
-	@echo '    make test       test'
+	@echo '    user : make install                   install the packages'
+	@echo '           make uninstall                 remove the package'
+	@echo '    dev  : make venv                      install venv'
+	@echo '           source venv/bin/activate       activate venv'
+	@echo '           make dev                       install as dev'
+	@echo '           make doc                       make the README'
+	@echo '           make test                      test'
+	@echo '           make stubs                     refresh stubs'
 	@echo
 
+venv:
+	@pip3 install virtualenv --user
+	@virtualenv venv
+
 dev:
-	@sudo -H pip3 install -e .
+	@pip3 install -e ".[dev]"
 
 install:
-	$(MAKE) clean
-	@./setup.py release
-	@sudo -H pip3 install --extra-index-url https://francois-le-ko4la.github.io/pep-503/ . --upgrade
+	@pip3 install . --upgrade
 
 uninstall:
-	@pip3 show $(PACKAGE_NAME)
-	@sudo -H pip3 uninstall -y $(PACKAGE_NAME)
-
-clean:
-	@sudo rm -Rf .eggs *.egg-info .cache .coverage .tox build dist docs/build htmlcov .pytest_cache
-	@sudo find -depth -type d -name __pycache__ -exec rm -Rf {} \;
-	@sudo find -type f -name '*.pyc' -delete
-
-fulldoc:
-	@pyreverse $(PACKAGE_NAME) -f ALL -o png -p $(PACKAGE_NAME)
-	@mv *.png pictures/
-	@$(MAKE) doc
+	@pip3 uninstall -y $(PACKAGE_NAME)
 
 doc:
-	@export_docstring2md.py -i $(PACKAGE_DIR) -o README.md -t runtime.txt -u pictures/classes_$(PACKAGE_NAME).png
+	@pyreverse src/$(PACKAGE_NAME) -ASmy -o mmd -p $(PACKAGE_NAME) -d doc
 
-release:
-	@$(MAKE) clean
-	@$(MAKE) install
-	@$(MAKE) doc
+docstring2md:
+	@export_docstring2md -p $(PACKAGE_DIR) --output-file README.md -mmd doc/classes_smoothprogressbar.mmd -tml pyproject.toml -td doc/todo.md --private-def --toc
+
+test:
+	@pytest --pyargs $(PACKAGE_NAME)
 
 publish:
-	@$(MAKE) test
+	@pytest --pyargs $(PACKAGE_NAME)
 	@git add .
 	@git commit
 	@git push
 
-test:
-	@pip3 show $(PACKAGE_NAME)
-	@sudo ./setup.py test
-	@sudo ./setup.py test > last_check.log
-
-.PHONY: default init dev install uninstall clean test doc publish release
+.PHONY: default init dev install uninstall doc stubs test example publish

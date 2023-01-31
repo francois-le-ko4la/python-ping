@@ -1,0 +1,256 @@
+classDiagram
+  class MyYAMLConfigFile {
+    config
+    exists
+    path
+    status
+    set_path(path: Optional[str]) MyYAMLConfigFile
+  }
+  class Optional {
+  }
+  class TextIOWrapper {
+    mode : str
+    close()
+    detach()
+    fileno()
+    flush()
+    isatty()
+    read()
+    readable()
+    readline()
+    readlines()
+    reconfigure()
+    seek()
+    seekable()
+    tell()
+    truncate()
+    writable()
+    write()
+    writelines()
+  }
+  class _IOBase {
+    close()
+    fileno()
+    flush()
+    isatty()
+    readable()
+    readline()
+    readlines()
+    seek()
+    seekable()
+    tell()
+    truncate()
+    writable()
+    writelines()
+  }
+  class _TextIOBase {
+    close()
+    detach()
+    fileno()
+    flush()
+    isatty()
+    read()
+    readable()
+    readline()
+    readlines()
+    seek()
+    seekable()
+    tell()
+    truncate()
+    writable()
+    write()
+    writelines()
+  }
+  class RLock {
+    acquire()
+    release()
+  }
+  class deque {
+    iterable : list
+    maxlen : int
+    append(x)
+    appendleft(x)
+    clear()
+    copy()
+    count(x)
+    extend(iterable)
+    extendleft(iterable)
+    index(x, start, end)
+    insert(i, x)
+    pop()
+    popleft()
+    remove(value)
+    reverse()
+    rotate(n)
+  }
+  class Enum {
+    name()
+    value()
+  }
+  class IntEnum {
+  }
+  class ReprEnum {
+  }
+  class Config {
+    name
+  }
+  class ExitStatus {
+    name
+  }
+  class PytPingError {
+  }
+  class PytPingHostConfigError {
+  }
+  class PytPingPortConfigError {
+  }
+  class MyYAMLConfigFile {
+    config
+    exists : bool
+    path : Optional[Path]
+    status
+    set_path(path: Optional[str]) MyYAMLConfigFile
+  }
+  class MultiThread {
+    func
+    run() None
+    stop() None
+  }
+  class NetworkNode {
+    connected : bool
+    host : str
+    id : int
+    ip_address : Optional[Union[ipaddress.IPv4Address, ipaddress.IPv6Address, None]]
+    label : str
+    mthr : Optional[MultiThread]
+    port : Union[int, str]
+    rtt : float
+    refresh() None
+    start() None
+    stop() None
+  }
+  class PythonPing {
+    config_file
+    run() None
+  }
+  class ElemSize {
+    height : int
+    width : int
+  }
+  class ProgressIndicator {
+    circular_anim : deque[str]
+    get_value() str
+  }
+  class ScreenCurses {
+    height
+    screen
+    width
+    build() None
+    menubar() None
+    run() None
+  }
+  class ScreenPosition {
+    x : int
+    y : int
+  }
+  class ViewBoxNetworkNode {
+    height : int
+    width : int
+    x
+    y
+    get_tuple() tuple[int, int, int, int]
+    set_pos_yx(cur_width: int, cur_id: int) None
+  }
+  class ViewNetworkNode {
+    view_box
+    view_label
+    view_name
+    view_rtt
+    refresh_view(screen_width: int) None
+  }
+  class ViewString {
+    ch : str
+    x
+    get_tuple() tuple[int, int, str]
+  }
+  class Condition {
+    acquire
+    release
+    notify(n)
+    notifyAll()
+    notify_all()
+    wait(timeout)
+    wait_for(predicate, timeout)
+  }
+  class Event {
+    clear()
+    isSet()
+    is_set()
+    set()
+    wait(timeout)
+  }
+  class Thread {
+    daemon
+    daemon : bool
+    ident
+    name
+    name
+    native_id
+    getName()
+    isDaemon()
+    is_alive()
+    join(timeout)
+    run()
+    setDaemon(daemonic)
+    setName(name)
+    start()
+  }
+  class Timer {
+    args : list, NoneType
+    finished
+    function
+    interval
+    kwargs : NoneType, dict
+    cancel()
+    run()
+  }
+  class _RLock {
+    acquire(blocking, timeout)
+    release()
+  }
+  class NamedTuple {
+  }
+  TextIOWrapper --|> _TextIOBase
+  _TextIOBase --|> _IOBase
+  IntEnum --|> ReprEnum
+  ReprEnum --|> Enum
+  Config --|> Enum
+  ExitStatus --|> IntEnum
+  PytPingHostConfigError --|> PytPingError
+  PytPingPortConfigError --|> PytPingError
+  MyYAMLConfigFile --|> NamedTuple
+  MultiThread --|> Thread
+  ViewBoxNetworkNode --|> ElemSize
+  ViewBoxNetworkNode --|> ScreenPosition
+  ViewNetworkNode --|> NetworkNode
+  ViewString --|> ScreenPosition
+  Timer --|> Thread
+  MyYAMLConfigFile --* PythonPing : config_file
+  Optional --* MyYAMLConfigFile : config
+  TextIOWrapper --* Thread : _stderr
+  RLock --* Condition : _lock
+  deque --* PythonPing : __host_list
+  deque --* Condition : _waiters
+  ExitStatus --* MyYAMLConfigFile : status
+  MultiThread --* ScreenCurses : __mthr
+  ProgressIndicator --* ScreenCurses : __count
+  ScreenCurses --* PythonPing : __screen
+  ViewBoxNetworkNode --* ViewNetworkNode : view_box
+  ViewString --* ViewNetworkNode : view_label
+  ViewString --* ViewNetworkNode : view_name
+  ViewString --* ViewNetworkNode : view_rtt
+  Condition --* Event : _cond
+  Event --* Thread : _started
+  Event --* Timer : finished
+  Timer --* MultiThread : __timer
+  Timer --* MultiThread : __timer
+  _RLock --* Condition : _lock

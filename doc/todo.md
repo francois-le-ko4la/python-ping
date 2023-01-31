@@ -1,0 +1,35 @@
+- [X] Create the project
+- [X] Write code and tests
+- [X] Test installation and requirements (setup.py and/or Makefile)
+- [X] Test code
+- [X] Validate features
+- [X] Write Doc/stringdoc
+- [X] Run PEP8 validation
+- [X] Clean & last check
+- [X] Release
+- [X] Change (un)install process
+- [X] Remove MANIFEST.in
+- [X] Manage global var: __ version __....
+- [X] Improve the doc
+- [X] Release 0.4.3
+- [X] Improve (un)install process
+- [X] Release 0.5.0
+- [X] Validate preq install
+- [X] Improve screenshot
+- [X] Fix doc
+- [X] Perf logs
+- [X] Release 0.5.1
+- [X] test the Python version
+- [X] Install automatically pytest
+- [X] Fix doc (install)
+- [X] Release 0.5.2
+- [X] Clean the config file
+- [X] Clean the UML model using NamedTuple and chain
+- [X] Migrate to pyproject.toml
+- [X] NamedTuple to dataclass to define multiple objects
+- [X] clean the project directory
+- [X] multithreading optimisation to use pytest
+- [X] simplify the progress indicator
+- [X] typing done
+- [ ] Add/remove a network node & save the config
+- [ ] Use Snap method

@@ -1,0 +1,32 @@
+classDiagram
+  class pytping {
+  }
+  class __about__ {
+  }
+  class __config__ {
+  }
+  class cli {
+  }
+  class file {
+  }
+  class multithreading {
+  }
+  class netnode {
+  }
+  class pyping {
+  }
+  class screen {
+  }
+  cli --> __about__
+  cli --> __config__
+  cli --> pyping
+  file --> __config__
+  netnode --> __config__
+  netnode --> multithreading
+  pyping --> __config__
+  pyping --> file
+  pyping --> screen
+  screen --> __about__
+  screen --> __config__
+  screen --> multithreading
+  screen --> netnode
