@@ -19,11 +19,6 @@ the "curses" library, which is provided by the system V/Posix environments.
 This library allows for the creation of a graphical user interface that is
 easy to use and understand.
 
-For those who prefer to use Windows, the tool can also be adapted to work
-in that environment through the use of a windows library for the screen
-module. This adaptability ensures that the tool can be used by a wide range
-of users, regardless of their preferred operating system.
-
 In summary, the tool provides a simple and efficient solution to the
 challenges faced when checking multiple network nodes using the ping
 command, making the task less time-consuming and more manageable.
