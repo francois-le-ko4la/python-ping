@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 """Define CLI."""
 
+from __future__ import annotations
+
 import argparse
 import os
 

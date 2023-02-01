@@ -3,6 +3,8 @@
 # pylint: disable=too-many-instance-attributes, invalid-name
 """Define a network node."""
 
+from __future__ import annotations
+
 import ipaddress
 import platform
 import socket
@@ -96,7 +98,7 @@ class NetworkNode:
                                   stderr=subprocess.PIPE) as proc:
                 proc.wait()
                 rtt = float(proc.stdout.read().decode(
-                    "utf-8").split("=")[-1].split("/")[1] \
+                    "utf-8").split("=")[-1].split("/")[1]
                     if proc.stdout is not None else "0")
                 # rtt = rtt.decode("utf-8").split("=")[-1].split("/")[1]
                 return True, rtt
@@ -106,7 +108,7 @@ class NetworkNode:
     def start(self) -> None:
         """Start multithreading."""
         if self.mthr is None:
-            self.mthr = MultiThread(self.refresh, Config.REFRESH.value)
+            self.mthr = MultiThread(Config.REFRESH.value, self.refresh)
             self.mthr.start()
 
     def stop(self) -> None:

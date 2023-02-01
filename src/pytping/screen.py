@@ -3,6 +3,8 @@
 # pylint: disable=invalid-name
 """Manage the screen."""
 
+from __future__ import annotations
+
 import curses
 from collections import deque
 from dataclasses import dataclass, field
@@ -175,7 +177,7 @@ class ScreenCurses:
         """Init the Screen."""
         self.__host_list = host_list
         self.__count = ProgressIndicator()
-        self.__mthr = MultiThread(self.build, Config.REFRESH_SCREEN.value)
+        self.__mthr = MultiThread(Config.REFRESH_SCREEN.value, self.build)
         self.screen = curses.initscr()
         self.screen.immedok(True)
         self.height, self.width = self.screen.getmaxyx()
@@ -215,7 +217,11 @@ class ScreenCurses:
 
         for host in self.__host_list:
             host.refresh_view(self.width)
-            box = self.screen.subwin(*host.view_box.get_tuple())
+            try:
+                box = self.screen.subwin(*host.view_box.get_tuple())
+            except curses.error:
+                return
+
             box.box()
             box.addstr(0, 0, Config.BOX_LABEL.value)
             box.addstr(*host.view_label.get_tuple())

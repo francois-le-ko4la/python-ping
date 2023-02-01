@@ -3,6 +3,8 @@
 # pylint: disable=too-few-public-methods
 """Define pyping."""
 
+from __future__ import annotations
+
 from collections import deque
 
 from pytping.__config__ import ExitStatus

@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # noqa: D400
 """
-
 pytping:
+
     [![badge](https://forthebadge.com/images/badges/made-with-python.svg)]()
     ![](./doc/pycodestyle-passing.svg)
     ![](./doc/pylint-passing.svg)

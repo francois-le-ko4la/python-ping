@@ -3,6 +3,9 @@
 # Metadata with importlib_metadata:
 # mypy: disable-error-code=no-redef
 """Define about."""
+
+from __future__ import annotations
+
 import sys
 
 if sys.version_info >= (3, 8):

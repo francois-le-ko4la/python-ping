@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 """Define config."""
 
+from __future__ import annotations
+
 import os
 from collections import deque
 from enum import Enum, IntEnum, unique
