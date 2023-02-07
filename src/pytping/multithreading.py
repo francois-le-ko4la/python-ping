@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""This is a python module for managing multithreading.
+"""Manage multithreading.
 
 It defines a class called MultiThread which is a subclass of the built-in
 class Timer/threading. The class provides a run method that implements the

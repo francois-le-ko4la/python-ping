@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# Metadata with importlib_metadata:
-# mypy: disable-error-code=no-redef
 """Define about."""
 
 from __future__ import annotations
