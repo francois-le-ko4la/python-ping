@@ -30,7 +30,7 @@ class MyYAMLConfigFile(NamedTuple):
         True
         >>> import os
         >>> dirname = os.path.dirname(__file__)
-        >>> file = f"{dirname}/../../tests/config.yml.sample"
+        >>> file = f"{dirname}/../../sample/config.yml"
         >>> conf = MyYAMLConfigFile.set_path(file)
         >>> conf.status
         <ExitStatus.EX_OK: 0>

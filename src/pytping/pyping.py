@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# pylint: disable=too-few-public-methods
 """Define pyping."""
 
 from __future__ import annotations
 
 from collections import deque
+from typing import Optional
 
 from pytping.__config__ import ExitStatus
 from pytping.file import MyYAMLConfigFile
@@ -20,7 +20,10 @@ class PythonPing:
     - Launch the screen manager
     """
 
-    config_file: MyYAMLConfigFile
+    # pylint: disable=too-few-public-methods
+
+    __screen: ScreenCurses
+    __host_list: Optional[deque[ViewNetworkNode]]
 
     def __init__(self, input_file: str) -> None:
         """Init the class.
@@ -33,6 +36,12 @@ class PythonPing:
             None.
 
         """
+        self.__get_host_list(input_file)
+        if self.__host_list is None:
+            return
+        self.__screen = ScreenCurses(self.__host_list)
+
+    def __get_host_list(self, input_file: str) -> None:
         config_file = MyYAMLConfigFile.set_path(input_file)
         self.__host_list = deque([
             ViewNetworkNode(index,
@@ -45,11 +54,6 @@ class PythonPing:
             ]) if (config_file.status is ExitStatus.EX_OK
                    and config_file.config is not None
                    and "nodes" in config_file.config.keys()) else None
-
-        if self.__host_list is None:
-            return
-
-        self.__screen = ScreenCurses(self.__host_list)
 
     def run(self) -> None:
         """Start curses screen.
