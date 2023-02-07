@@ -72,3 +72,5 @@ disallow_untyped_defs = true
 warn_redundant_casts = true
 strict_equality = true
 
+[tool.pylint."MESSAGES CONTROL"]
+good-names = ["id", "x", "y", "ch"]

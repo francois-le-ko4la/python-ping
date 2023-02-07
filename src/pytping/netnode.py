@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# pylint: disable=too-many-instance-attributes, invalid-name
 """Define a network node."""
 
 from __future__ import annotations
@@ -42,6 +41,8 @@ class NetworkNode:
         >>> node.stop()
 
     """
+
+    # pylint: disable=too-many-instance-attributes
 
     id: int
     label: str
