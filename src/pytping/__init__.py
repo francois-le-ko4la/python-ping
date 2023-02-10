@@ -46,17 +46,17 @@ Setup:
 
     - Download the package:
     ```shell
-    $ git clone https://github.com/francois-le-ko4la/python-ping.git
+    git clone https://github.com/francois-le-ko4la/python-ping.git
     ```
 
     - enter in the folder:
     ```shell
-    $ cd python-ping
+    cd python-ping
     ```
 
     - Install :
     ```shell
-    $ make install
+    make install
     ```
 
 Test:
@@ -69,7 +69,7 @@ Use:
     - Check network permissions to ping
 
     ```shell
-    $ sudo iptables -P OUTPUT ACCEPT
+    sudo iptables -P OUTPUT ACCEPT
     ```
 
     - Use the script provided in this package :

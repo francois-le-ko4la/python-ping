@@ -43,7 +43,10 @@ class MultiThread(Timer):
             None.
         """
         while not self.finished.wait(self.interval):
-            self.function()
+            try:
+                self.function()
+            except Exception:
+                raise
 
     def stop(self) -> None:
         """Stop the Timer."""

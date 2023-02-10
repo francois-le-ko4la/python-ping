@@ -41,22 +41,22 @@ If you use virtualenv, then you will not use sudo to launch the setup.
 
 - Download the package:
   ```shell
-  $ git clone https://github.com/francois-le-ko4la/python-ping.git
+  git clone https://github.com/francois-le-ko4la/python-ping.git
   ```
 
 - Change to the folder:
   ```shell
-  $ cd python-ping
+  cd python-ping
   ```
 
 - Install :
   ```shell
-  $ make install
+  make install
   ```
 
 # Test:
 ```shell
-make test.py
+make test
 ```
 
 # Use:
@@ -64,42 +64,45 @@ make test.py
 - Check network permissions to ping
 
   ```shell
-  $ sudo iptables -P OUTPUT ACCEPT
+  sudo iptables -P OUTPUT ACCEPT
   ```
 
-- Use the script provided in this package :
+  - Use the script provided in this package :
 
-  ```shell
-  $ pytping -h
-  usage: pytping [-h] [-v] -i INPUT
-  Ping tool...
-  optional arguments:
-    -h, --help            show this help message and exit
-    -v, --version         show program's version number and exit
-  required arguments:
-    -i INPUT, --input INPUT
-                          Input file name
-  ```
-
-    Configuration file should be written according to this example:
-
-    ```yaml
-    ---
-    nodes:
-      Internet:
-        host: www.google.fr
-        port: 80
-      vCenter:
-        host: 192.168.1.12
-        port: ICMP
-      ESX1:
-        host: 192.168.1.230
-        port: 22
-      ESX2:
-        host: 192.168.1.240
-        port: ICMP
-    ...
+    ```shell
+    $ pytping -h
+    usage: pytping [-h] [-v] -i INPUT
+    Ping tool...
+    optional arguments:
+      -h, --help            show this help message and exit
+      -v, --version         show program's version number and exit
+    required arguments:
+      -i INPUT, --input INPUT
+                            Input file name
     ```
+
+      Configuration file should be written according to this example:
+
+      ```yaml
+      ---
+      nodes:
+        Internet(80):
+          host: www.google.fr
+          port: 80
+        Google IPV6(ICMP):
+          host: 2001:4860:4860::8888
+          port: ICMP
+        Google IPV6(53):
+          host: 2001:4860:4860::8888
+          port: 53
+        ESX1(22):
+          host: 192.168.1.230
+          port: 22
+        ESX2(ICMP):
+          host: 192.168.1.240
+          port: ICMP
+      ...
+      ```
 
 # License
 

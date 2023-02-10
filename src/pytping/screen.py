@@ -13,6 +13,8 @@ from pytping.__config__ import Config
 from pytping.multithreading import MultiThread
 from pytping.netnode import NetworkNode
 
+from typing import Any
+
 
 @dataclass
 class ProgressIndicator:
@@ -176,7 +178,7 @@ class ScreenCurses:
         """Init the Screen."""
         self.__host_list = host_list
         self.__count = ProgressIndicator()
-        self.__mthr = MultiThread(Config.REFRESH_SCREEN.value, self.build)
+        self.__mthr = MultiThread(Config.REFRESH_SCREEN.value, self.__build)
         self.screen = curses.initscr()
         self.screen.immedok(True)
         self.height, self.width = self.screen.getmaxyx()
@@ -191,7 +193,7 @@ class ScreenCurses:
         curses.init_pair(5, curses.COLOR_BLACK, curses.COLOR_RED)
         curses.curs_set(0)
 
-    def menubar(self) -> None:
+    def __menubar(self) -> None:
         """Draw the bar.
 
         Returns:
@@ -203,8 +205,9 @@ class ScreenCurses:
         txt = f"{__pkg_name__}({__version__}) | {Config.MSG.value}"
         txt = f"{txt} {self.__count.get_value()}"
         box.addstr(1, 2, txt)
+        box.refresh()
 
-    def build(self) -> None:
+    def __build(self) -> None:
         """Build the screen.
 
         Returns:
@@ -212,7 +215,7 @@ class ScreenCurses:
         """
         self.height, self.width = self.screen.getmaxyx()
         self.screen.border(0)
-        self.menubar()
+        self.__menubar()
 
         for host in self.__host_list:
             host.refresh_view(self.width)
@@ -232,20 +235,26 @@ class ScreenCurses:
             else:
                 box.addstr(2, Config.BOX_WIDTH.value - 4,
                            Config.NODE_STATUS_KO.value, curses.color_pair(5))
+            box.refresh()
 
-    def run(self) -> None:
+    def run(self) -> Any:
         """Run Curses loop.
 
         Returns:
             None
         """
-        keypressevent = 0
-        self.__mthr.start()
+        try:
+            keypressevent = 0
+            self.__mthr.start()
 
-        while keypressevent != 27:
-            self.screen.erase()
-            self.build()
-            keypressevent = self.screen.getch()
+            while keypressevent != 27:
+                self.screen.clear()
+                self.__build()
+                self.screen.refresh()
+                keypressevent = self.screen.getch()
 
-        self.__mthr.stop()
-        curses.endwin()
+            self.__mthr.stop()
+            curses.endwin()
+
+        except Exception:
+            raise
